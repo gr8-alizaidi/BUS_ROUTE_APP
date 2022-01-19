@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="Gradle: xyz.sahildave:searchviewlayout:0.6@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4b3890a5e6aa3000ad07f4a472ccc5f4/transformed/jetified-searchviewlayout-0.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4b3890a5e6aa3000ad07f4a472ccc5f4/transformed/jetified-searchviewlayout-0.6/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4b3890a5e6aa3000ad07f4a472ccc5f4/transformed/jetified-searchviewlayout-0.6/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/26d9ebfe9956f0ca5e7b78800e6415fa/transformed/jetified-searchviewlayout-0.6/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/26d9ebfe9956f0ca5e7b78800e6415fa/transformed/jetified-searchviewlayout-0.6/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/26d9ebfe9956f0ca5e7b78800e6415fa/transformed/jetified-searchviewlayout-0.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f5f67ae61a4d80301f7a9d20d27361b3/transformed/jetified-searchviewlayout-0.6/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/f5f67ae61a4d80301f7a9d20d27361b3/transformed/jetified-searchviewlayout-0.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f5f67ae61a4d80301f7a9d20d27361b3/transformed/jetified-searchviewlayout-0.6/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/xyz.sahildave/searchviewlayout/0.6/2ab8473f1983a29aded41ecb8c56979e3c5f6d10/searchviewlayout-0.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/xyz.sahildave/searchviewlayout/0.6/7af112995b8167e28878fbbc020b932418c43a88/searchviewlayout-0.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

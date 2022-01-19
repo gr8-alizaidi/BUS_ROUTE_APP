@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation.xml"
+    app:startDestination="@id/mapsFragment">
+
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.alizaidi.busroute.MapsFragment"
+        android:label="MapsFragment" >
+        <action
+            android:id="@+id/action_mapsFragment_to_searchBusFragment"
+            app:destination="@id/searchBusFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchBusFragment"
+        android:name="com.alizaidi.busroute.SearchBusFragment"
+        android:label="SearchBusFragment" >
+        <action
+            android:id="@+id/action_searchBusFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
+</navigation>

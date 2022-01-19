@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/ZAIDI/.gradle/caches/transforms-3/4b3890a5e6aa3000ad07f4a472ccc5f4/transformed/jetified-searchviewlayout-0.6/res/layout/widget_search_bar.xml" value="0.15185185185185185" />
+        <entry key="..\:/Users/ZAIDI/AndroidStudioProjects/BusRoute/app/src/main/res/drawable/search_bg.xml" value="0.16203703703703703" />
+        <entry key="..\:/Users/ZAIDI/AndroidStudioProjects/BusRoute/app/src/main/res/layout/activity_live.xml" value="0.1796875" />
+        <entry key="..\:/Users/ZAIDI/AndroidStudioProjects/BusRoute/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/ZAIDI/AndroidStudioProjects/BusRoute/app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.25869565217391305" />
+        <entry key="..\:/Users/ZAIDI/AndroidStudioProjects/BusRoute/app/src/main/res/layout/bus_search.xml" value="0.1796875" />
+        <entry key="..\:/Users/ZAIDI/AndroidStudioProjects/BusRoute/app/src/main/res/layout/fragment_maps.xml" value="0.16308470290771176" />
+        <entry key="..\:/Users/ZAIDI/AndroidStudioProjects/BusRoute/app/src/main/res/layout/fragment_searchbus.xml" value="0.1796875" />
+        <entry key="..\:/Users/ZAIDI/AndroidStudioProjects/BusRoute/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1796875" />
+        <entry key="..\:/Users/ZAIDI/AndroidStudioProjects/BusRoute/app/src/main/res/menu/menu_nav.xml" value="0.1796875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

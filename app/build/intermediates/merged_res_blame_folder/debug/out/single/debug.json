@@ -1,0 +1,238 @@
+[
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\font_nunito_sans_bold.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\font\\nunito_sans_bold.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\raw_img_red.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\raw\\img_red.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_bus_foreground.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_bus_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_bus.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-hdpi\\ic_bus.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_bus.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-mdpi\\ic_bus.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_bus_round.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-xhdpi\\ic_bus_round.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_calendar_month_24.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_baseline_calendar_month_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\raw_img_green.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\raw\\img_green.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_sticky_note_2_24.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_baseline_sticky_note_2_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\raw_bus.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\raw\\bus.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_bus.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_bus.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_bus_round.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-hdpi\\ic_bus_round.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_live.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\layout\\activity_live.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_people_24.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_baseline_people_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_bus_round.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_bus_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_timeline_24.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_baseline_timeline_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_bus_background.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_bus_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_bus.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-xhdpi\\ic_bus.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_mic_24.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_baseline_mic_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\menu_menu_nav.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\menu\\menu_nav.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_img_2.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable-v24\\img_2.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_directions_bus_24.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_baseline_directions_bus_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\raw_img_blue.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\raw\\img_blue.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_bus_round.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_bus_round.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_img.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable-v24\\img.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_directions_24.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_baseline_directions_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_gps_fixed_24.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_baseline_gps_fixed_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxxhdpi_ic_bus.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_bus.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xxhdpi_ic_bus_round.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_bus_round.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\raw_img_orange.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\raw\\img_orange.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_search_24.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_baseline_search_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_maps.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\layout\\fragment_maps.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_location_on_24.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_baseline_location_on_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_search_bg.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\search_bg.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_bus_round.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-mdpi\\ic_bus_round.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_img_1.png.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable-v24\\img_1.png"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\navigation_navigation.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\navigation\\navigation.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_settings_24.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_baseline_settings_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_bus_search.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\layout\\bus_search.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_fragment_searchbus.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\layout\\fragment_searchbus.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\mipmap-anydpi-v26_ic_bus.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_bus.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_filter_alt_24.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_baseline_filter_alt_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\drawable_ic_baseline_call_split_24.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\drawable\\ic_baseline_call_split_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\build\\intermediates\\merged_res\\debug\\layout_bottom_sheet_dialog.xml.flat",
+        "source": "C:\\Users\\ZAIDI\\AndroidStudioProjects\\BusRoute\\app\\src\\main\\res\\layout\\bottom_sheet_dialog.xml"
+    }
+]

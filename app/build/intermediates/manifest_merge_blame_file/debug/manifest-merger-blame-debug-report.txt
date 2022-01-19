@@ -1,0 +1,225 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.alizaidi.busroute"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+8-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml
+10
+11    <!--
+12         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+13         Google Maps Android API v2, but you must specify either coarse or fine
+14         location permissions for the "MyLocation" functionality.
+15    -->
+16    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+16-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:10:5-84
+16-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:10:22-82
+17    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+17-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:11:5-79
+17-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:11:22-76
+18    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+18-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:12:5-80
+18-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:12:22-78
+19    <uses-permission android:name="android.permission.INTERNET" />
+19-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:13:5-67
+19-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:13:22-64
+20    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+20-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:14:5-79
+20-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:14:22-76
+21    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+21-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:15:5-98
+21-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:15:22-95
+22    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+22-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:16:5-80
+22-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:16:22-78
+23
+24    <uses-feature
+24-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\ZAIDI\.gradle\caches\transforms-3\2f39700a59f1cf55ccf2be1d8a64b827\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:26:5-28:35
+25        android:glEsVersion="0x00020000"
+25-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\ZAIDI\.gradle\caches\transforms-3\2f39700a59f1cf55ccf2be1d8a64b827\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:27:9-41
+26        android:required="true" />
+26-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\ZAIDI\.gradle\caches\transforms-3\2f39700a59f1cf55ccf2be1d8a64b827\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:28:9-32
+27
+28    <queries>
+28-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\ZAIDI\.gradle\caches\transforms-3\2f39700a59f1cf55ccf2be1d8a64b827\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:30:5-34:15
+29
+30        <!-- Needs to be explicitly declared on Android R+ -->
+31        <package android:name="com.google.android.apps.maps" />
+31-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\ZAIDI\.gradle\caches\transforms-3\2f39700a59f1cf55ccf2be1d8a64b827\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:33:9-64
+31-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\ZAIDI\.gradle\caches\transforms-3\2f39700a59f1cf55ccf2be1d8a64b827\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:33:18-61
+32    </queries>
+33
+34    <uses-permission android:name="android.permission.REORDER_TASKS" /> <!-- Google MAP API key -->
+34-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:24:5-72
+34-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:24:22-69
+35    <application
+35-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:19:5-54:19
+36        android:allowBackup="true"
+36-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:20:9-35
+37        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+37-->[androidx.core:core:1.7.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\be155f961c023ad3a742f63d2940f6bd\transformed\core-1.7.0\AndroidManifest.xml:24:18-86
+38        android:debuggable="true"
+39        android:extractNativeLibs="false"
+40        android:foregroundServiceType="location"
+40-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:24:9-49
+41        android:icon="@mipmap/ic_launcher"
+41-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:21:9-43
+42        android:label="@string/app_name"
+42-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:22:9-41
+43        android:roundIcon="@mipmap/ic_launcher_round"
+43-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:25:9-54
+44        android:supportsRtl="true"
+44-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:26:9-35
+45        android:testOnly="true"
+46        android:theme="@style/Theme.BusRoute"
+46-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:27:9-46
+47        android:usesCleartextTraffic="true" >
+47-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:23:9-44
+48
+49        <!--
+50             The API key for Google Maps-based APIs is defined as a string resource.
+51             (See the file "res/values/google_maps_api.xml").
+52             Note that the API key is linked to the encryption key used to sign the APK.
+53             You need a different API key for each encryption key, including the release key that is used to
+54             sign the APK for publishing.
+55             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+56        -->
+57        <meta-data
+57-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:37:9-39:55
+58            android:name="com.google.android.geo.API_KEY"
+58-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:38:13-58
+59            android:value="@string/google_maps_key" />
+59-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:39:13-52
+60
+61        <activity
+61-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:41:9-49:20
+62            android:name="com.alizaidi.busroute.MainActivity"
+62-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:42:13-41
+63            android:exported="true" >
+63-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:43:13-36
+64            <intent-filter>
+64-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:44:13-48:29
+65                <action android:name="android.intent.action.MAIN" />
+65-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:45:17-69
+65-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:45:25-66
+66
+67                <category android:name="android.intent.category.LAUNCHER" />
+67-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:47:17-77
+67-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:47:27-74
+68            </intent-filter>
+69        </activity>
+70
+71        <meta-data
+71-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:51:9-53:57
+72            android:name="preloaded_fonts"
+72-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:52:13-43
+73            android:resource="@array/preloaded_fonts" />
+73-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:53:13-54
+74
+75        <activity
+75-->[pub.devrel:easypermissions:3.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\edb10b1f8e89a22cd6e4f6e9ac08e3e9\transformed\jetified-easypermissions-3.0.0\AndroidManifest.xml:12:9-16:66
+76            android:name="pub.devrel.easypermissions.AppSettingsDialogHolderActivity"
+76-->[pub.devrel:easypermissions:3.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\edb10b1f8e89a22cd6e4f6e9ac08e3e9\transformed\jetified-easypermissions-3.0.0\AndroidManifest.xml:13:13-86
+77            android:exported="false"
+77-->[pub.devrel:easypermissions:3.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\edb10b1f8e89a22cd6e4f6e9ac08e3e9\transformed\jetified-easypermissions-3.0.0\AndroidManifest.xml:14:13-37
+78            android:label=""
+78-->[pub.devrel:easypermissions:3.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\edb10b1f8e89a22cd6e4f6e9ac08e3e9\transformed\jetified-easypermissions-3.0.0\AndroidManifest.xml:15:13-29
+79            android:theme="@style/EasyPermissions.Transparent" /> <!-- Needs to be explicitly declared on P+ -->
+79-->[pub.devrel:easypermissions:3.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\edb10b1f8e89a22cd6e4f6e9ac08e3e9\transformed\jetified-easypermissions-3.0.0\AndroidManifest.xml:16:13-63
+80        <uses-library
+80-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\ZAIDI\.gradle\caches\transforms-3\2f39700a59f1cf55ccf2be1d8a64b827\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:39:9-41:40
+81            android:name="org.apache.http.legacy"
+81-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\ZAIDI\.gradle\caches\transforms-3\2f39700a59f1cf55ccf2be1d8a64b827\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:40:13-50
+82            android:required="false" />
+82-->[com.google.android.gms:play-services-maps:18.0.2] C:\Users\ZAIDI\.gradle\caches\transforms-3\2f39700a59f1cf55ccf2be1d8a64b827\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:41:13-37
+83
+84        <activity
+84-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\ZAIDI\.gradle\caches\transforms-3\ee91a3a9461ab04c815cfcf95cfb453a\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+85            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+85-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\ZAIDI\.gradle\caches\transforms-3\ee91a3a9461ab04c815cfcf95cfb453a\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+86            android:exported="false"
+86-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\ZAIDI\.gradle\caches\transforms-3\ee91a3a9461ab04c815cfcf95cfb453a\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+87            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+87-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\ZAIDI\.gradle\caches\transforms-3\ee91a3a9461ab04c815cfcf95cfb453a\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+88
+89        <meta-data
+89-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\b7e6a1a1668219a03c31d61728c52141\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
+90            android:name="com.google.android.gms.version"
+90-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\b7e6a1a1668219a03c31d61728c52141\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:22:13-58
+91            android:value="@integer/google_play_services_version" />
+91-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\b7e6a1a1668219a03c31d61728c52141\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:23:13-66
+92
+93        <provider
+93-->[androidx.emoji2:emoji2:1.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\02ff5db1520365fe041ef4e3aa46384c\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:26:9-34:20
+94            android:name="androidx.startup.InitializationProvider"
+94-->[androidx.emoji2:emoji2:1.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\02ff5db1520365fe041ef4e3aa46384c\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:27:13-67
+95            android:authorities="com.alizaidi.busroute.androidx-startup"
+95-->[androidx.emoji2:emoji2:1.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\02ff5db1520365fe041ef4e3aa46384c\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:28:13-68
+96            android:exported="false" >
+96-->[androidx.emoji2:emoji2:1.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\02ff5db1520365fe041ef4e3aa46384c\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:29:13-37
+97            <meta-data
+97-->[androidx.emoji2:emoji2:1.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\02ff5db1520365fe041ef4e3aa46384c\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:31:13-33:52
+98                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+98-->[androidx.emoji2:emoji2:1.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\02ff5db1520365fe041ef4e3aa46384c\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:32:17-75
+99                android:value="androidx.startup" />
+99-->[androidx.emoji2:emoji2:1.0.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\02ff5db1520365fe041ef4e3aa46384c\transformed\jetified-emoji2-1.0.0\AndroidManifest.xml:33:17-49
+100            <meta-data
+100-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\46aaae69713bdf885caa2ca602e2273b\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:31:13-33:52
+101                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+101-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\46aaae69713bdf885caa2ca602e2273b\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:32:17-78
+102                android:value="androidx.startup" />
+102-->[androidx.lifecycle:lifecycle-process:2.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\46aaae69713bdf885caa2ca602e2273b\transformed\jetified-lifecycle-process-2.4.0\AndroidManifest.xml:33:17-49
+103        </provider>
+104
+105        <activity
+105-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:27:9-34:20
+106            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
+106-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:28:13-99
+107            android:exported="true"
+107-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:29:13-36
+108            android:theme="@android:style/Theme" >
+108-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:30:13-49
+109            <intent-filter>
+109-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:31:13-33:29
+110                <action android:name="android.intent.action.MAIN" />
+110-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:45:17-69
+110-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:45:25-66
+111            </intent-filter>
+112        </activity>
+113        <activity
+113-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:35:9-42:20
+114            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
+114-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:36:13-95
+115            android:exported="true"
+115-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:37:13-36
+116            android:theme="@android:style/Theme" >
+116-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:38:13-49
+117            <intent-filter>
+117-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:31:13-33:29
+118                <action android:name="android.intent.action.MAIN" />
+118-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:45:17-69
+118-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:45:25-66
+119            </intent-filter>
+120        </activity>
+121        <activity
+121-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:43:9-50:20
+122            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
+122-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:44:13-103
+123            android:exported="true"
+123-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:45:13-36
+124            android:theme="@android:style/Theme.Dialog" >
+124-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:46:13-56
+125            <intent-filter>
+125-->[androidx.test:core:1.4.0] C:\Users\ZAIDI\.gradle\caches\transforms-3\ec776d2ec8025dc601bb5db90e97927d\transformed\jetified-core-1.4.0\AndroidManifest.xml:31:13-33:29
+126                <action android:name="android.intent.action.MAIN" />
+126-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:45:17-69
+126-->C:\Users\ZAIDI\AndroidStudioProjects\BusRoute\app\src\main\AndroidManifest.xml:45:25-66
+127            </intent-filter>
+128        </activity>
+129    </application>
+130
+131</manifest>

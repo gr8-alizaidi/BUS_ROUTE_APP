@@ -1,0 +1,2 @@
+com/alizaidi/busroute/BuildConfig.java
+ com.alizaidi.busroute.BuildConfig

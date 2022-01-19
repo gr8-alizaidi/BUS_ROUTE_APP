@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+android:orientation="vertical"
+    android:padding="10dp"
+    >
+    <SearchView
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchBus"
+        android:queryHint="Enter Bus Route"
+        android:iconifiedByDefault="false"
+        android:elevation="5dp"
+        android:goIcon="@drawable/ic_baseline_sticky_note_2_24"
+        android:voiceIcon="@drawable/ic_baseline_settings_24"
+        />
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/pbar"
+        />
+    <ListView
+        android:layout_below="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:elevation="4dp"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:id="@+id/listview"/>
+</LinearLayout>

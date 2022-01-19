@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Bus Route</string>
+    <string name="permission_rationale">Please Grant Permission</string>
+    <string name="permission_denied_explanation">Give Permission</string>
+    <string name="settings">Open Setting</string>
+    <string name="no_location_detected">no location detected</string>
+</resources>
