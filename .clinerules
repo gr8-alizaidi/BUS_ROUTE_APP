@@ -76,56 +76,60 @@ Before writing or modifying code, review these rules and do not violate them.
 19. 🟠 **[HIGH]** We will implement a multi-provider abstraction where each pipeline step (detection, extraction, enrichment, formatting) has its own LLM provider configuration via environment variables. At request time, an 'effort mode' can override the provider selection on a per-company basis.
    - **Why:** This approach allows companies with high context volume (Tier 3+) to pay extra for Claude-Sonnet's accuracy where needed, while companies with tighter budgets can use more cost-effective options like Gemini-Flash for all steps. It also decouples our infrastructure from individual LLM vendor stability and enables independent contract negotiations with different providers (Anthropic, OpenAI, Google).
 
-20. 🟡 **[MEDIUM]** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
+20. 🟡 **[MEDIUM]** Implement direct PostgreSQL connection within the User Profile Server Component to fetch order history.
+   - **Why:** Direct database access reduces development effort by bypassing the overhead of creating and maintaining additional GraphQL resolvers for simple data retrieval tasks.
+   - **Files:** `src/components/user/Profile.server.ts`
+
+21. 🟡 **[MEDIUM]** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
    - **Why:** TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency.
    - **Files:** `/src/backend/`
 
-21. 🟡 **[MEDIUM]** The team has officially cancelled the usage and implementation of RFC 78.
+22. 🟡 **[MEDIUM]** The team has officially cancelled the usage and implementation of RFC 78.
    - **Why:** The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities.
 
-22. 🟡 **[MEDIUM]** Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
+23. 🟡 **[MEDIUM]** Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
    - **Why:** RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data.
    - **Files:** `src/sync/theme-validation.js`
 
-23. 🟡 **[MEDIUM]** All new vector indexes must be created using the HNSW algorithm. Existing IVFFlat indexes (specifically in the llm_cache table) are to be migrated to HNSW in Sprint 16.
+24. 🟡 **[MEDIUM]** All new vector indexes must be created using the HNSW algorithm. Existing IVFFlat indexes (specifically in the llm_cache table) are to be migrated to HNSW in Sprint 16.
    - **Why:** HNSW is the current architectural standard for vector indexing. The previous rejection of the migration to HNSW was due to operational risks in production, not a lack of performance or technical suitability of HNSW.
    - **Files:** `db/schema/vector_indexes`, `db/migrations/sprint_16/migrate_llm_cache_to_hnsw`
 
-24. 🟡 **[MEDIUM]** Adopt the HIGH severity specification as the authoritative version for the RFC 7807 error format, which includes fields: type, title, status, detail, and instance.
+25. 🟡 **[MEDIUM]** Adopt the HIGH severity specification as the authoritative version for the RFC 7807 error format, which includes fields: type, title, status, detail, and instance.
    - **Why:** The team identified that two existing conventions were redundant. Designating the HIGH severity entry as canonical while allowing the fusion engine to merge duplicate references ensures consistency across documentation and API implementations.
    - **Files:** `packages/api/src/plugins/error-handler.ts`
 
-25. 🟡 **[MEDIUM]** We have standardized on cosine distance (using the <=> operator in pgvector) for all similarity search operations.
+26. 🟡 **[MEDIUM]** We have standardized on cosine distance (using the <=> operator in pgvector) for all similarity search operations.
    - **Why:** Cosine distance provides significantly better recall (12% improvement) on normalized text embeddings compared to L2 distance. Furthermore, L2 distance is overly sensitive to embedding magnitude, making it less reliable for our specific use case.
 
-26. 🟡 **[MEDIUM]** MongoDB is strictly prohibited for use in core pipeline services (including the core decision pipeline, authentication, and the context store). These services must exclusively use PostgreSQL 16 and Redis. Any deviation requires a formal ADR.
+27. 🟡 **[MEDIUM]** MongoDB is strictly prohibited for use in core pipeline services (including the core decision pipeline, authentication, and the context store). These services must exclusively use PostgreSQL 16 and Redis. Any deviation requires a formal ADR.
    - **Why:** To maintain architectural integrity and prevent fragmentation in the core tech stack. Previous attempts to introduce MongoDB for event queues nearly caused instability, highlighting the need for a hard, enforceable constraint.
    - **Files:** `analytics/storage`, `infrastructure/database-policy`
 
-27. 🟡 **[MEDIUM]** The team decided to discontinue the use of EventStoreDB and removed event sourcing as an architectural pattern following the migration back to a monorepo.
+28. 🟡 **[MEDIUM]** The team decided to discontinue the use of EventStoreDB and removed event sourcing as an architectural pattern following the migration back to a monorepo.
    - **Why:** The complexity of maintaining three separate runbooks for EventStoreDB operations outweighed the benefits of its auditability features for the current team size and system scale.
 
-28. 🟡 **[MEDIUM]** All internal API routes must adhere to the RFC 7807 error format, consistent with public-facing API routes.
+29. 🟡 **[MEDIUM]** All internal API routes must adhere to the RFC 7807 error format, consistent with public-facing API routes.
    - **Why:** Inconsistent error formats, specifically plain strings from internal routes, prevent AI tools from reliably parsing and analyzing errors, leading to broken analysis workflows.
    - **Files:** `packages/api/src/routes/internal/`
 
-29. 🟡 **[MEDIUM]** We will use the `text-embedding-3-small` OpenAI model to generate 1536-dimension embeddings. These embeddings will be stored in the `knowledge_chunks` table within PostgreSQL. The HNSW index used for vector search will be configured with `ef_construction=200` and `m=16`.
+30. 🟡 **[MEDIUM]** We will use the `text-embedding-3-small` OpenAI model to generate 1536-dimension embeddings. These embeddings will be stored in the `knowledge_chunks` table within PostgreSQL. The HNSW index used for vector search will be configured with `ef_construction=200` and `m=16`.
    - **Why:** The chosen HNSW parameters (`ef_construction=200` and `m=16`) are set to provide an optimal tradeoff between recall accuracy and search speed. The `text-embedding-3-small` model is selected for generating the text embeddings.
    - **Files:** `packages/decision-store/src/schema.ts`
 
-30. 🟡 **[MEDIUM]** We decided to use cosine distance for semantic similarity search of text embeddings with pgvector HNSW for deduplication.
+31. 🟡 **[MEDIUM]** We decided to use cosine distance for semantic similarity search of text embeddings with pgvector HNSW for deduplication.
    - **Why:** Cosine distance is invariant to vector magnitude, meaning it only considers the direction of vectors. This property is precisely what is desired for semantic similarity of text embeddings, as it allows for accurate comparison of semantic meaning regardless of variations in embedding vector norms. L2 (Euclidean) distance, on the other hand, would incorrectly penalize vectors with different magnitudes, even if they share the same semantic direction.
 
-31. 🟡 **[MEDIUM]** Implemented Redis semantic caching for LLM embedding calls. The cache key is a hash of the input text, model, and provider. The cache entries have a Time-To-Live (TTL) of 1 hour.
+32. 🟡 **[MEDIUM]** Implemented Redis semantic caching for LLM embedding calls. The cache key is a hash of the input text, model, and provider. The cache entries have a Time-To-Live (TTL) of 1 hour.
    - **Why:** Redis was a natural extension since it is already in use for BullMQ and session caching. This implementation reduced redundant embedding calls by approximately 40% in tests.
 
-32. 🟡 **[MEDIUM]** The Revenue squad now has exclusive ownership of the billing module and Stripe integration, requiring their explicit approval for all pull requests affecting these areas.
+33. 🟡 **[MEDIUM]** The Revenue squad now has exclusive ownership of the billing module and Stripe integration, requiring their explicit approval for all pull requests affecting these areas.
    - **Why:** Centralizing ownership ensures better control, security, and specialized maintenance for critical payment-related infrastructure.
    - **Files:** `packages/api/src/billing/`, `src/modules/billing/`, `src/integrations/stripe/`
 
-33. 🟢 **[LOW]** Use standard SCSS in a separate navbar.scss file for the new navigation component.
+34. 🟢 **[LOW]** Use standard SCSS in a separate navbar.scss file for the new navigation component.
    - **Why:** Complex hover state requirements for the navigation component lead to unmanageable code when using Tailwind utility classes.
    - **Files:** `navbar.scss`, `navbar.tsx`
 
-34. 🟢 **[LOW]** The team will use iPhones to perform mobile calls.
+35. 🟢 **[LOW]** The team will use iPhones to perform mobile calls.
    - **Why:** The team aligned on a single mobile device platform for communication consistency.
