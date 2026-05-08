@@ -1,50 +1,3 @@
-<!-- DECISION-CNST-8D7300 -->
-## Decision: Prohibit MongoDB and mandate PostgreSQL for core pipelines
-
-**Status**: Active  
-**Date**: 2026-04-22  
-**Severity**: Critical
-
-**Files**:
-- `infrastructure/database`
-- `src/db/config.ts`
-
-**Rules**:
-```json
-{
-  "conditions": [
-    {
-      "type": "file",
-      "pattern": "{infrastructure/database/**,src/db/config.ts}",
-      "content_rules": [
-        {
-          "mode": "string",
-          "patterns": [
-            "mongodb",
-            "mongoose",
-            "mongo"
-          ]
-        }
-      ]
-    }
-  ],
-  "match_mode": "all"
-}
-```
-
-### Context
-
-**Problem:** Need to define and enforce the database technology stack to ensure system consistency and data integrity.
-
-**Decision:** The core pipeline must exclusively use PostgreSQL 16 with pgvector and Redis; the use of MongoDB is strictly prohibited.
-
-**Rationale:** Enforcing a specific database stack ensures architectural consistency, simplifies maintenance, and leverages existing infrastructure and expertise with PostgreSQL and pgvector.
-
-**Alternatives Considered:**
-- **MongoDB**: Prohibited to maintain stack consistency and data integrity requirements.
-
----
-
 <!-- DECISION-CNST-393329 -->
 ## Decision: Prohibition of MongoDB in the Tech Stack for Analytics Events
 
@@ -83,6 +36,69 @@
 
 **Alternatives Considered:**
 - **MongoDB for analytics events**: It violates an active architectural constraint due to its lack of native ACID compliance, which is non-negotiable for billing and user data within our stack.
+
+---
+
+<!-- DECISION-DEC-1C6970 -->
+## Decision: Migrate from Redux to Zustand for Global State Management
+
+**Status**: Active  
+**Date**: 2026-05-08  
+**Severity**: Critical
+
+**Files**:
+- `src/store`
+- `src/state`
+
+**Rules**:
+```json
+{
+  "conditions": [
+    {
+      "type": "file",
+      "pattern": "src/store/**/*.{js,ts,jsx,tsx}",
+      "content_rules": [
+        {
+          "mode": "string",
+          "patterns": [
+            "redux",
+            "createStore",
+            "useSelector",
+            "useDispatch"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "pattern": "src/state/**/*.{js,ts,jsx,tsx}",
+      "content_rules": [
+        {
+          "mode": "string",
+          "patterns": [
+            "redux",
+            "createStore",
+            "useSelector",
+            "useDispatch"
+          ]
+        }
+      ]
+    }
+  ],
+  "match_mode": "any"
+}
+```
+
+### Context
+
+**Problem:** Redux was causing significant boilerplate overhead in the React application.
+
+**Decision:** Drop Redux entirely and adopt Zustand as the standard library for all global state management in the React application.
+
+**Rationale:** Zustand was chosen to replace Redux because it significantly reduces boilerplate code, improving maintainability and developer productivity compared to the Redux architecture.
+
+**Alternatives Considered:**
+- **Redux**: The library introduces excessive boilerplate overhead that hinders development efficiency.
 
 ---
 
@@ -804,15 +820,15 @@
 
 ---
 
-<!-- DECISION-DEC-A0711B -->
-## Decision: Direct database access in Server Components for order history
+<!-- DECISION-CONV-47BAF0 -->
+## Decision: Standardize on TypeScript and camelCase JSON for backend services
 
 **Status**: Active  
 **Date**: 2026-05-08  
 **Severity**: Warning
 
 **Files**:
-- `src/components/user/Profile.server.ts`
+- `/src/backend/`
 
 **Rules**:
 ```json
@@ -820,14 +836,15 @@
   "conditions": [
     {
       "type": "file",
-      "pattern": "src/components/user/Profile.server.ts",
+      "pattern": "src/backend/**/*.ts",
       "content_rules": [
         {
           "mode": "regex",
-          "start": 0,
-          "pattern": "new\\s+GraphQLResolver"
+          "start": 1,
+          "pattern": "(?s).*class.*|.*interface.*"
         }
-      ]
+      ],
+      "content_match_mode": "all"
     }
   ],
   "match_mode": "all"
@@ -836,11 +853,7 @@
 
 ### Context
 
-**Problem:** Avoid writing and reviewing new GraphQL resolvers for fetching user order history in Server Components.
-
-**Decision:** Implement direct PostgreSQL connection within the User Profile Server Component to fetch order history.
-
-**Rationale:** Direct database access reduces development effort by bypassing the overhead of creating and maintaining additional GraphQL resolvers for simple data retrieval tasks.
+**Problem:** Need to ensure consistency and type safety across new backend development and prevent API interoperability issues.
 
 
 <!-- decispher: output truncated to context budget -->
