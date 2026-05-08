@@ -10,13 +10,13 @@ Any code change that violates these decisions MUST be flagged.
 
 | Decision | Rationale | Files |
 |----------|-----------|-------|
-| The core pipeline must exclusively use PostgreSQL 16 with pgvector and Redis; the use of MongoDB is strictly prohibited. | Enforcing a specific database stack ensures architectural consistency, simplifies maintenance, and leverages existing infrastructure and expertise with PostgreSQL and pgvector. | infrastructure/database, src/db/config.ts |
 | MongoDB is strictly prohibited from being integrated into the current technology stack, including for analytics events. | There is an active and non-negotiable architectural constraint against MongoDB in the stack due to the critical requirement for ACID compliance across all billing and user data. MongoDB does not satisfy this fundamental requirement. | * |
 
 ### HIGH
 
 | Decision | Rationale | Files |
 |----------|-----------|-------|
+| Drop Redux entirely and adopt Zustand as the standard library for all global state management in the React application. | Zustand was chosen to replace Redux because it significantly reduces boilerplate code, improving maintainability and developer productivity compared to the Redux architecture. | src/store, src/state |
 | Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication. | The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup. | src/reporting-worker/api-client.ts, src/api/auth/middleware.ts |
 | Implement a strict 5-minute token expiry window for the authentication service. | This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens. | services/auth-service |
 | Migrate all email services to Zoho and update the SMTP server infrastructure, including the implementation of new routing rules to block any traffic to the legacy SMTP server. | The team decided to move to Zoho to consolidate mailing services and address the limitations or overhead associated with the existing legacy SMTP infrastructure. | infrastructure/mail, services/smtp, config/email_routing |
@@ -39,7 +39,6 @@ Any code change that violates these decisions MUST be flagged.
 
 | Decision | Rationale | Files |
 |----------|-----------|-------|
-| Implement direct PostgreSQL connection within the User Profile Server Component to fetch order history. | Direct database access reduces development effort by bypassing the overhead of creating and maintaining additional GraphQL resolvers for simple data retrieval tasks. | src/components/user/Profile.server.ts |
 | Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON. | TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency. | /src/backend/ |
 | The team has officially cancelled the usage and implementation of RFC 78. | The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities. | * |
 | Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations. | RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data. | src/sync/theme-validation.js |
