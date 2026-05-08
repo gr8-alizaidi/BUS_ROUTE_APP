@@ -99,6 +99,11 @@ Violating these decisions requires explicit approval.
 - **Do NOT:** Continue with current fragmented multi-provider setup (Gemini-Flash for detection, Claude-Sonnet for extraction, GPT-4o-mini for formatting). (This approach is unmaintainable, costly (Claude-Sonnet accounts for 60% of the LLM bill), and suffers from inconsistent provider availability issues.)
 - **Do NOT:** Consolidate to a single LLM provider for all pipeline steps. (This would limit flexibility, potentially sacrificing accuracy for high-tier companies or forcing budget-conscious companies to pay for more expensive models than necessary. It would also lead to vendor lock-in and a single point of failure for LLM stability.)
 
+### Adopt RFC7812 for theme data JSON validation (MEDIUM)
+- **Decision:** Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
+- **Rationale:** RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data.
+- **Affected files:** `src/sync/theme-validation.js`
+
 ### Standardize on HNSW for new vector indexes (MEDIUM)
 - **Decision:** All new vector indexes must be created using the HNSW algorithm. Existing IVFFlat indexes (specifically in the llm_cache table) are to be migrated to HNSW in Sprint 16.
 - **Rationale:** HNSW is the current architectural standard for vector indexing. The previous rejection of the migration to HNSW was due to operational risks in production, not a lack of performance or technical suitability of HNSW.
