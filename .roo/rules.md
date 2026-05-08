@@ -67,6 +67,9 @@
 
 ## General Conventions
 
+- **Standardize on TypeScript and camelCase JSON for backend services:** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
+  *(TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency.)*
+
 - **Cancellation of RFC 78 implementation:** The team has officially cancelled the usage and implementation of RFC 78.
   *(The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities.)*
 
