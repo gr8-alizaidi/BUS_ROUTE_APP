@@ -39,6 +39,7 @@ Any code change that violates these decisions MUST be flagged.
 
 | Decision | Rationale | Files |
 |----------|-----------|-------|
+| Implement direct PostgreSQL connection within the User Profile Server Component to fetch order history. | Direct database access reduces development effort by bypassing the overhead of creating and maintaining additional GraphQL resolvers for simple data retrieval tasks. | src/components/user/Profile.server.ts |
 | Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON. | TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency. | /src/backend/ |
 | The team has officially cancelled the usage and implementation of RFC 78. | The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities. | * |
 | Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations. | RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data. | src/sync/theme-validation.js |
