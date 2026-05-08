@@ -37,6 +37,7 @@ Any code change that violates these decisions MUST be flagged.
 
 | Decision | Rationale | Files |
 |----------|-----------|-------|
+| Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON. | TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency. | /src/backend/ |
 | The team has officially cancelled the usage and implementation of RFC 78. | The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities. | * |
 | Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations. | RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data. | src/sync/theme-validation.js |
 | All new vector indexes must be created using the HNSW algorithm. Existing IVFFlat indexes (specifically in the llm_cache table) are to be migrated to HNSW in Sprint 16. | HNSW is the current architectural standard for vector indexing. The previous rejection of the migration to HNSW was due to operational risks in production, not a lack of performance or technical suitability of HNSW. | db/schema/vector_indexes, db/migrations/sprint_16/migrate_llm_cache_to_hnsw |
