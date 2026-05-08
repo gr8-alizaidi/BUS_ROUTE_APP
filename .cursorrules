@@ -29,6 +29,12 @@
   Rationale: To maintain architectural integrity and prevent fragmentation in the core tech stack. Previous attempts to introduce MongoDB for event queues nearly caused instability, highlighting the need for a hard, enforceable constraint.
   Files: analytics/storage, infrastructure/database-policy
 
+## Authentication
+
+- Implement a strict 5-minute token expiry window for the authentication service.
+  Rationale: This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.
+  Files: services/auth-service
+
 ## Email
 
 - Migrate all email services to Zoho and update the SMTP server infrastructure, including the implementation of new routing rules to block any traffic to the legacy SMTP server.
@@ -49,13 +55,13 @@
 
 ## Billing
 
-- Replace all usage of the double type for money representations with the string type in src/billing.ts.
-  Rationale: Using floating-point numbers (doubles) for currency leads to rounding errors and precision issues due to IEEE 754 binary representation. Using strings ensures that exact decimal precision is maintained during financial calculations.
-  Files: packages/api/src/routes/credits.ts, packages/decision-store/src/repositories/credit-repository.ts, packages/common/src/types/credits.ts
+- The billing service uses long-running containers instead of serverless functions.
+  Rationale: Serverless functions introduced cold starts which resulted in unacceptable latency spikes during traffic peaks, negatively impacting the user experience for the billing service.
+  Files: packages/api/src/routes/credits.ts, packages/decision-store/src/repositories/credit-repository.ts, packages/common/src/types/credits.ts, services/billing
 
-- Replace all usages of double with string to represent money transactions in src/billing.ts.
-  Rationale: Using string types for monetary values prevents floating-point arithmetic errors inherent in the double type, ensuring accuracy for financial calculations.
-  Files: packages/api/src/billing/
+- The Revenue squad now has exclusive ownership of the billing module and Stripe integration, requiring their explicit approval for all pull requests affecting these areas.
+  Rationale: Centralizing ownership ensures better control, security, and specialized maintenance for critical payment-related infrastructure.
+  Files: packages/api/src/billing/, src/modules/billing/, src/integrations/stripe/
 
 ## Llm
 
