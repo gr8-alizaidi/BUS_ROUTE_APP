@@ -126,5 +126,9 @@ Cascade MUST respect these rules when generating or modifying code.
 
 ## [LOW]
 
+- Use standard SCSS in a separate navbar.scss file for the new navigation component.
+  Reason: Complex hover state requirements for the navigation component lead to unmanageable code when using Tailwind utility classes.
+  Files: navbar.scss, navbar.tsx
+
 - The team will use iPhones to perform mobile calls.
   Reason: The team aligned on a single mobile device platform for communication consistency.
