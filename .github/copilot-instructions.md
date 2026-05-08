@@ -20,14 +20,15 @@ When generating code for this project, follow these rules:
 15. All API errors must adhere to the RFC 7807 problem details format, including fields such as type, title, status, detail, and instance.
 16. The specific LLM model combinations for the multi-provider effort modes were finalized: Saver mode uses `gemini-flash` for detection, extraction, and format. Balanced mode uses `gemini-flash` for detection, `claude-haiku` for extraction, and `gpt-4o-mini` for format. Pro mode uses `gemini-flash` for detection, `claude-sonnet` for extraction, and `gpt-4o-mini` for format. Super mode uses `gemini-flash` for detection, `claude-opus` for extraction, and `claude-sonnet` for format.
 17. We will implement a multi-provider abstraction where each pipeline step (detection, extraction, enrichment, formatting) has its own LLM provider configuration via environment variables. At request time, an 'effort mode' can override the provider selection on a per-company basis.
-18. All new vector indexes must be created using the HNSW algorithm. Existing IVFFlat indexes (specifically in the llm_cache table) are to be migrated to HNSW in Sprint 16.
-19. Adopt the HIGH severity specification as the authoritative version for the RFC 7807 error format, which includes fields: type, title, status, detail, and instance.
-20. We have standardized on cosine distance (using the <=> operator in pgvector) for all similarity search operations.
-21. MongoDB is strictly prohibited for use in core pipeline services (including the core decision pipeline, authentication, and the context store). These services must exclusively use PostgreSQL 16 and Redis. Any deviation requires a formal ADR.
-22. The team decided to discontinue the use of EventStoreDB and removed event sourcing as an architectural pattern following the migration back to a monorepo.
-23. All internal API routes must adhere to the RFC 7807 error format, consistent with public-facing API routes.
-24. We will use the `text-embedding-3-small` OpenAI model to generate 1536-dimension embeddings. These embeddings will be stored in the `knowledge_chunks` table within PostgreSQL. The HNSW index used for vector search will be configured with `ef_construction=200` and `m=16`.
-25. We decided to use cosine distance for semantic similarity search of text embeddings with pgvector HNSW for deduplication.
-26. Implemented Redis semantic caching for LLM embedding calls. The cache key is a hash of the input text, model, and provider. The cache entries have a Time-To-Live (TTL) of 1 hour.
-27. Replace all usages of double with string to represent money transactions in src/billing.ts.
-28. The team will use iPhones to perform mobile calls.
+18. Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
+19. All new vector indexes must be created using the HNSW algorithm. Existing IVFFlat indexes (specifically in the llm_cache table) are to be migrated to HNSW in Sprint 16.
+20. Adopt the HIGH severity specification as the authoritative version for the RFC 7807 error format, which includes fields: type, title, status, detail, and instance.
+21. We have standardized on cosine distance (using the <=> operator in pgvector) for all similarity search operations.
+22. MongoDB is strictly prohibited for use in core pipeline services (including the core decision pipeline, authentication, and the context store). These services must exclusively use PostgreSQL 16 and Redis. Any deviation requires a formal ADR.
+23. The team decided to discontinue the use of EventStoreDB and removed event sourcing as an architectural pattern following the migration back to a monorepo.
+24. All internal API routes must adhere to the RFC 7807 error format, consistent with public-facing API routes.
+25. We will use the `text-embedding-3-small` OpenAI model to generate 1536-dimension embeddings. These embeddings will be stored in the `knowledge_chunks` table within PostgreSQL. The HNSW index used for vector search will be configured with `ef_construction=200` and `m=16`.
+26. We decided to use cosine distance for semantic similarity search of text embeddings with pgvector HNSW for deduplication.
+27. Implemented Redis semantic caching for LLM embedding calls. The cache key is a hash of the input text, model, and provider. The cache entries have a Time-To-Live (TTL) of 1 hour.
+28. Replace all usages of double with string to represent money transactions in src/billing.ts.
+29. The team will use iPhones to perform mobile calls.
