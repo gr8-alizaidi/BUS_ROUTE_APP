@@ -296,6 +296,17 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 - **Scope:** packages/api/src/billing/, src/modules/billing/, src/integrations/stripe/
 - **Tags:** billing, ownership, team
 
+### Use separate SCSS file for navigation component styling
+
+- **Severity:** LOW
+- **Rule:** Use standard SCSS in a separate navbar.scss file for the new navigation component.
+- **Rationale:** Complex hover state requirements for the navigation component lead to unmanageable code when using Tailwind utility classes.
+- **Scope:** navbar.scss, navbar.tsx
+- **Tags:** css, scss, tailwind, frontend, ui
+
+**Alternatives considered (rejected):**
+- ~~Tailwind utility classes~~ — The resulting code is too messy and complex for the required hover states.
+
 ### Standardization on iPhones for mobile communication
 
 - **Severity:** LOW
