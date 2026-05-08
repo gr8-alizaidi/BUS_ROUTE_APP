@@ -56,4 +56,5 @@ Any code change that violates these decisions MUST be flagged.
 
 | Decision | Rationale | Files |
 |----------|-----------|-------|
+| Use standard SCSS in a separate navbar.scss file for the new navigation component. | Complex hover state requirements for the navigation component lead to unmanageable code when using Tailwind utility classes. | navbar.scss, navbar.tsx |
 | The team will use iPhones to perform mobile calls. | The team aligned on a single mobile device platform for communication consistency. | * |
