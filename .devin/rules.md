@@ -29,6 +29,14 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 **Alternatives considered (rejected):**
 - ~~MongoDB for analytics events~~ — It violates an active architectural constraint due to its lack of native ACID compliance, which is non-negotiable for billing and user data within our stack.
 
+### Enforce 5-minute token expiry for authentication service
+
+- **Severity:** HIGH
+- **Rule:** Implement a strict 5-minute token expiry window for the authentication service.
+- **Rationale:** This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.
+- **Scope:** services/auth-service
+- **Tags:** authentication, security, compliance, backend
+
 ### Migrate email service to Zoho and update SMTP infrastructure
 
 - **Severity:** HIGH
@@ -56,13 +64,16 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 - **Scope:** api/responses, api/error-handling
 - **Tags:** api, rfc7807, standards, backend
 
-### Establish ownership and modification constraints for credits and billing system
+### Use long-running containers for billing service instead of serverless functions
 
 - **Severity:** HIGH
-- **Rule:** Replace all usage of the double type for money representations with the string type in src/billing.ts.
-- **Rationale:** Using floating-point numbers (doubles) for currency leads to rounding errors and precision issues due to IEEE 754 binary representation. Using strings ensures that exact decimal precision is maintained during financial calculations.
-- **Scope:** packages/api/src/routes/credits.ts, packages/decision-store/src/repositories/credit-repository.ts, packages/common/src/types/credits.ts
+- **Rule:** The billing service uses long-running containers instead of serverless functions.
+- **Rationale:** Serverless functions introduced cold starts which resulted in unacceptable latency spikes during traffic peaks, negatively impacting the user experience for the billing service.
+- **Scope:** packages/api/src/routes/credits.ts, packages/decision-store/src/repositories/credit-repository.ts, packages/common/src/types/credits.ts, services/billing
 - **Tags:** billing, ownership, credits, compliance
+
+**Alternatives considered (rejected):**
+- ~~Serverless functions~~ — Caused unacceptable latency spikes due to cold starts during traffic peaks.
 
 ### Define Model Fallback Ordering Strategy for API Rate Limits
 
@@ -277,12 +288,12 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 - **Rationale:** Redis was a natural extension since it is already in use for BullMQ and session caching. This implementation reduced redundant embedding calls by approximately 40% in tests.
 - **Tags:** redis, caching, llm, embeddings, performance, optimization
 
-### Ownership of Billing Module
+### Establish Revenue squad ownership of billing and Stripe integration
 
 - **Severity:** MEDIUM
-- **Rule:** Replace all usages of double with string to represent money transactions in src/billing.ts.
-- **Rationale:** Using string types for monetary values prevents floating-point arithmetic errors inherent in the double type, ensuring accuracy for financial calculations.
-- **Scope:** packages/api/src/billing/
+- **Rule:** The Revenue squad now has exclusive ownership of the billing module and Stripe integration, requiring their explicit approval for all pull requests affecting these areas.
+- **Rationale:** Centralizing ownership ensures better control, security, and specialized maintenance for critical payment-related infrastructure.
+- **Scope:** packages/api/src/billing/, src/modules/billing/, src/integrations/stripe/
 - **Tags:** billing, ownership, team
 
 ### Standardization on iPhones for mobile communication
