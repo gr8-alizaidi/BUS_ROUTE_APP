@@ -75,6 +75,9 @@
 
 ## General Conventions
 
+- **Direct database access in Server Components for order history:** Implement direct PostgreSQL connection within the User Profile Server Component to fetch order history.
+  *(Direct database access reduces development effort by bypassing the overhead of creating and maintaining additional GraphQL resolvers for simple data retrieval tasks.)*
+
 - **Standardize on TypeScript and camelCase JSON for backend services:** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
   *(TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency.)*
 
