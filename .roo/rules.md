@@ -10,6 +10,10 @@
 - **Prohibition of MongoDB in the Tech Stack for Analytics Events:** MongoDB is strictly prohibited from being integrated into the current technology stack, including for analytics events.
   *(There is an active and non-negotiable architectural constraint against MongoDB in the stack due to the critical requirement for ACID compliance across all billing and user data. MongoDB does not satisfy this fundamental requirement.)*
 
+- **Use shared secret token authentication for reporting worker communication:** Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
+  *(The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.)*
+  Files: src/reporting-worker/api-client.ts, src/api/auth/middleware.ts
+
 - **Enforce 5-minute token expiry for authentication service:** Implement a strict 5-minute token expiry window for the authentication service.
   *(This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.)*
   Files: services/auth-service
