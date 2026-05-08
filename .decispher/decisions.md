@@ -86,6 +86,64 @@
 
 ---
 
+<!-- DECISION-DEC-260C41 -->
+## Decision: Use shared secret token authentication for reporting worker communication
+
+**Status**: Active  
+**Date**: 2026-05-08  
+**Severity**: Critical
+
+**Files**:
+- `src/reporting-worker/api-client.ts`
+- `src/api/auth/middleware.ts`
+
+**Rules**:
+```json
+{
+  "conditions": [
+    {
+      "type": "file",
+      "pattern": "src/reporting-worker/api-client.ts",
+      "content_rules": [
+        {
+          "mode": "string",
+          "patterns": [
+            "https",
+            "tls",
+            "clientCert"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "pattern": "src/api/auth/middleware.ts",
+      "content_rules": [
+        {
+          "mode": "regex",
+          "start": 1,
+          "pattern": "mtls|certificate"
+        }
+      ]
+    }
+  ],
+  "match_mode": "any"
+}
+```
+
+### Context
+
+**Problem:** The reporting worker requires authentication to communicate with the main API, but mTLS setup is perceived as too slow or complex for this specific integration.
+
+**Decision:** Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
+
+**Rationale:** The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.
+
+**Alternatives Considered:**
+- **mTLS**: The team felt it would be too slow and complex to implement for this specific worker.
+
+---
+
 <!-- DECISION-RAT-02E6AC -->
 ## Decision: Enforce 5-minute token expiry for authentication service
 
@@ -782,80 +840,6 @@
 **Problem:** Need to ensure consistency and type safety across new backend development and prevent API interoperability issues.
 
 **Decision:** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
-
-**Rationale:** TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency.
-
----
-
-<!-- DECISION-DEC-2D19C7 -->
-## Decision: Cancellation of RFC 78 implementation
-
-**Status**: Active  
-**Date**: 2026-05-08  
-**Severity**: Warning
-
-**Rules**:
-```json
-{
-  "conditions": [
-    {
-      "type": "file",
-      "pattern": "**/*",
-      "content_rules": [
-        {
-          "mode": "regex",
-          "start": 0,
-          "pattern": "RFC 78",
-          "patterns": [
-            "RFC 78"
-          ]
-        }
-      ]
-    }
-  ],
-  "match_mode": "all"
-}
-```
-
-### Context
-
-**Problem:** The team decided to move away from the architectural proposal defined in RFC 78.
-
-**Decision:** The team has officially cancelled the usage and implementation of RFC 78.
-
-**Rationale:** The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities.
-
----
-
-<!-- DECISION-DEC-15E9A6 -->
-## Decision: Adopt RFC7812 for theme data JSON validation
-
-**Status**: Active  
-**Date**: 2026-05-08  
-**Severity**: Warning
-
-**Files**:
-- `src/sync/theme-validation.js`
-
-**Rules**:
-```json
-{
-  "conditions": [
-    {
-      "type": "file",
-      "pattern": "src/sync/theme-validation.js",
-      "content_rules": [
-        {
-          "mode": "full_file"
-        }
-      ]
-    }
-  ],
-  "match_mode": "all"
-}
-```
-
-### Context
 
 
 <!-- decispher: output truncated to context budget -->
