@@ -190,6 +190,17 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 - ~~Continue with current fragmented multi-provider setup (Gemini-Flash for detection, Claude-Sonnet for extraction, GPT-4o-mini for formatting).~~ — This approach is unmaintainable, costly (Claude-Sonnet accounts for 60% of the LLM bill), and suffers from inconsistent provider availability issues.
 - ~~Consolidate to a single LLM provider for all pipeline steps.~~ — This would limit flexibility, potentially sacrificing accuracy for high-tier companies or forcing budget-conscious companies to pay for more expensive models than necessary. It would also lead to vendor lock-in and a single point of failure for LLM stability.
 
+### Direct database access in Server Components for order history
+
+- **Severity:** MEDIUM
+- **Rule:** Implement direct PostgreSQL connection within the User Profile Server Component to fetch order history.
+- **Rationale:** Direct database access reduces development effort by bypassing the overhead of creating and maintaining additional GraphQL resolvers for simple data retrieval tasks.
+- **Scope:** src/components/user/Profile.server.ts
+- **Tags:** postgresql, graphql, backend, server-components, fusion:contradicts
+
+**Alternatives considered (rejected):**
+- ~~Implement a new GraphQL resolver~~ — Requires additional development effort and time for code review compared to direct database access.
+
 ### Standardize on TypeScript and camelCase JSON for backend services
 
 - **Severity:** MEDIUM
