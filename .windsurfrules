@@ -12,10 +12,6 @@ Cascade MUST respect these rules when generating or modifying code.
 
 ## [HIGH]
 
-- Drop Redux entirely and adopt Zustand as the standard library for all global state management in the React application.
-  Reason: Zustand was chosen to replace Redux because it significantly reduces boilerplate code, improving maintainability and developer productivity compared to the Redux architecture.
-  Files: src/store, src/state
-
 - Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
   Reason: The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.
   Files: src/reporting-worker/api-client.ts, src/api/auth/middleware.ts
