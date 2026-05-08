@@ -3,12 +3,12 @@
 
 ## ⚠️ Critical Rules — Do Not Violate
 
-- **Prohibit MongoDB and mandate PostgreSQL for core pipelines:** The core pipeline must exclusively use PostgreSQL 16 with pgvector and Redis; the use of MongoDB is strictly prohibited.
-  *(Enforcing a specific database stack ensures architectural consistency, simplifies maintenance, and leverages existing infrastructure and expertise with PostgreSQL and pgvector.)*
-  Files: infrastructure/database, src/db/config.ts
-
 - **Prohibition of MongoDB in the Tech Stack for Analytics Events:** MongoDB is strictly prohibited from being integrated into the current technology stack, including for analytics events.
   *(There is an active and non-negotiable architectural constraint against MongoDB in the stack due to the critical requirement for ACID compliance across all billing and user data. MongoDB does not satisfy this fundamental requirement.)*
+
+- **Migrate from Redux to Zustand for Global State Management:** Drop Redux entirely and adopt Zustand as the standard library for all global state management in the React application.
+  *(Zustand was chosen to replace Redux because it significantly reduces boilerplate code, improving maintainability and developer productivity compared to the Redux architecture.)*
+  Files: src/store, src/state
 
 - **Use shared secret token authentication for reporting worker communication:** Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
   *(The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.)*
@@ -74,9 +74,6 @@
   *(This approach allows companies with high context volume (Tier 3+) to pay extra for Claude-Sonnet's accuracy where needed, while companies with tighter budgets can use more cost-effective options like Gemini-Flash for all steps. It also decouples our infrastructure from individual LLM vendor stability and enables independent contract negotiations with different providers (Anthropic, OpenAI, Google).)*
 
 ## General Conventions
-
-- **Direct database access in Server Components for order history:** Implement direct PostgreSQL connection within the User Profile Server Component to fetch order history.
-  *(Direct database access reduces development effort by bypassing the overhead of creating and maintaining additional GraphQL resolvers for simple data retrieval tasks.)*
 
 - **Standardize on TypeScript and camelCase JSON for backend services:** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
   *(TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency.)*
