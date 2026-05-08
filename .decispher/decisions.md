@@ -804,15 +804,15 @@
 
 ---
 
-<!-- DECISION-CONV-47BAF0 -->
-## Decision: Standardize on TypeScript and camelCase JSON for backend services
+<!-- DECISION-DEC-A0711B -->
+## Decision: Direct database access in Server Components for order history
 
 **Status**: Active  
 **Date**: 2026-05-08  
 **Severity**: Warning
 
 **Files**:
-- `/src/backend/`
+- `src/components/user/Profile.server.ts`
 
 **Rules**:
 ```json
@@ -820,15 +820,14 @@
   "conditions": [
     {
       "type": "file",
-      "pattern": "src/backend/**/*.ts",
+      "pattern": "src/components/user/Profile.server.ts",
       "content_rules": [
         {
           "mode": "regex",
-          "start": 1,
-          "pattern": "(?s).*class.*|.*interface.*"
+          "start": 0,
+          "pattern": "new\\s+GraphQLResolver"
         }
-      ],
-      "content_match_mode": "all"
+      ]
     }
   ],
   "match_mode": "all"
@@ -837,9 +836,11 @@
 
 ### Context
 
-**Problem:** Need to ensure consistency and type safety across new backend development and prevent API interoperability issues.
+**Problem:** Avoid writing and reviewing new GraphQL resolvers for fetching user order history in Server Components.
 
-**Decision:** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
+**Decision:** Implement direct PostgreSQL connection within the User Profile Server Component to fetch order history.
+
+**Rationale:** Direct database access reduces development effort by bypassing the overhead of creating and maintaining additional GraphQL resolvers for simple data retrieval tasks.
 
 
 <!-- decispher: output truncated to context budget -->
