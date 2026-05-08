@@ -119,5 +119,9 @@ Before writing or modifying code, review these rules and do not violate them.
    - **Why:** Centralizing ownership ensures better control, security, and specialized maintenance for critical payment-related infrastructure.
    - **Files:** `packages/api/src/billing/`, `src/modules/billing/`, `src/integrations/stripe/`
 
-32. 🟢 **[LOW]** The team will use iPhones to perform mobile calls.
+32. 🟢 **[LOW]** Use standard SCSS in a separate navbar.scss file for the new navigation component.
+   - **Why:** Complex hover state requirements for the navigation component lead to unmanageable code when using Tailwind utility classes.
+   - **Files:** `navbar.scss`, `navbar.tsx`
+
+33. 🟢 **[LOW]** The team will use iPhones to perform mobile calls.
    - **Why:** The team aligned on a single mobile device platform for communication consistency.
