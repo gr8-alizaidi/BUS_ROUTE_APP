@@ -210,6 +210,14 @@ Aider should follow all of these conventions when making changes.
 
 **Relevant files:** `packages/api/src/routes/internal/`
 
+## Rfc
+
+### Cancellation of RFC 78 implementation
+
+**Convention:** The team has officially cancelled the usage and implementation of RFC 78.
+
+**Why:** The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities.
+
 ## Rfc7812
 
 ### Adopt RFC7812 for theme data JSON validation
