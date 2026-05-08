@@ -42,18 +42,6 @@ Aider should follow all of these conventions when making changes.
 
 **Relevant files:** `analytics/storage`, `infrastructure/database-policy`
 
-## Frontend
-
-### Migrate from Redux to Zustand for Global State Management
-
-**Convention:** Drop Redux entirely and adopt Zustand as the standard library for all global state management in the React application.
-
-**Why:** Zustand was chosen to replace Redux because it significantly reduces boilerplate code, improving maintainability and developer productivity compared to the Redux architecture.
-
-> ⚠️ This is a **HIGH** priority rule — do not violate it.
-
-**Relevant files:** `src/store`, `src/state`
-
 ## Security
 
 ### Use shared secret token authentication for reporting worker communication
