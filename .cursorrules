@@ -105,6 +105,12 @@
   Rationale: Inconsistent error formats, specifically plain strings from internal routes, prevent AI tools from reliably parsing and analyzing errors, leading to broken analysis workflows.
   Files: packages/api/src/routes/internal/
 
+## Rfc7812
+
+- Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
+  Rationale: RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data.
+  Files: src/sync/theme-validation.js
+
 ## Vector-search
 
 - All new vector indexes must be created using the HNSW algorithm. Existing IVFFlat indexes (specifically in the llm_cache table) are to be migrated to HNSW in Sprint 16.
