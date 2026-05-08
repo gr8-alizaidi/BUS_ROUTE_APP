@@ -709,8 +709,28 @@
 **Date**: 2026-05-08  
 **Severity**: Warning
 
-**Files**:
-- `**/*`
+**Rules**:
+```json
+{
+  "conditions": [
+    {
+      "type": "file",
+      "pattern": "**/*",
+      "content_rules": [
+        {
+          "mode": "regex",
+          "start": 0,
+          "pattern": "RFC 78",
+          "patterns": [
+            "RFC 78"
+          ]
+        }
+      ]
+    }
+  ],
+  "match_mode": "all"
+}
+```
 
 ### Context
 
@@ -830,20 +850,5 @@
     {
       "type": "file",
       "pattern": "packages/api/src/plugins/error-handler.ts",
-      "content_rules": [
-        {
-          "mode": "regex",
-          "start": 0,
-          "pattern": "(?s)^(?!.*(type|title|status|detail|instance)).*$"
-        }
-      ]
-    }
-  ],
-  "match_mode": "all"
-}
-```
-
-### Context
-
 
 <!-- decispher: output truncated to context budget -->
