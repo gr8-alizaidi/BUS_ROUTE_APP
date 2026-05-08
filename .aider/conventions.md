@@ -210,6 +210,16 @@ Aider should follow all of these conventions when making changes.
 
 **Relevant files:** `packages/api/src/routes/internal/`
 
+## Rfc7812
+
+### Adopt RFC7812 for theme data JSON validation
+
+**Convention:** Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
+
+**Why:** RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data.
+
+**Relevant files:** `src/sync/theme-validation.js`
+
 ## Vector-search
 
 ### Standardize on HNSW for new vector indexes
