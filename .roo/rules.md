@@ -67,6 +67,9 @@
 
 ## General Conventions
 
+- **Cancellation of RFC 78 implementation:** The team has officially cancelled the usage and implementation of RFC 78.
+  *(The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities.)*
+
 - **Adopt RFC7812 for theme data JSON validation:** Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
   *(RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data.)*
 
