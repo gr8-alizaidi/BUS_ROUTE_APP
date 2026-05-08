@@ -702,6 +702,26 @@
 
 ---
 
+<!-- DECISION-DEC-2D19C7 -->
+## Decision: Cancellation of RFC 78 implementation
+
+**Status**: Active  
+**Date**: 2026-05-08  
+**Severity**: Warning
+
+**Files**:
+- `**/*`
+
+### Context
+
+**Problem:** The team decided to move away from the architectural proposal defined in RFC 78.
+
+**Decision:** The team has officially cancelled the usage and implementation of RFC 78.
+
+**Rationale:** The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities.
+
+---
+
 <!-- DECISION-DEC-15E9A6 -->
 ## Decision: Adopt RFC7812 for theme data JSON validation
 
@@ -825,12 +845,5 @@
 
 ### Context
 
-**Problem:** Duplicate and conflicting conventions regarding RFC 7807 error format severity were documented in the Decispher system.
-
-**Decision:** Adopt the HIGH severity specification as the authoritative version for the RFC 7807 error format, which includes fields: type, title, status, detail, and instance.
-
-**Rationale:** The team identified that two existing conventions were redundant. Designating the HIGH severity entry as canonical while allowing the fusion engine to merge duplicate references ensures consistency across documentation and API implementations.
-
-**Alternatives Considered:**
 
 <!-- decispher: output truncated to context budget -->
