@@ -29,6 +29,17 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 **Alternatives considered (rejected):**
 - ~~MongoDB for analytics events~~ — It violates an active architectural constraint due to its lack of native ACID compliance, which is non-negotiable for billing and user data within our stack.
 
+### Use shared secret token authentication for reporting worker communication
+
+- **Severity:** HIGH
+- **Rule:** Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
+- **Rationale:** The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.
+- **Scope:** src/reporting-worker/api-client.ts, src/api/auth/middleware.ts
+- **Tags:** security, authentication, reporting-service, mtls, api
+
+**Alternatives considered (rejected):**
+- ~~mTLS~~ — The team felt it would be too slow and complex to implement for this specific worker.
+
 ### Enforce 5-minute token expiry for authentication service
 
 - **Severity:** HIGH
