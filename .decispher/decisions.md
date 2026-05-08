@@ -702,6 +702,47 @@
 
 ---
 
+<!-- DECISION-CONV-47BAF0 -->
+## Decision: Standardize on TypeScript and camelCase JSON for backend services
+
+**Status**: Active  
+**Date**: 2026-05-08  
+**Severity**: Warning
+
+**Files**:
+- `/src/backend/`
+
+**Rules**:
+```json
+{
+  "conditions": [
+    {
+      "type": "file",
+      "pattern": "src/backend/**/*.ts",
+      "content_rules": [
+        {
+          "mode": "regex",
+          "start": 1,
+          "pattern": "(?s).*class.*|.*interface.*"
+        }
+      ],
+      "content_match_mode": "all"
+    }
+  ],
+  "match_mode": "all"
+}
+```
+
+### Context
+
+**Problem:** Need to ensure consistency and type safety across new backend development and prevent API interoperability issues.
+
+**Decision:** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
+
+**Rationale:** TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency.
+
+---
+
 <!-- DECISION-DEC-2D19C7 -->
 ## Decision: Cancellation of RFC 78 implementation
 
@@ -822,33 +863,5 @@
 
 ### Context
 
-**Problem:** Uncertainty regarding whether the rejection of IVFFlat to HNSW migration applied to the index technology choice or the migration process itself.
-
-**Decision:** All new vector indexes must be created using the HNSW algorithm. Existing IVFFlat indexes (specifically in the llm_cache table) are to be migrated to HNSW in Sprint 16.
-
-**Rationale:** HNSW is the current architectural standard for vector indexing. The previous rejection of the migration to HNSW was due to operational risks in production, not a lack of performance or technical suitability of HNSW.
-
-**Alternatives Considered:**
-- **IVFFlat**: The team has standardized on HNSW for new indexes to maintain architectural consistency, despite potential performance profiles for specific query patterns.
-
----
-
-<!-- DECISION-CONV-17F772 -->
-## Decision: Establish authoritative RFC 7807 error format convention
-
-**Status**: Active  
-**Date**: 2026-04-22  
-**Severity**: Warning
-
-**Files**:
-- `packages/api/src/plugins/error-handler.ts`
-
-**Rules**:
-```json
-{
-  "conditions": [
-    {
-      "type": "file",
-      "pattern": "packages/api/src/plugins/error-handler.ts",
 
 <!-- decispher: output truncated to context budget -->
