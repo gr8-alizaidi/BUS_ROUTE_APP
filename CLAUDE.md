@@ -171,6 +171,12 @@ Violating these decisions requires explicit approval.
 - **Rationale:** Centralizing ownership ensures better control, security, and specialized maintenance for critical payment-related infrastructure.
 - **Affected files:** `packages/api/src/billing/`, `src/modules/billing/`, `src/integrations/stripe/`
 
+### Use separate SCSS file for navigation component styling (LOW)
+- **Decision:** Use standard SCSS in a separate navbar.scss file for the new navigation component.
+- **Rationale:** Complex hover state requirements for the navigation component lead to unmanageable code when using Tailwind utility classes.
+- **Affected files:** `navbar.scss`, `navbar.tsx`
+- **Do NOT:** Tailwind utility classes (The resulting code is too messy and complex for the required hover states.)
+
 ### Standardization on iPhones for mobile communication (LOW)
 - **Decision:** The team will use iPhones to perform mobile calls.
 - **Rationale:** The team aligned on a single mobile device platform for communication consistency.
