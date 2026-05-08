@@ -19,6 +19,12 @@ Violating these decisions requires explicit approval.
 - **Rationale:** There is an active and non-negotiable architectural constraint against MongoDB in the stack due to the critical requirement for ACID compliance across all billing and user data. MongoDB does not satisfy this fundamental requirement.
 - **Do NOT:** MongoDB for analytics events (It violates an active architectural constraint due to its lack of native ACID compliance, which is non-negotiable for billing and user data within our stack.)
 
+### Use shared secret token authentication for reporting worker communication (HIGH)
+- **Decision:** Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
+- **Rationale:** The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.
+- **Affected files:** `src/reporting-worker/api-client.ts`, `src/api/auth/middleware.ts`
+- **Do NOT:** mTLS (The team felt it would be too slow and complex to implement for this specific worker.)
+
 ### Enforce 5-minute token expiry for authentication service (HIGH)
 - **Decision:** Implement a strict 5-minute token expiry window for the authentication service.
 - **Rationale:** This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.
