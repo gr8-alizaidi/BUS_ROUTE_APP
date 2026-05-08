@@ -29,6 +29,12 @@
   Rationale: To maintain architectural integrity and prevent fragmentation in the core tech stack. Previous attempts to introduce MongoDB for event queues nearly caused instability, highlighting the need for a hard, enforceable constraint.
   Files: analytics/storage, infrastructure/database-policy
 
+## Security
+
+- Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
+  Rationale: The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.
+  Files: src/reporting-worker/api-client.ts, src/api/auth/middleware.ts
+
 ## Authentication
 
 - Implement a strict 5-minute token expiry window for the authentication service.
