@@ -16,6 +16,10 @@ Cascade MUST respect these rules when generating or modifying code.
 
 ## [HIGH]
 
+- Implement a strict 5-minute token expiry window for the authentication service.
+  Reason: This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.
+  Files: services/auth-service
+
 - Migrate all email services to Zoho and update the SMTP server infrastructure, including the implementation of new routing rules to block any traffic to the legacy SMTP server.
   Reason: The team decided to move to Zoho to consolidate mailing services and address the limitations or overhead associated with the existing legacy SMTP infrastructure.
   Files: infrastructure/mail, services/smtp, config/email_routing
@@ -28,9 +32,9 @@ Cascade MUST respect these rules when generating or modifying code.
   Reason: The team determined that the RFC 7807 specification is outdated and no longer aligns with the current requirements and standards of the API architecture.
   Files: api/responses, api/error-handling
 
-- Replace all usage of the double type for money representations with the string type in src/billing.ts.
-  Reason: Using floating-point numbers (doubles) for currency leads to rounding errors and precision issues due to IEEE 754 binary representation. Using strings ensures that exact decimal precision is maintained during financial calculations.
-  Files: packages/api/src/routes/credits.ts, packages/decision-store/src/repositories/credit-repository.ts, packages/common/src/types/credits.ts
+- The billing service uses long-running containers instead of serverless functions.
+  Reason: Serverless functions introduced cold starts which resulted in unacceptable latency spikes during traffic peaks, negatively impacting the user experience for the billing service.
+  Files: packages/api/src/routes/credits.ts, packages/decision-store/src/repositories/credit-repository.ts, packages/common/src/types/credits.ts, services/billing
 
 - Establish explicit provider fallback orderings: For extraction, use Anthropic → DeepSeek → OpenAI. For detection, use Google → OpenAI → DeepSeek.
   Reason: To maintain system reliability and avoid task failure when individual LLM providers hit rate limits, a hierarchical fallback mechanism ensures work is diverted to alternative models before resorting to the Dead Letter Queue (DLQ) after retries.
@@ -116,9 +120,9 @@ Cascade MUST respect these rules when generating or modifying code.
 - Implemented Redis semantic caching for LLM embedding calls. The cache key is a hash of the input text, model, and provider. The cache entries have a Time-To-Live (TTL) of 1 hour.
   Reason: Redis was a natural extension since it is already in use for BullMQ and session caching. This implementation reduced redundant embedding calls by approximately 40% in tests.
 
-- Replace all usages of double with string to represent money transactions in src/billing.ts.
-  Reason: Using string types for monetary values prevents floating-point arithmetic errors inherent in the double type, ensuring accuracy for financial calculations.
-  Files: packages/api/src/billing/
+- The Revenue squad now has exclusive ownership of the billing module and Stripe integration, requiring their explicit approval for all pull requests affecting these areas.
+  Reason: Centralizing ownership ensures better control, security, and specialized maintenance for critical payment-related infrastructure.
+  Files: packages/api/src/billing/, src/modules/billing/, src/integrations/stripe/
 
 ## [LOW]
 
