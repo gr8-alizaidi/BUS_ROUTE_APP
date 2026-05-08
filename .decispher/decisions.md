@@ -86,6 +86,46 @@
 
 ---
 
+<!-- DECISION-RAT-02E6AC -->
+## Decision: Enforce 5-minute token expiry for authentication service
+
+**Status**: Active  
+**Date**: 2026-05-08  
+**Severity**: Critical
+
+**Files**:
+- `services/auth-service`
+
+**Rules**:
+```json
+{
+  "conditions": [
+    {
+      "type": "file",
+      "pattern": "services/auth-service/**/*",
+      "content_rules": [
+        {
+          "mode": "regex",
+          "start": 1,
+          "pattern": "(expiresIn|expiry|ttl|lifetime).*?([6-9]\\d{2,}|[1-9]\\d{3,}|[0-9]{4,})"
+        }
+      ]
+    }
+  ],
+  "match_mode": "all"
+}
+```
+
+### Context
+
+**Problem:** Determine the optimal token expiration duration for the authentication service to balance security and usability.
+
+**Decision:** Implement a strict 5-minute token expiry window for the authentication service.
+
+**Rationale:** This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.
+
+---
+
 <!-- DECISION-DEC-E90978 -->
 ## Decision: Migrate email service to Zoho and update SMTP infrastructure
 
@@ -220,7 +260,7 @@
 ---
 
 <!-- DECISION-OWN-08631B -->
-## Decision: Establish ownership and modification constraints for credits and billing system
+## Decision: Use long-running containers for billing service instead of serverless functions
 
 **Status**: Active  
 **Date**: 2026-04-22  
@@ -230,6 +270,7 @@
 - `packages/api/src/routes/credits.ts`
 - `packages/decision-store/src/repositories/credit-repository.ts`
 - `packages/common/src/types/credits.ts`
+- `services/billing`
 
 **Rules**:
 ```json
@@ -256,9 +297,12 @@
 
 **Problem:** Uncertainty regarding ownership of the billing module and the requirements for implementing new effort modes.
 
-**Decision:** Replace all usage of the double type for money representations with the string type in src/billing.ts.
+**Decision:** The billing service uses long-running containers instead of serverless functions.
 
-**Rationale:** Using floating-point numbers (doubles) for currency leads to rounding errors and precision issues due to IEEE 754 binary representation. Using strings ensures that exact decimal precision is maintained during financial calculations.
+**Rationale:** Serverless functions introduced cold starts which resulted in unacceptable latency spikes during traffic peaks, negatively impacting the user experience for the billing service.
+
+**Alternatives Considered:**
+- **Serverless functions**: Caused unacceptable latency spikes due to cold starts during traffic peaks.
 
 ---
 
@@ -808,56 +852,6 @@
     }
   ],
   "match_mode": "all"
-}
-```
-
-### Context
-
-**Decision:** Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
-
-**Rationale:** RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data.
-
----
-
-<!-- DECISION-DEC-F3DB51 -->
-## Decision: Standardize on HNSW for new vector indexes
-
-**Status**: Active  
-**Date**: 2026-04-22  
-**Severity**: Warning
-
-**Files**:
-- `db/schema/vector_indexes`
-- `db/migrations/sprint_16/migrate_llm_cache_to_hnsw`
-
-**Rules**:
-```json
-{
-  "conditions": [
-    {
-      "type": "file",
-      "pattern": "db/schema/vector_indexes",
-      "content_rules": [
-        {
-          "mode": "regex",
-          "start": 0,
-          "pattern": "USING\\s+(IVFFLAT|IVFFLAT\\s+)"
-        }
-      ]
-    },
-    {
-      "type": "file",
-      "pattern": "db/migrations/sprint_16/migrate_llm_cache_to_hnsw",
-      "content_rules": [
-        {
-          "mode": "regex",
-          "start": 0,
-          "pattern": "CREATE\\s+INDEX.*USING\\s+IVFFLAT"
-        }
-      ]
-    }
-  ],
-  "match_mode": "any"
 }
 ```
 
