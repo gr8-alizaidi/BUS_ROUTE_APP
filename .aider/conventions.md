@@ -210,6 +210,16 @@ Aider should follow all of these conventions when making changes.
 
 **Relevant files:** `packages/api/src/routes/internal/`
 
+## Typescript
+
+### Standardize on TypeScript and camelCase JSON for backend services
+
+**Convention:** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
+
+**Why:** TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency.
+
+**Relevant files:** `/src/backend/`
+
 ## Rfc
 
 ### Cancellation of RFC 78 implementation
