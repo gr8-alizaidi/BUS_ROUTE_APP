@@ -16,7 +16,6 @@ Any code change that violates these decisions MUST be flagged.
 
 | Decision | Rationale | Files |
 |----------|-----------|-------|
-| Drop Redux entirely and adopt Zustand as the standard library for all global state management in the React application. | Zustand was chosen to replace Redux because it significantly reduces boilerplate code, improving maintainability and developer productivity compared to the Redux architecture. | src/store, src/state |
 | Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication. | The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup. | src/reporting-worker/api-client.ts, src/api/auth/middleware.ts |
 | Implement a strict 5-minute token expiry window for the authentication service. | This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens. | services/auth-service |
 | Migrate all email services to Zoho and update the SMTP server infrastructure, including the implementation of new routing rules to block any traffic to the legacy SMTP server. | The team decided to move to Zoho to consolidate mailing services and address the limitations or overhead associated with the existing legacy SMTP infrastructure. | infrastructure/mail, services/smtp, config/email_routing |
