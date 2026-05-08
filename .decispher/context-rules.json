@@ -1,12 +1,12 @@
 {
   "$schema": "https://decispher.dev/schemas/context-rules/v1.json",
   "specVersion": "1.0.0",
-  "generatedAt": "2026-05-08T21:50:26.398Z",
+  "generatedAt": "2026-05-08T21:51:12.183Z",
   "companyId": "1489dcdc-ef7f-4cc5-b0cb-b453efa059f4",
   "meta": {
-    "totalRules": 33,
+    "totalRules": 34,
     "rulesByType": {
-      "decision": 22,
+      "decision": 23,
       "convention": 4,
       "constraint": 2,
       "rationale": 1,
@@ -16,7 +16,7 @@
     },
     "rulesBySeverity": {
       "CRITICAL": 2,
-      "HIGH": 16,
+      "HIGH": 17,
       "MEDIUM": 13,
       "LOW": 2
     },
@@ -132,6 +132,67 @@
       },
       "createdAt": "2026-04-18T13:33:59.601Z",
       "updatedAt": "2026-04-18T13:34:22.478Z",
+      "version": 1,
+      "createdBy": "U05F9P78LTG",
+      "reviewedBy": "U05F9P78LTG"
+    },
+    {
+      "id": "260c4141-6041-4f13-9314-cecfe7698bc1",
+      "type": "decision",
+      "title": "Use shared secret token authentication for reporting worker communication",
+      "problem": "The reporting worker requires authentication to communicate with the main API, but mTLS setup is perceived as too slow or complex for this specific integration.",
+      "decision": "Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.",
+      "rationale": "The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.",
+      "severity": "HIGH",
+      "status": "active",
+      "confidence": 0.43,
+      "affectedFiles": [
+        "src/reporting-worker/api-client.ts",
+        "src/api/auth/middleware.ts"
+      ],
+      "tags": [
+        "security",
+        "authentication",
+        "reporting-service",
+        "mtls",
+        "api"
+      ],
+      "alternatives": [
+        {
+          "option": "mTLS",
+          "reasonRejected": "The team felt it would be too slow and complex to implement for this specific worker."
+        }
+      ],
+      "sources": [
+        {
+          "type": "slack",
+          "confidence": 0.43,
+          "ref": {
+            "priority": "high",
+            "threadTs": "1778277024.087199",
+            "channelId": "C0ALKBAGZQS",
+            "sourceUrl": "https://newworkspace-zdx9462.slack.com/archives/C0ALKBAGZQS/p1778277024087199?thread_ts=1778277024.087199&cid=C0ALKBAGZQS",
+            "channelName": "bot-test-1",
+            "slackTeamId": null,
+            "triggeredBy": "U05F9P78LTG",
+            "detectionMethod": "explicit",
+            "triggeredByName": "Ali Abbas"
+          },
+          "snippet": "Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication."
+        }
+      ],
+      "supersededBy": null,
+      "enforcement": {
+        "blockOnViolation": false,
+        "requiresExplicitOverride": false,
+        "filePatterns": [
+          "src/reporting-worker/api-client.ts",
+          "src/api/auth/middleware.ts"
+        ],
+        "exemptPatterns": []
+      },
+      "createdAt": "2026-05-08T21:50:33.887Z",
+      "updatedAt": "2026-05-08T21:50:52.410Z",
       "version": 1,
       "createdBy": "U05F9P78LTG",
       "reviewedBy": "U05F9P78LTG"
@@ -605,71 +666,5 @@
             "detectionMethod": "explicit",
             "triggeredByName": null
           },
-          "snippet": "Use PostgreSQL with pgvector and HNSW indexes as the standard solution for primary datastore and vector search operations."
-        }
-      ],
-      "supersededBy": null,
-      "enforcement": {
-        "blockOnViolation": false,
-        "requiresExplicitOverride": false,
-        "filePatterns": [],
-        "exemptPatterns": []
-      },
-      "createdAt": "2026-04-22T06:06:49.679Z",
-      "updatedAt": "2026-04-22T11:44:09.055Z",
-      "version": 1,
-      "createdBy": "U_ALI",
-      "reviewedBy": "df51fb32-47a2-48b2-ac32-3887a582a966"
-    },
-    {
-      "id": "3213c504-c4a3-4364-bc9f-3e3213242b7a",
-      "type": "decision",
-      "title": "Use MongoDB Atlas for schemaless analytics webhook storage",
-      "problem": "",
-      "decision": "Use MongoDB Atlas specifically for the analytics event ingestion pipeline, while keeping all other core application data in PostgreSQL.",
-      "rationale": "MongoDB Atlas provides the necessary horizontal sharding and schemaless structure to handle the required 50k write operations per second, whereas PostgreSQL performance degrades under this load.",
-      "severity": "HIGH",
-      "status": "active",
-      "confidence": 0.5,
-      "affectedFiles": [
-        "services/analytics-webhook-handler",
-        "infrastructure/database-clusters"
-      ],
-      "tags": [
-        "mongodb",
-        "postgresql",
-        "analytics",
-        "database",
-        "infrastructure",
-        "fusion:contradicts"
-      ],
-      "alternatives": [
-        {
-          "option": "PostgreSQL JSONB",
-          "reasonRejected": "Proved too difficult and inefficient to index effectively for schemaless event data."
-        }
-      ],
-      "sources": [
-        {
-          "type": "slack",
-          "confidence": 0.5,
-          "ref": {
-            "priority": "high",
-            "threadTs": "1776590790.779709",
-            "channelId": "C0ALJ121XLZ",
-            "channelName": "decispher-test-1",
-            "triggeredBy": "U05F9P78LTG",
-            "detectionMethod": "explicit"
-          },
-          "snippet": "Use MongoDB Atlas as the primary datastore for all raw analytics event logs, bypassing the existing PostgreSQL setup for this specific data type."
-        },
-        {
-          "type": "slack",
-          "confidence": 0.5,
-          "ref": {
-            "priority": "high",
-            "threadTs": "1777674632.806469",
-            "channelId": "C0ALKBAGZQS",
-            "sourceUrl": "https://newworkspace-zdx9462.slack.com/archives/C0ALKBAGZQS/p1777674632806469?thread_ts=1777674632.806469&cid=C0ALKBAGZQS",
 
 <!-- decispher: output truncated to context budget -->
