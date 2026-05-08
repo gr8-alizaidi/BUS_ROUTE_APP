@@ -169,6 +169,12 @@
   Rationale: Redis was a natural extension since it is already in use for BullMQ and session caching. This implementation reduced redundant embedding calls by approximately 40% in tests.
   Files: *
 
+## Css
+
+- Use standard SCSS in a separate navbar.scss file for the new navigation component.
+  Rationale: Complex hover state requirements for the navigation component lead to unmanageable code when using Tailwind utility classes.
+  Files: navbar.scss, navbar.tsx
+
 ## Mobile
 
 - The team will use iPhones to perform mobile calls.
