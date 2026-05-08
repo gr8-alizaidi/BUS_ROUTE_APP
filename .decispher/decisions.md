@@ -702,6 +702,42 @@
 
 ---
 
+<!-- DECISION-DEC-15E9A6 -->
+## Decision: Adopt RFC7812 for theme data JSON validation
+
+**Status**: Active  
+**Date**: 2026-05-08  
+**Severity**: Warning
+
+**Files**:
+- `src/sync/theme-validation.js`
+
+**Rules**:
+```json
+{
+  "conditions": [
+    {
+      "type": "file",
+      "pattern": "src/sync/theme-validation.js",
+      "content_rules": [
+        {
+          "mode": "full_file"
+        }
+      ]
+    }
+  ],
+  "match_mode": "all"
+}
+```
+
+### Context
+
+**Decision:** Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
+
+**Rationale:** RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data.
+
+---
+
 <!-- DECISION-DEC-F3DB51 -->
 ## Decision: Standardize on HNSW for new vector indexes
 
@@ -796,40 +832,5 @@
 **Rationale:** The team identified that two existing conventions were redundant. Designating the HIGH severity entry as canonical while allowing the fusion engine to merge duplicate references ensures consistency across documentation and API implementations.
 
 **Alternatives Considered:**
-- **MEDIUM severity specification**: The HIGH severity version was explicitly selected as the authoritative and canonical standard.
-
----
-
-<!-- DECISION-DEC-75490C -->
-## Decision: Use cosine distance for pgvector similarity searches
-
-**Status**: Active  
-**Date**: 2026-04-22  
-**Severity**: Warning
-
-**Rules**:
-```json
-{
-  "conditions": [
-    {
-      "type": "file",
-      "pattern": "**/*.sql",
-      "content_rules": [
-        {
-          "mode": "regex",
-          "start": 0,
-          "pattern": "<->"
-        }
-      ]
-    }
-  ],
-  "match_mode": "all"
-}
-```
-
-### Context
-
-**Problem:** Determine the optimal distance metric for embedding similarity search in pgvector to maximize recall.
-
 
 <!-- decispher: output truncated to context budget -->
