@@ -62,6 +62,18 @@ Aider should follow all of these conventions when making changes.
 
 **Relevant files:** `analytics/storage`, `infrastructure/database-policy`
 
+## Authentication
+
+### Enforce 5-minute token expiry for authentication service
+
+**Convention:** Implement a strict 5-minute token expiry window for the authentication service.
+
+**Why:** This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.
+
+> ⚠️ This is a **HIGH** priority rule — do not violate it.
+
+**Relevant files:** `services/auth-service`
+
 ## Email
 
 ### Migrate email service to Zoho and update SMTP infrastructure
@@ -100,23 +112,23 @@ Aider should follow all of these conventions when making changes.
 
 ## Billing
 
-### Establish ownership and modification constraints for credits and billing system
+### Use long-running containers for billing service instead of serverless functions
 
-**Convention:** Replace all usage of the double type for money representations with the string type in src/billing.ts.
+**Convention:** The billing service uses long-running containers instead of serverless functions.
 
-**Why:** Using floating-point numbers (doubles) for currency leads to rounding errors and precision issues due to IEEE 754 binary representation. Using strings ensures that exact decimal precision is maintained during financial calculations.
+**Why:** Serverless functions introduced cold starts which resulted in unacceptable latency spikes during traffic peaks, negatively impacting the user experience for the billing service.
 
 > ⚠️ This is a **HIGH** priority rule — do not violate it.
 
-**Relevant files:** `packages/api/src/routes/credits.ts`, `packages/decision-store/src/repositories/credit-repository.ts`, `packages/common/src/types/credits.ts`
+**Relevant files:** `packages/api/src/routes/credits.ts`, `packages/decision-store/src/repositories/credit-repository.ts`, `packages/common/src/types/credits.ts`, `services/billing`
 
-### Ownership of Billing Module
+### Establish Revenue squad ownership of billing and Stripe integration
 
-**Convention:** Replace all usages of double with string to represent money transactions in src/billing.ts.
+**Convention:** The Revenue squad now has exclusive ownership of the billing module and Stripe integration, requiring their explicit approval for all pull requests affecting these areas.
 
-**Why:** Using string types for monetary values prevents floating-point arithmetic errors inherent in the double type, ensuring accuracy for financial calculations.
+**Why:** Centralizing ownership ensures better control, security, and specialized maintenance for critical payment-related infrastructure.
 
-**Relevant files:** `packages/api/src/billing/`
+**Relevant files:** `packages/api/src/billing/`, `src/modules/billing/`, `src/integrations/stripe/`
 
 ## Llm
 
