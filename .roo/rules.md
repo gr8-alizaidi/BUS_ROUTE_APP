@@ -110,5 +110,8 @@
 - **Establish Revenue squad ownership of billing and Stripe integration:** The Revenue squad now has exclusive ownership of the billing module and Stripe integration, requiring their explicit approval for all pull requests affecting these areas.
   *(Centralizing ownership ensures better control, security, and specialized maintenance for critical payment-related infrastructure.)*
 
+- **Use separate SCSS file for navigation component styling:** Use standard SCSS in a separate navbar.scss file for the new navigation component.
+  *(Complex hover state requirements for the navigation component lead to unmanageable code when using Tailwind utility classes.)*
+
 - **Standardization on iPhones for mobile communication:** The team will use iPhones to perform mobile calls.
   *(The team aligned on a single mobile device platform for communication consistency.)*
