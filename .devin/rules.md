@@ -168,6 +168,13 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 - ~~Continue with current fragmented multi-provider setup (Gemini-Flash for detection, Claude-Sonnet for extraction, GPT-4o-mini for formatting).~~ — This approach is unmaintainable, costly (Claude-Sonnet accounts for 60% of the LLM bill), and suffers from inconsistent provider availability issues.
 - ~~Consolidate to a single LLM provider for all pipeline steps.~~ — This would limit flexibility, potentially sacrificing accuracy for high-tier companies or forcing budget-conscious companies to pay for more expensive models than necessary. It would also lead to vendor lock-in and a single point of failure for LLM stability.
 
+### Cancellation of RFC 78 implementation
+
+- **Severity:** MEDIUM
+- **Rule:** The team has officially cancelled the usage and implementation of RFC 78.
+- **Rationale:** The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities.
+- **Tags:** rfc, architecture, process
+
 ### Adopt RFC7812 for theme data JSON validation
 
 - **Severity:** MEDIUM
