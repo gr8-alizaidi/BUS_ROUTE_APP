@@ -4,34 +4,6 @@
 These are the active engineering decisions for this repository.
 Aider should follow all of these conventions when making changes.
 
-## Postgresql
-
-### Prohibit MongoDB and mandate PostgreSQL for core pipelines
-
-**Convention:** The core pipeline must exclusively use PostgreSQL 16 with pgvector and Redis; the use of MongoDB is strictly prohibited.
-
-**Why:** Enforcing a specific database stack ensures architectural consistency, simplifies maintenance, and leverages existing infrastructure and expertise with PostgreSQL and pgvector.
-
-> ⚠️ This is a **CRITICAL** priority rule — do not violate it.
-
-**Relevant files:** `infrastructure/database`, `src/db/config.ts`
-
-### Standardize on PostgreSQL with pgvector for primary storage and vector search
-
-**Convention:** Use PostgreSQL with pgvector and HNSW indexes as the standard solution for primary datastore and vector search operations.
-
-**Why:** PostgreSQL with pgvector provides the ability to manage both SQL-based relational data and vector search capabilities within a single system, simplifying the architecture compared to managing separate databases.
-
-> ⚠️ This is a **HIGH** priority rule — do not violate it.
-
-### Direct database access in Server Components for order history
-
-**Convention:** Implement direct PostgreSQL connection within the User Profile Server Component to fetch order history.
-
-**Why:** Direct database access reduces development effort by bypassing the overhead of creating and maintaining additional GraphQL resolvers for simple data retrieval tasks.
-
-**Relevant files:** `src/components/user/Profile.server.ts`
-
 ## Mongodb
 
 ### Prohibition of MongoDB in the Tech Stack for Analytics Events
@@ -69,6 +41,18 @@ Aider should follow all of these conventions when making changes.
 **Why:** To maintain architectural integrity and prevent fragmentation in the core tech stack. Previous attempts to introduce MongoDB for event queues nearly caused instability, highlighting the need for a hard, enforceable constraint.
 
 **Relevant files:** `analytics/storage`, `infrastructure/database-policy`
+
+## Frontend
+
+### Migrate from Redux to Zustand for Global State Management
+
+**Convention:** Drop Redux entirely and adopt Zustand as the standard library for all global state management in the React application.
+
+**Why:** Zustand was chosen to replace Redux because it significantly reduces boilerplate code, improving maintainability and developer productivity compared to the Redux architecture.
+
+> ⚠️ This is a **HIGH** priority rule — do not violate it.
+
+**Relevant files:** `src/store`, `src/state`
 
 ## Security
 
@@ -173,6 +157,16 @@ Aider should follow all of these conventions when making changes.
 > ⚠️ This is a **HIGH** priority rule — do not violate it.
 
 **Relevant files:** `infrastructure/terraform`, `infrastructure/k8s`
+
+## Postgresql
+
+### Standardize on PostgreSQL with pgvector for primary storage and vector search
+
+**Convention:** Use PostgreSQL with pgvector and HNSW indexes as the standard solution for primary datastore and vector search operations.
+
+**Why:** PostgreSQL with pgvector provides the ability to manage both SQL-based relational data and vector search capabilities within a single system, simplifying the architecture compared to managing separate databases.
+
+> ⚠️ This is a **HIGH** priority rule — do not violate it.
 
 ## LLM
 
