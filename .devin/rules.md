@@ -18,17 +18,6 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 **Alternatives considered (rejected):**
 - ~~MongoDB for analytics events~~ — It violates an active architectural constraint due to its lack of native ACID compliance, which is non-negotiable for billing and user data within our stack.
 
-### Migrate from Redux to Zustand for Global State Management
-
-- **Severity:** HIGH
-- **Rule:** Drop Redux entirely and adopt Zustand as the standard library for all global state management in the React application.
-- **Rationale:** Zustand was chosen to replace Redux because it significantly reduces boilerplate code, improving maintainability and developer productivity compared to the Redux architecture.
-- **Scope:** src/store, src/state
-- **Tags:** frontend, react, state-management, zustand, redux
-
-**Alternatives considered (rejected):**
-- ~~Redux~~ — The library introduces excessive boilerplate overhead that hinders development efficiency.
-
 ### Use shared secret token authentication for reporting worker communication
 
 - **Severity:** HIGH
