@@ -81,6 +81,10 @@ Cascade MUST respect these rules when generating or modifying code.
 
 ## [MEDIUM]
 
+- Implement direct PostgreSQL connection within the User Profile Server Component to fetch order history.
+  Reason: Direct database access reduces development effort by bypassing the overhead of creating and maintaining additional GraphQL resolvers for simple data retrieval tasks.
+  Files: src/components/user/Profile.server.ts
+
 - Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
   Reason: TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency.
   Files: /src/backend/
