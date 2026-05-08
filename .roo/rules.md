@@ -67,6 +67,9 @@
 
 ## General Conventions
 
+- **Adopt RFC7812 for theme data JSON validation:** Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
+  *(RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data.)*
+
 - **Standardize on HNSW for new vector indexes:** All new vector indexes must be created using the HNSW algorithm. Existing IVFFlat indexes (specifically in the llm_cache table) are to be migrated to HNSW in Sprint 16.
   *(HNSW is the current architectural standard for vector indexing. The previous rejection of the migration to HNSW was due to operational risks in production, not a lack of performance or technical suitability of HNSW.)*
 
