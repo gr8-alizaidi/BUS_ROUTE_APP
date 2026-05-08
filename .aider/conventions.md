@@ -24,6 +24,14 @@ Aider should follow all of these conventions when making changes.
 
 > ⚠️ This is a **HIGH** priority rule — do not violate it.
 
+### Direct database access in Server Components for order history
+
+**Convention:** Implement direct PostgreSQL connection within the User Profile Server Component to fetch order history.
+
+**Why:** Direct database access reduces development effort by bypassing the overhead of creating and maintaining additional GraphQL resolvers for simple data retrieval tasks.
+
+**Relevant files:** `src/components/user/Profile.server.ts`
+
 ## Mongodb
 
 ### Prohibition of MongoDB in the Tech Stack for Analytics Events
