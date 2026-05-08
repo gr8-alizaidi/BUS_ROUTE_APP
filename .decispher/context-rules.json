@@ -1,22 +1,22 @@
 {
   "$schema": "https://decispher.dev/schemas/context-rules/v1.json",
   "specVersion": "1.0.0",
-  "generatedAt": "2026-05-08T20:46:21.277Z",
+  "generatedAt": "2026-05-08T21:26:05.686Z",
   "companyId": "1489dcdc-ef7f-4cc5-b0cb-b453efa059f4",
   "meta": {
-    "totalRules": 31,
+    "totalRules": 32,
     "rulesByType": {
       "decision": 21,
       "convention": 4,
       "constraint": 2,
-      "rationale": 0,
+      "rationale": 1,
       "ownership": 2,
       "history": 1,
       "plan": 1
     },
     "rulesBySeverity": {
       "CRITICAL": 2,
-      "HIGH": 15,
+      "HIGH": 16,
       "MEDIUM": 13,
       "LOW": 1
     },
@@ -135,6 +135,59 @@
       "version": 1,
       "createdBy": "U05F9P78LTG",
       "reviewedBy": "U05F9P78LTG"
+    },
+    {
+      "id": "02e6acff-0e2b-4caf-969d-be906d20eedc",
+      "type": "rationale",
+      "title": "Enforce 5-minute token expiry for authentication service",
+      "problem": "Determine the optimal token expiration duration for the authentication service to balance security and usability.",
+      "decision": "Implement a strict 5-minute token expiry window for the authentication service.",
+      "rationale": "This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.",
+      "severity": "HIGH",
+      "status": "active",
+      "confidence": 0.45,
+      "affectedFiles": [
+        "services/auth-service"
+      ],
+      "tags": [
+        "authentication",
+        "security",
+        "compliance",
+        "backend"
+      ],
+      "alternatives": [],
+      "sources": [
+        {
+          "type": "slack",
+          "confidence": 0.45,
+          "ref": {
+            "priority": "high",
+            "threadTs": "1778275094.826989",
+            "channelId": "C0ALKBAGZQS",
+            "sourceUrl": "https://newworkspace-zdx9462.slack.com/archives/C0ALKBAGZQS/p1778275094826989?thread_ts=1778275094.826989&cid=C0ALKBAGZQS",
+            "channelName": "bot-test-1",
+            "slackTeamId": null,
+            "triggeredBy": "U05F9P78LTG",
+            "detectionMethod": "explicit",
+            "triggeredByName": "Ali Abbas"
+          },
+          "snippet": "Implement a strict 5-minute token expiry window for the authentication service."
+        }
+      ],
+      "supersededBy": null,
+      "enforcement": {
+        "blockOnViolation": false,
+        "requiresExplicitOverride": false,
+        "filePatterns": [
+          "services/auth-service"
+        ],
+        "exemptPatterns": []
+      },
+      "createdAt": "2026-05-08T21:24:39.440Z",
+      "updatedAt": "2026-05-08T21:25:38.007Z",
+      "version": 1,
+      "createdBy": "U05F9P78LTG",
+      "reviewedBy": "df51fb32-47a2-48b2-ac32-3887a582a966"
     },
     {
       "id": "e9097831-0c7b-43f1-895a-b115dd36c20b",
@@ -304,17 +357,18 @@
     {
       "id": "08631b5a-a39c-4766-b840-beb3a13fde5e",
       "type": "ownership",
-      "title": "Establish ownership and modification constraints for credits and billing system",
+      "title": "Use long-running containers for billing service instead of serverless functions",
       "problem": "Uncertainty regarding ownership of the billing module and the requirements for implementing new effort modes.",
-      "decision": "Replace all usage of the double type for money representations with the string type in src/billing.ts.",
-      "rationale": "Using floating-point numbers (doubles) for currency leads to rounding errors and precision issues due to IEEE 754 binary representation. Using strings ensures that exact decimal precision is maintained during financial calculations.",
+      "decision": "The billing service uses long-running containers instead of serverless functions.",
+      "rationale": "Serverless functions introduced cold starts which resulted in unacceptable latency spikes during traffic peaks, negatively impacting the user experience for the billing service.",
       "severity": "HIGH",
       "status": "active",
       "confidence": 0.43,
       "affectedFiles": [
         "packages/api/src/routes/credits.ts",
         "packages/decision-store/src/repositories/credit-repository.ts",
-        "packages/common/src/types/credits.ts"
+        "packages/common/src/types/credits.ts",
+        "services/billing"
       ],
       "tags": [
         "billing",
@@ -322,7 +376,12 @@
         "credits",
         "compliance"
       ],
-      "alternatives": [],
+      "alternatives": [
+        {
+          "option": "Serverless functions",
+          "reasonRejected": "Caused unacceptable latency spikes due to cold starts during traffic peaks."
+        }
+      ],
       "sources": [
         {
           "type": "slack",
@@ -367,12 +426,13 @@
         "filePatterns": [
           "packages/api/src/routes/credits.ts",
           "packages/decision-store/src/repositories/credit-repository.ts",
-          "packages/common/src/types/credits.ts"
+          "packages/common/src/types/credits.ts",
+          "services/billing"
         ],
         "exemptPatterns": []
       },
       "createdAt": "2026-04-22T06:14:04.546Z",
-      "updatedAt": "2026-05-05T12:33:12.799Z",
+      "updatedAt": "2026-05-08T21:16:45.660Z",
       "version": 2,
       "createdBy": "U_SARA",
       "reviewedBy": "df51fb32-47a2-48b2-ac32-3887a582a966"
@@ -610,58 +670,5 @@
             "priority": "high",
             "threadTs": "1777674632.806469",
             "channelId": "C0ALKBAGZQS",
-            "sourceUrl": "https://newworkspace-zdx9462.slack.com/archives/C0ALKBAGZQS/p1777674632806469?thread_ts=1777674632.806469&cid=C0ALKBAGZQS",
-            "channelName": "bot-test-1",
-            "slackTeamId": null,
-            "triggeredBy": "U05F9P78LTG",
-            "detectionMethod": "explicit",
-            "triggeredByName": "Ali Abbas"
-          },
-          "snippet": "Use MongoDB Atlas specifically for the analytics event ingestion pipeline, while keeping all other core application data in PostgreSQL."
-        }
-      ],
-      "supersededBy": null,
-      "enforcement": {
-        "blockOnViolation": false,
-        "requiresExplicitOverride": false,
-        "filePatterns": [
-          "services/analytics-webhook-handler",
-          "infrastructure/database-clusters"
-        ],
-        "exemptPatterns": []
-      },
-      "createdAt": "2026-04-19T09:26:59.727Z",
-      "updatedAt": "2026-05-01T23:41:07.751Z",
-      "version": 2,
-      "createdBy": "U05F9P78LTG",
-      "reviewedBy": "df51fb32-47a2-48b2-ac32-3887a582a966"
-    },
-    {
-      "id": "465c1e1a-bb9e-4b3f-ade4-dc7674a5870a",
-      "type": "decision",
-      "title": "Use MongoDB for Analytics Events Pipeline",
-      "problem": "PostgreSQL's write throughput is insufficient for high-cardinality analytics event data, failing to meet new scale requirements.",
-      "decision": "We will use MongoDB for the analytics events pipeline, provisioning a MongoDB Atlas cluster to handle the data.",
-      "rationale": "MongoDB offers 10x the write throughput compared to PostgreSQL for high-cardinality event data, which is essential to meet the current scale requirements. The previous constraint was established before these new scale demands emerged.",
-      "severity": "HIGH",
-      "status": "active",
-      "confidence": 0.5,
-      "affectedFiles": [
-        "packages/api/src/analytics/"
-      ],
-      "tags": [
-        "mongodb",
-        "analytics",
-        "database",
-        "pipeline",
-        "backend",
-        "fusion:contradicts"
-      ],
-      "alternatives": [
-        {
-          "option": "PostgreSQL",
-          "reasonRejected": "PostgreSQL's write throughput is 10x lower than MongoDB for high-cardinality event data, making it unsuitable for the new scale requirements of the analytics pipeline."
-        }
-      ],
 
 <!-- decispher: output truncated to context budget -->
