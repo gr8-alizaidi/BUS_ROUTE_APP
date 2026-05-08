@@ -1,89 +1,28 @@
 {
   "$schema": "https://decispher.dev/schemas/context-rules/v1.json",
   "specVersion": "1.0.0",
-  "generatedAt": "2026-05-08T21:55:22.854Z",
+  "generatedAt": "2026-05-08T22:00:01.600Z",
   "companyId": "1489dcdc-ef7f-4cc5-b0cb-b453efa059f4",
   "meta": {
-    "totalRules": 35,
+    "totalRules": 34,
     "rulesByType": {
       "decision": 24,
       "convention": 4,
-      "constraint": 2,
+      "constraint": 1,
       "rationale": 1,
       "ownership": 2,
       "history": 1,
       "plan": 1
     },
     "rulesBySeverity": {
-      "CRITICAL": 2,
-      "HIGH": 17,
-      "MEDIUM": 14,
+      "CRITICAL": 1,
+      "HIGH": 18,
+      "MEDIUM": 13,
       "LOW": 2
     },
     "generator": "decispher-ai-blocker@1.0.0"
   },
   "rules": [
-    {
-      "id": "8d730075-9042-46a9-b163-9bedcaaee371",
-      "type": "constraint",
-      "title": "Prohibit MongoDB and mandate PostgreSQL for core pipelines",
-      "problem": "Need to define and enforce the database technology stack to ensure system consistency and data integrity.",
-      "decision": "The core pipeline must exclusively use PostgreSQL 16 with pgvector and Redis; the use of MongoDB is strictly prohibited.",
-      "rationale": "Enforcing a specific database stack ensures architectural consistency, simplifies maintenance, and leverages existing infrastructure and expertise with PostgreSQL and pgvector.",
-      "severity": "CRITICAL",
-      "status": "active",
-      "confidence": 0.48,
-      "affectedFiles": [
-        "infrastructure/database",
-        "src/db/config.ts"
-      ],
-      "tags": [
-        "postgresql",
-        "database",
-        "mongodb",
-        "infrastructure",
-        "backend"
-      ],
-      "alternatives": [
-        {
-          "option": "MongoDB",
-          "reasonRejected": "Prohibited to maintain stack consistency and data integrity requirements."
-        }
-      ],
-      "sources": [
-        {
-          "type": "slack",
-          "confidence": 0.48,
-          "ref": {
-            "priority": "high",
-            "threadTs": "1776838145.000000",
-            "channelId": "C_BACKEND_INFRA",
-            "sourceUrl": null,
-            "channelName": "backend-infra",
-            "slackTeamId": "T05FJS3A8JG",
-            "triggeredBy": null,
-            "detectionMethod": "explicit",
-            "triggeredByName": null
-          },
-          "snippet": "The core pipeline must exclusively use PostgreSQL 16 with pgvector and Redis; the use of MongoDB is strictly prohibited."
-        }
-      ],
-      "supersededBy": null,
-      "enforcement": {
-        "blockOnViolation": false,
-        "requiresExplicitOverride": false,
-        "filePatterns": [
-          "infrastructure/database",
-          "src/db/config.ts"
-        ],
-        "exemptPatterns": []
-      },
-      "createdAt": "2026-04-22T06:07:48.054Z",
-      "updatedAt": "2026-04-22T11:43:24.579Z",
-      "version": 1,
-      "createdBy": "U_NADIA",
-      "reviewedBy": "df51fb32-47a2-48b2-ac32-3887a582a966"
-    },
     {
       "id": "393329ba-9640-498c-89f1-46c1324aaeff",
       "type": "constraint",
@@ -132,6 +71,67 @@
       },
       "createdAt": "2026-04-18T13:33:59.601Z",
       "updatedAt": "2026-04-18T13:34:22.478Z",
+      "version": 1,
+      "createdBy": "U05F9P78LTG",
+      "reviewedBy": "U05F9P78LTG"
+    },
+    {
+      "id": "1c69700d-d0b7-4c1d-87e0-894f1f510cb3",
+      "type": "decision",
+      "title": "Migrate from Redux to Zustand for Global State Management",
+      "problem": "Redux was causing significant boilerplate overhead in the React application.",
+      "decision": "Drop Redux entirely and adopt Zustand as the standard library for all global state management in the React application.",
+      "rationale": "Zustand was chosen to replace Redux because it significantly reduces boilerplate code, improving maintainability and developer productivity compared to the Redux architecture.",
+      "severity": "HIGH",
+      "status": "active",
+      "confidence": 0.5,
+      "affectedFiles": [
+        "src/store",
+        "src/state"
+      ],
+      "tags": [
+        "frontend",
+        "react",
+        "state-management",
+        "zustand",
+        "redux"
+      ],
+      "alternatives": [
+        {
+          "option": "Redux",
+          "reasonRejected": "The library introduces excessive boilerplate overhead that hinders development efficiency."
+        }
+      ],
+      "sources": [
+        {
+          "type": "slack",
+          "confidence": 0.5,
+          "ref": {
+            "priority": "high",
+            "threadTs": "1778277488.909709",
+            "channelId": "C0ALKBAGZQS",
+            "sourceUrl": "https://newworkspace-zdx9462.slack.com/archives/C0ALKBAGZQS/p1778277488909709?thread_ts=1778277488.909709&cid=C0ALKBAGZQS",
+            "channelName": "bot-test-1",
+            "slackTeamId": null,
+            "triggeredBy": "U05F9P78LTG",
+            "detectionMethod": "explicit",
+            "triggeredByName": "Ali Abbas"
+          },
+          "snippet": "Drop Redux entirely and adopt Zustand as the standard library for all global state management in the React application."
+        }
+      ],
+      "supersededBy": null,
+      "enforcement": {
+        "blockOnViolation": false,
+        "requiresExplicitOverride": false,
+        "filePatterns": [
+          "src/store",
+          "src/state"
+        ],
+        "exemptPatterns": []
+      },
+      "createdAt": "2026-05-08T21:58:33.676Z",
+      "updatedAt": "2026-05-08T21:59:28.977Z",
       "version": 1,
       "createdBy": "U05F9P78LTG",
       "reviewedBy": "U05F9P78LTG"
