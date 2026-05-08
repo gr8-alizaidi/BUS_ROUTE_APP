@@ -73,6 +73,9 @@ Cascade MUST respect these rules when generating or modifying code.
 
 ## [MEDIUM]
 
+- The team has officially cancelled the usage and implementation of RFC 78.
+  Reason: The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities.
+
 - Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
   Reason: RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data.
   Files: src/sync/theme-validation.js
