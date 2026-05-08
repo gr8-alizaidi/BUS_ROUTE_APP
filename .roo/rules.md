@@ -6,10 +6,6 @@
 - **Prohibition of MongoDB in the Tech Stack for Analytics Events:** MongoDB is strictly prohibited from being integrated into the current technology stack, including for analytics events.
   *(There is an active and non-negotiable architectural constraint against MongoDB in the stack due to the critical requirement for ACID compliance across all billing and user data. MongoDB does not satisfy this fundamental requirement.)*
 
-- **Migrate from Redux to Zustand for Global State Management:** Drop Redux entirely and adopt Zustand as the standard library for all global state management in the React application.
-  *(Zustand was chosen to replace Redux because it significantly reduces boilerplate code, improving maintainability and developer productivity compared to the Redux architecture.)*
-  Files: src/store, src/state
-
 - **Use shared secret token authentication for reporting worker communication:** Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
   *(The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.)*
   Files: src/reporting-worker/api-client.ts, src/api/auth/middleware.ts
