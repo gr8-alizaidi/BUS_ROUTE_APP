@@ -34,4 +34,5 @@ When generating code for this project, follow these rules:
 29. We decided to use cosine distance for semantic similarity search of text embeddings with pgvector HNSW for deduplication.
 30. Implemented Redis semantic caching for LLM embedding calls. The cache key is a hash of the input text, model, and provider. The cache entries have a Time-To-Live (TTL) of 1 hour.
 31. The Revenue squad now has exclusive ownership of the billing module and Stripe integration, requiring their explicit approval for all pull requests affecting these areas.
-32. The team will use iPhones to perform mobile calls.
+32. Use standard SCSS in a separate navbar.scss file for the new navigation component.
+33. The team will use iPhones to perform mobile calls.
