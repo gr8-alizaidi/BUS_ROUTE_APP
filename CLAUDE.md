@@ -13,12 +13,6 @@ Violating these decisions requires explicit approval.
 - **Rationale:** There is an active and non-negotiable architectural constraint against MongoDB in the stack due to the critical requirement for ACID compliance across all billing and user data. MongoDB does not satisfy this fundamental requirement.
 - **Do NOT:** MongoDB for analytics events (It violates an active architectural constraint due to its lack of native ACID compliance, which is non-negotiable for billing and user data within our stack.)
 
-### Migrate from Redux to Zustand for Global State Management (HIGH)
-- **Decision:** Drop Redux entirely and adopt Zustand as the standard library for all global state management in the React application.
-- **Rationale:** Zustand was chosen to replace Redux because it significantly reduces boilerplate code, improving maintainability and developer productivity compared to the Redux architecture.
-- **Affected files:** `src/store`, `src/state`
-- **Do NOT:** Redux (The library introduces excessive boilerplate overhead that hinders development efficiency.)
-
 ### Use shared secret token authentication for reporting worker communication (HIGH)
 - **Decision:** Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
 - **Rationale:** The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.
