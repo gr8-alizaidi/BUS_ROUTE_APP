@@ -9,123 +9,119 @@ Before writing or modifying code, review these rules and do not violate them.
 1. 🔴 **[CRITICAL]** MongoDB is strictly prohibited from being integrated into the current technology stack, including for analytics events.
    - **Why:** There is an active and non-negotiable architectural constraint against MongoDB in the stack due to the critical requirement for ACID compliance across all billing and user data. MongoDB does not satisfy this fundamental requirement.
 
-2. 🟠 **[HIGH]** Drop Redux entirely and adopt Zustand as the standard library for all global state management in the React application.
-   - **Why:** Zustand was chosen to replace Redux because it significantly reduces boilerplate code, improving maintainability and developer productivity compared to the Redux architecture.
-   - **Files:** `src/store`, `src/state`
-
-3. 🟠 **[HIGH]** Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
+2. 🟠 **[HIGH]** Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
    - **Why:** The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.
    - **Files:** `src/reporting-worker/api-client.ts`, `src/api/auth/middleware.ts`
 
-4. 🟠 **[HIGH]** Implement a strict 5-minute token expiry window for the authentication service.
+3. 🟠 **[HIGH]** Implement a strict 5-minute token expiry window for the authentication service.
    - **Why:** This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.
    - **Files:** `services/auth-service`
 
-5. 🟠 **[HIGH]** Migrate all email services to Zoho and update the SMTP server infrastructure, including the implementation of new routing rules to block any traffic to the legacy SMTP server.
+4. 🟠 **[HIGH]** Migrate all email services to Zoho and update the SMTP server infrastructure, including the implementation of new routing rules to block any traffic to the legacy SMTP server.
    - **Why:** The team decided to move to Zoho to consolidate mailing services and address the limitations or overhead associated with the existing legacy SMTP infrastructure.
    - **Files:** `infrastructure/mail`, `services/smtp`, `config/email_routing`
 
-6. 🟠 **[HIGH]** Switch from the third-party Shipsy provider to an in-house developed mapping event system.
+5. 🟠 **[HIGH]** Switch from the third-party Shipsy provider to an in-house developed mapping event system.
    - **Why:** The team identified that the Shipsy service was negatively impacting the platform's scalability, and moving to an internal solution reduces external dependencies.
    - **Files:** `services/shipping-integration`, `infrastructure/event-bus`
 
-7. 🟠 **[HIGH]** We have decided to officially discontinue the use of RFC 7807 (Problem Details for HTTP APIs) for all API error responses moving forward.
+6. 🟠 **[HIGH]** We have decided to officially discontinue the use of RFC 7807 (Problem Details for HTTP APIs) for all API error responses moving forward.
    - **Why:** The team determined that the RFC 7807 specification is outdated and no longer aligns with the current requirements and standards of the API architecture.
    - **Files:** `api/responses`, `api/error-handling`
 
-8. 🟠 **[HIGH]** The billing service uses long-running containers instead of serverless functions.
+7. 🟠 **[HIGH]** The billing service uses long-running containers instead of serverless functions.
    - **Why:** Serverless functions introduced cold starts which resulted in unacceptable latency spikes during traffic peaks, negatively impacting the user experience for the billing service.
    - **Files:** `packages/api/src/routes/credits.ts`, `packages/decision-store/src/repositories/credit-repository.ts`, `packages/common/src/types/credits.ts`, `services/billing`
 
-9. 🟠 **[HIGH]** Establish explicit provider fallback orderings: For extraction, use Anthropic → DeepSeek → OpenAI. For detection, use Google → OpenAI → DeepSeek.
+8. 🟠 **[HIGH]** Establish explicit provider fallback orderings: For extraction, use Anthropic → DeepSeek → OpenAI. For detection, use Google → OpenAI → DeepSeek.
    - **Why:** To maintain system reliability and avoid task failure when individual LLM providers hit rate limits, a hierarchical fallback mechanism ensures work is diverted to alternative models before resorting to the Dead Letter Queue (DLQ) after retries.
    - **Files:** `src/llm/client_factory.py`, `src/llm/fallback_logic.py`
 
-10. 🟠 **[HIGH]** The team will migrate from AWS ECS to AWS EKS for container orchestration.
+9. 🟠 **[HIGH]** The team will migrate from AWS ECS to AWS EKS for container orchestration.
    - **Why:** EKS provides superior orchestration flexibility, including native Horizontal Pod Autoscaler and improved multi-AZ/multi-region failover capabilities, which are necessary for the current scale, outweighing the operational overhead of Kubernetes.
    - **Files:** `infrastructure/terraform`, `infrastructure/k8s`
 
-11. 🟠 **[HIGH]** Use PostgreSQL with pgvector and HNSW indexes as the standard solution for primary datastore and vector search operations.
+10. 🟠 **[HIGH]** Use PostgreSQL with pgvector and HNSW indexes as the standard solution for primary datastore and vector search operations.
    - **Why:** PostgreSQL with pgvector provides the ability to manage both SQL-based relational data and vector search capabilities within a single system, simplifying the architecture compared to managing separate databases.
 
-12. 🟠 **[HIGH]** Use MongoDB Atlas specifically for the analytics event ingestion pipeline, while keeping all other core application data in PostgreSQL.
+11. 🟠 **[HIGH]** Use MongoDB Atlas specifically for the analytics event ingestion pipeline, while keeping all other core application data in PostgreSQL.
    - **Why:** MongoDB Atlas provides the necessary horizontal sharding and schemaless structure to handle the required 50k write operations per second, whereas PostgreSQL performance degrades under this load.
    - **Files:** `services/analytics-webhook-handler`, `infrastructure/database-clusters`
 
-13. 🟠 **[HIGH]** We will use MongoDB for the analytics events pipeline, provisioning a MongoDB Atlas cluster to handle the data.
+12. 🟠 **[HIGH]** We will use MongoDB for the analytics events pipeline, provisioning a MongoDB Atlas cluster to handle the data.
    - **Why:** MongoDB offers 10x the write throughput compared to PostgreSQL for high-cardinality event data, which is essential to meet the current scale requirements. The previous constraint was established before these new scale demands emerged.
    - **Files:** `packages/api/src/analytics/`
 
-14. 🟠 **[HIGH]** Each LLM pipeline step (detection, extraction, formatting) has its own provider configuration managed via environment variables. An 'effort mode' concept allows overriding these configurations per company at request time, defining specific LLM models for different quality/cost tiers: Saver uses gemini-flash, Balanced mixes gemini-flash, claude-haiku, and gpt-4o-mini, Pro uses claude-sonnet for extraction, and Super uses claude-opus.
+13. 🟠 **[HIGH]** Each LLM pipeline step (detection, extraction, formatting) has its own provider configuration managed via environment variables. An 'effort mode' concept allows overriding these configurations per company at request time, defining specific LLM models for different quality/cost tiers: Saver uses gemini-flash, Balanced mixes gemini-flash, claude-haiku, and gpt-4o-mini, Pro uses claude-sonnet for extraction, and Super uses claude-opus.
    - **Why:** The strategy is designed to provide flexibility and optimization across different pipeline steps and 'effort modes'. By configuring providers per step and allowing overrides based on company effort modes, the system can balance cost, performance, and model quality according to specific requirements, from 'Saver' (likely cost-optimized) to 'Super' (likely highest quality/cost). The multi-provider abstraction facilitates this dynamic selection.
    - **Files:** `packages/analyzer/`
 
-15. 🟠 **[HIGH]** The trigger metric for initiating the AWS migration has been adjusted from 20 paying customers to 30 paying customers. The Q3 2026 timeline for the migration still holds.
+14. 🟠 **[HIGH]** The trigger metric for initiating the AWS migration has been adjusted from 20 paying customers to 30 paying customers. The Q3 2026 timeline for the migration still holds.
    - **Why:** This adjustment is due to Railway costs being more predictable than initially expected. Additionally, the VPC isolation requirement, which was a significant factor, only applies to enterprise customers, a segment we are targeting at a later stage.
 
-16. 🟠 **[HIGH]** We will integrate decision-guardian into our PR pipeline to enforce and track architectural decisions.
+15. 🟠 **[HIGH]** We will integrate decision-guardian into our PR pipeline to enforce and track architectural decisions.
    - **Why:** Automating the verification of architectural decisions during the review process helps maintain consistency and ensures that developers adhere to established guidelines.
 
-17. 🟠 **[HIGH]** All API errors must adhere to the RFC 7807 problem details format, including fields such as type, title, status, detail, and instance.
+16. 🟠 **[HIGH]** All API errors must adhere to the RFC 7807 problem details format, including fields such as type, title, status, detail, and instance.
    - **Why:** To ensure consistency across all API endpoints and prevent the generation of non-compliant errors, especially from AI-assisted code.
    - **Files:** `auth endpoint`, `cursorrules`, `All API error handling implementations`
 
-18. 🟠 **[HIGH]** The specific LLM model combinations for the multi-provider effort modes were finalized: Saver mode uses `gemini-flash` for detection, extraction, and format. Balanced mode uses `gemini-flash` for detection, `claude-haiku` for extraction, and `gpt-4o-mini` for format. Pro mode uses `gemini-flash` for detection, `claude-sonnet` for extraction, and `gpt-4o-mini` for format. Super mode uses `gemini-flash` for detection, `claude-opus` for extraction, and `claude-sonnet` for format.
+17. 🟠 **[HIGH]** The specific LLM model combinations for the multi-provider effort modes were finalized: Saver mode uses `gemini-flash` for detection, extraction, and format. Balanced mode uses `gemini-flash` for detection, `claude-haiku` for extraction, and `gpt-4o-mini` for format. Pro mode uses `gemini-flash` for detection, `claude-sonnet` for extraction, and `gpt-4o-mini` for format. Super mode uses `gemini-flash` for detection, `claude-opus` for extraction, and `claude-sonnet` for format.
    - **Why:** The chosen LLM model combinations for each effort mode (Saver, Balanced, Pro, Super) were selected to provide different performance and cost profiles, aligning with the multi-provider strategy. Cost analysis confirmed that the proposed combinations, ranging from ~$0.08/1M tokens for Saver to ~$4.50/1M tokens for Super, ensure fine margins at current credit pricing.
 
-19. 🟠 **[HIGH]** We will implement a multi-provider abstraction where each pipeline step (detection, extraction, enrichment, formatting) has its own LLM provider configuration via environment variables. At request time, an 'effort mode' can override the provider selection on a per-company basis.
+18. 🟠 **[HIGH]** We will implement a multi-provider abstraction where each pipeline step (detection, extraction, enrichment, formatting) has its own LLM provider configuration via environment variables. At request time, an 'effort mode' can override the provider selection on a per-company basis.
    - **Why:** This approach allows companies with high context volume (Tier 3+) to pay extra for Claude-Sonnet's accuracy where needed, while companies with tighter budgets can use more cost-effective options like Gemini-Flash for all steps. It also decouples our infrastructure from individual LLM vendor stability and enables independent contract negotiations with different providers (Anthropic, OpenAI, Google).
 
-20. 🟡 **[MEDIUM]** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
+19. 🟡 **[MEDIUM]** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
    - **Why:** TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency.
    - **Files:** `/src/backend/`
 
-21. 🟡 **[MEDIUM]** The team has officially cancelled the usage and implementation of RFC 78.
+20. 🟡 **[MEDIUM]** The team has officially cancelled the usage and implementation of RFC 78.
    - **Why:** The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities.
 
-22. 🟡 **[MEDIUM]** Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
+21. 🟡 **[MEDIUM]** Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
    - **Why:** RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data.
    - **Files:** `src/sync/theme-validation.js`
 
-23. 🟡 **[MEDIUM]** All new vector indexes must be created using the HNSW algorithm. Existing IVFFlat indexes (specifically in the llm_cache table) are to be migrated to HNSW in Sprint 16.
+22. 🟡 **[MEDIUM]** All new vector indexes must be created using the HNSW algorithm. Existing IVFFlat indexes (specifically in the llm_cache table) are to be migrated to HNSW in Sprint 16.
    - **Why:** HNSW is the current architectural standard for vector indexing. The previous rejection of the migration to HNSW was due to operational risks in production, not a lack of performance or technical suitability of HNSW.
    - **Files:** `db/schema/vector_indexes`, `db/migrations/sprint_16/migrate_llm_cache_to_hnsw`
 
-24. 🟡 **[MEDIUM]** Adopt the HIGH severity specification as the authoritative version for the RFC 7807 error format, which includes fields: type, title, status, detail, and instance.
+23. 🟡 **[MEDIUM]** Adopt the HIGH severity specification as the authoritative version for the RFC 7807 error format, which includes fields: type, title, status, detail, and instance.
    - **Why:** The team identified that two existing conventions were redundant. Designating the HIGH severity entry as canonical while allowing the fusion engine to merge duplicate references ensures consistency across documentation and API implementations.
    - **Files:** `packages/api/src/plugins/error-handler.ts`
 
-25. 🟡 **[MEDIUM]** We have standardized on cosine distance (using the <=> operator in pgvector) for all similarity search operations.
+24. 🟡 **[MEDIUM]** We have standardized on cosine distance (using the <=> operator in pgvector) for all similarity search operations.
    - **Why:** Cosine distance provides significantly better recall (12% improvement) on normalized text embeddings compared to L2 distance. Furthermore, L2 distance is overly sensitive to embedding magnitude, making it less reliable for our specific use case.
 
-26. 🟡 **[MEDIUM]** MongoDB is strictly prohibited for use in core pipeline services (including the core decision pipeline, authentication, and the context store). These services must exclusively use PostgreSQL 16 and Redis. Any deviation requires a formal ADR.
+25. 🟡 **[MEDIUM]** MongoDB is strictly prohibited for use in core pipeline services (including the core decision pipeline, authentication, and the context store). These services must exclusively use PostgreSQL 16 and Redis. Any deviation requires a formal ADR.
    - **Why:** To maintain architectural integrity and prevent fragmentation in the core tech stack. Previous attempts to introduce MongoDB for event queues nearly caused instability, highlighting the need for a hard, enforceable constraint.
    - **Files:** `analytics/storage`, `infrastructure/database-policy`
 
-27. 🟡 **[MEDIUM]** The team decided to discontinue the use of EventStoreDB and removed event sourcing as an architectural pattern following the migration back to a monorepo.
+26. 🟡 **[MEDIUM]** The team decided to discontinue the use of EventStoreDB and removed event sourcing as an architectural pattern following the migration back to a monorepo.
    - **Why:** The complexity of maintaining three separate runbooks for EventStoreDB operations outweighed the benefits of its auditability features for the current team size and system scale.
 
-28. 🟡 **[MEDIUM]** All internal API routes must adhere to the RFC 7807 error format, consistent with public-facing API routes.
+27. 🟡 **[MEDIUM]** All internal API routes must adhere to the RFC 7807 error format, consistent with public-facing API routes.
    - **Why:** Inconsistent error formats, specifically plain strings from internal routes, prevent AI tools from reliably parsing and analyzing errors, leading to broken analysis workflows.
    - **Files:** `packages/api/src/routes/internal/`
 
-29. 🟡 **[MEDIUM]** We will use the `text-embedding-3-small` OpenAI model to generate 1536-dimension embeddings. These embeddings will be stored in the `knowledge_chunks` table within PostgreSQL. The HNSW index used for vector search will be configured with `ef_construction=200` and `m=16`.
+28. 🟡 **[MEDIUM]** We will use the `text-embedding-3-small` OpenAI model to generate 1536-dimension embeddings. These embeddings will be stored in the `knowledge_chunks` table within PostgreSQL. The HNSW index used for vector search will be configured with `ef_construction=200` and `m=16`.
    - **Why:** The chosen HNSW parameters (`ef_construction=200` and `m=16`) are set to provide an optimal tradeoff between recall accuracy and search speed. The `text-embedding-3-small` model is selected for generating the text embeddings.
    - **Files:** `packages/decision-store/src/schema.ts`
 
-30. 🟡 **[MEDIUM]** We decided to use cosine distance for semantic similarity search of text embeddings with pgvector HNSW for deduplication.
+29. 🟡 **[MEDIUM]** We decided to use cosine distance for semantic similarity search of text embeddings with pgvector HNSW for deduplication.
    - **Why:** Cosine distance is invariant to vector magnitude, meaning it only considers the direction of vectors. This property is precisely what is desired for semantic similarity of text embeddings, as it allows for accurate comparison of semantic meaning regardless of variations in embedding vector norms. L2 (Euclidean) distance, on the other hand, would incorrectly penalize vectors with different magnitudes, even if they share the same semantic direction.
 
-31. 🟡 **[MEDIUM]** Implemented Redis semantic caching for LLM embedding calls. The cache key is a hash of the input text, model, and provider. The cache entries have a Time-To-Live (TTL) of 1 hour.
+30. 🟡 **[MEDIUM]** Implemented Redis semantic caching for LLM embedding calls. The cache key is a hash of the input text, model, and provider. The cache entries have a Time-To-Live (TTL) of 1 hour.
    - **Why:** Redis was a natural extension since it is already in use for BullMQ and session caching. This implementation reduced redundant embedding calls by approximately 40% in tests.
 
-32. 🟡 **[MEDIUM]** The Revenue squad now has exclusive ownership of the billing module and Stripe integration, requiring their explicit approval for all pull requests affecting these areas.
+31. 🟡 **[MEDIUM]** The Revenue squad now has exclusive ownership of the billing module and Stripe integration, requiring their explicit approval for all pull requests affecting these areas.
    - **Why:** Centralizing ownership ensures better control, security, and specialized maintenance for critical payment-related infrastructure.
    - **Files:** `packages/api/src/billing/`, `src/modules/billing/`, `src/integrations/stripe/`
 
-33. 🟢 **[LOW]** Use standard SCSS in a separate navbar.scss file for the new navigation component.
+32. 🟢 **[LOW]** Use standard SCSS in a separate navbar.scss file for the new navigation component.
    - **Why:** Complex hover state requirements for the navigation component lead to unmanageable code when using Tailwind utility classes.
    - **Files:** `navbar.scss`, `navbar.tsx`
 
-34. 🟢 **[LOW]** The team will use iPhones to perform mobile calls.
+33. 🟢 **[LOW]** The team will use iPhones to perform mobile calls.
    - **Why:** The team aligned on a single mobile device platform for communication consistency.
