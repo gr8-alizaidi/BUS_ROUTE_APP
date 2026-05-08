@@ -1,7 +1,7 @@
 {
   "$schema": "https://decispher.dev/schemas/context-rules/v1.json",
   "specVersion": "1.0.0",
-  "generatedAt": "2026-05-08T21:26:05.686Z",
+  "generatedAt": "2026-05-08T21:26:53.023Z",
   "companyId": "1489dcdc-ef7f-4cc5-b0cb-b453efa059f4",
   "meta": {
     "totalRules": 32,
@@ -184,10 +184,10 @@
         "exemptPatterns": []
       },
       "createdAt": "2026-05-08T21:24:39.440Z",
-      "updatedAt": "2026-05-08T21:25:38.007Z",
+      "updatedAt": "2026-05-08T21:26:29.595Z",
       "version": 1,
       "createdBy": "U05F9P78LTG",
-      "reviewedBy": "df51fb32-47a2-48b2-ac32-3887a582a966"
+      "reviewedBy": "U05F9P78LTG"
     },
     {
       "id": "e9097831-0c7b-43f1-895a-b115dd36c20b",
@@ -670,5 +670,6 @@
             "priority": "high",
             "threadTs": "1777674632.806469",
             "channelId": "C0ALKBAGZQS",
+            "sourceUrl": "https://newworkspace-zdx9462.slack.com/archives/C0ALKBAGZQS/p1777674632806469?thread_ts=1777674632.806469&cid=C0ALKBAGZQS",
 
 <!-- decispher: output truncated to context budget -->
