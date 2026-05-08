@@ -310,6 +310,16 @@ Aider should follow all of these conventions when making changes.
 
 **Why:** Redis was a natural extension since it is already in use for BullMQ and session caching. This implementation reduced redundant embedding calls by approximately 40% in tests.
 
+## Css
+
+### Use separate SCSS file for navigation component styling
+
+**Convention:** Use standard SCSS in a separate navbar.scss file for the new navigation component.
+
+**Why:** Complex hover state requirements for the navigation component lead to unmanageable code when using Tailwind utility classes.
+
+**Relevant files:** `navbar.scss`, `navbar.tsx`
+
 ## Mobile
 
 ### Standardization on iPhones for mobile communication
