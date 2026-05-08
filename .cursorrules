@@ -11,6 +11,10 @@
   Rationale: PostgreSQL with pgvector provides the ability to manage both SQL-based relational data and vector search capabilities within a single system, simplifying the architecture compared to managing separate databases.
   Files: *
 
+- Implement direct PostgreSQL connection within the User Profile Server Component to fetch order history.
+  Rationale: Direct database access reduces development effort by bypassing the overhead of creating and maintaining additional GraphQL resolvers for simple data retrieval tasks.
+  Files: src/components/user/Profile.server.ts
+
 ## Mongodb
 
 - MongoDB is strictly prohibited from being integrated into the current technology stack, including for analytics events.
