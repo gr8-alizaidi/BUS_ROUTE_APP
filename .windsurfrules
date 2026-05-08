@@ -7,14 +7,14 @@ Cascade MUST respect these rules when generating or modifying code.
 
 ## [CRITICAL]
 
-- The core pipeline must exclusively use PostgreSQL 16 with pgvector and Redis; the use of MongoDB is strictly prohibited.
-  Reason: Enforcing a specific database stack ensures architectural consistency, simplifies maintenance, and leverages existing infrastructure and expertise with PostgreSQL and pgvector.
-  Files: infrastructure/database, src/db/config.ts
-
 - MongoDB is strictly prohibited from being integrated into the current technology stack, including for analytics events.
   Reason: There is an active and non-negotiable architectural constraint against MongoDB in the stack due to the critical requirement for ACID compliance across all billing and user data. MongoDB does not satisfy this fundamental requirement.
 
 ## [HIGH]
+
+- Drop Redux entirely and adopt Zustand as the standard library for all global state management in the React application.
+  Reason: Zustand was chosen to replace Redux because it significantly reduces boilerplate code, improving maintainability and developer productivity compared to the Redux architecture.
+  Files: src/store, src/state
 
 - Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
   Reason: The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.
@@ -80,10 +80,6 @@ Cascade MUST respect these rules when generating or modifying code.
   Reason: This approach allows companies with high context volume (Tier 3+) to pay extra for Claude-Sonnet's accuracy where needed, while companies with tighter budgets can use more cost-effective options like Gemini-Flash for all steps. It also decouples our infrastructure from individual LLM vendor stability and enables independent contract negotiations with different providers (Anthropic, OpenAI, Google).
 
 ## [MEDIUM]
-
-- Implement direct PostgreSQL connection within the User Profile Server Component to fetch order history.
-  Reason: Direct database access reduces development effort by bypassing the overhead of creating and maintaining additional GraphQL resolvers for simple data retrieval tasks.
-  Files: src/components/user/Profile.server.ts
 
 - Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
   Reason: TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency.
