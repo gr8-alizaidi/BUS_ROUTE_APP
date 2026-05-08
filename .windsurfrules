@@ -16,6 +16,10 @@ Cascade MUST respect these rules when generating or modifying code.
 
 ## [HIGH]
 
+- Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
+  Reason: The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.
+  Files: src/reporting-worker/api-client.ts, src/api/auth/middleware.ts
+
 - Implement a strict 5-minute token expiry window for the authentication service.
   Reason: This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.
   Files: services/auth-service
