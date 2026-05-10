@@ -39,6 +39,51 @@
 
 ---
 
+<!-- DECISION-DEC-B5692C -->
+## Decision: Use ITSI RFC for SS7 stack backend development
+
+**Status**: Active  
+**Date**: 2026-05-10  
+**Severity**: Critical
+
+**Files**:
+- `src/ss7-stack/backend`
+
+**Rules**:
+```json
+{
+  "conditions": [
+    {
+      "type": "file",
+      "pattern": "src/ss7-stack/backend/**",
+      "content_rules": [
+        {
+          "mode": "string",
+          "patterns": [
+            "3GPP"
+          ]
+        }
+      ],
+      "content_match_mode": "any"
+    }
+  ],
+  "match_mode": "all"
+}
+```
+
+### Context
+
+**Problem:** Selecting the protocol standard for building the SS7 stack backend codebase.
+
+**Decision:** The team will adopt the ITSI RFC standard instead of the 3GPP standard for the implementation of the SS7 stack backend.
+
+**Rationale:** The team decided to move away from 3GPP in favor of ITSI RFC to better align with specific backend requirements for the SS7 stack.
+
+**Alternatives Considered:**
+- **3GPP**: The team explicitly opted for ITSI RFC instead, implying 3GPP did not meet current project requirements as effectively.
+
+---
+
 <!-- DECISION-DEC-260C41 -->
 ## Decision: Use shared secret token authentication for reporting worker communication
 
@@ -798,60 +843,5 @@
 
 ---
 
-<!-- DECISION-DEC-2D19C7 -->
-## Decision: Cancellation of RFC 78 implementation
-
-**Status**: Active  
-**Date**: 2026-05-08  
-**Severity**: Warning
-
-**Rules**:
-```json
-{
-  "conditions": [
-    {
-      "type": "file",
-      "pattern": "**/*",
-      "content_rules": [
-        {
-          "mode": "regex",
-          "start": 0,
-          "pattern": "RFC 78",
-          "patterns": [
-            "RFC 78"
-          ]
-        }
-      ]
-    }
-  ],
-  "match_mode": "all"
-}
-```
-
-### Context
-
-**Problem:** The team decided to move away from the architectural proposal defined in RFC 78.
-
-**Decision:** The team has officially cancelled the usage and implementation of RFC 78.
-
-**Rationale:** The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities.
-
----
-
-<!-- DECISION-DEC-15E9A6 -->
-## Decision: Adopt RFC7812 for theme data JSON validation
-
-**Status**: Active  
-**Date**: 2026-05-08  
-**Severity**: Warning
-
-**Files**:
-- `src/sync/theme-validation.js`
-
-**Rules**:
-```json
-{
-  "conditions": [
-    {
 
 <!-- decispher: output truncated to context budget -->
