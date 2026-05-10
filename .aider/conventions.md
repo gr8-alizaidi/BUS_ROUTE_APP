@@ -42,6 +42,18 @@ Aider should follow all of these conventions when making changes.
 
 **Relevant files:** `analytics/storage`, `infrastructure/database-policy`
 
+## Azure
+
+### Migrate payment backend to Azure Functions
+
+**Convention:** The payment backend cloud service will be hosted on Azure Functions instead of AWS.
+
+**Why:** The team decided to move the payment infrastructure to Azure to align with existing cloud vendor preferences and service integration requirements.
+
+> ⚠️ This is a **HIGH** priority rule — do not violate it.
+
+**Relevant files:** `infrastructure/payment-service`, `backend/payments`
+
 ## Ss7
 
 ### Use ITSI RFC for SS7 stack backend development
