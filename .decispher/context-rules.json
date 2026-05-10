@@ -1,12 +1,12 @@
 {
   "$schema": "https://decispher.dev/schemas/context-rules/v1.json",
   "specVersion": "1.0.0",
-  "generatedAt": "2026-05-10T11:05:05.069Z",
+  "generatedAt": "2026-05-10T11:43:52.037Z",
   "companyId": "1489dcdc-ef7f-4cc5-b0cb-b453efa059f4",
   "meta": {
-    "totalRules": 34,
+    "totalRules": 35,
     "rulesByType": {
-      "decision": 24,
+      "decision": 25,
       "convention": 4,
       "constraint": 1,
       "rationale": 1,
@@ -16,7 +16,7 @@
     },
     "rulesBySeverity": {
       "CRITICAL": 1,
-      "HIGH": 18,
+      "HIGH": 19,
       "MEDIUM": 13,
       "LOW": 2
     },
@@ -71,6 +71,66 @@
       },
       "createdAt": "2026-04-18T13:33:59.601Z",
       "updatedAt": "2026-04-18T13:34:22.478Z",
+      "version": 1,
+      "createdBy": "U05F9P78LTG",
+      "reviewedBy": "U05F9P78LTG"
+    },
+    {
+      "id": "9f213a97-eb01-49b8-aa57-76b0a2358c10",
+      "type": "decision",
+      "title": "Migrate payment backend to Azure Functions",
+      "problem": "Selecting the cloud hosting provider for the payment backend service.",
+      "decision": "The payment backend cloud service will be hosted on Azure Functions instead of AWS.",
+      "rationale": "The team decided to move the payment infrastructure to Azure to align with existing cloud vendor preferences and service integration requirements.",
+      "severity": "HIGH",
+      "status": "active",
+      "confidence": 0.5,
+      "affectedFiles": [
+        "infrastructure/payment-service",
+        "backend/payments"
+      ],
+      "tags": [
+        "azure",
+        "cloud-hosting",
+        "backend",
+        "payments"
+      ],
+      "alternatives": [
+        {
+          "option": "AWS Lambda",
+          "reasonRejected": "The team prefers Azure for the payment backend service infrastructure."
+        }
+      ],
+      "sources": [
+        {
+          "type": "slack",
+          "confidence": 0.5,
+          "ref": {
+            "priority": "high",
+            "threadTs": "1778413335.358529",
+            "channelId": "C05FDF7SWN9",
+            "sourceUrl": "https://newworkspace-zdx9462.slack.com/archives/C05FDF7SWN9/p1778413335358529?thread_ts=1778413335.358529&cid=C05FDF7SWN9",
+            "channelName": "general",
+            "slackTeamId": null,
+            "triggeredBy": "U05F9P78LTG",
+            "detectionMethod": "explicit",
+            "triggeredByName": "Ali Abbas"
+          },
+          "snippet": "The payment backend cloud service will be hosted on Azure Functions instead of AWS."
+        }
+      ],
+      "supersededBy": null,
+      "enforcement": {
+        "blockOnViolation": false,
+        "requiresExplicitOverride": false,
+        "filePatterns": [
+          "infrastructure/payment-service",
+          "backend/payments"
+        ],
+        "exemptPatterns": []
+      },
+      "createdAt": "2026-05-10T11:42:59.605Z",
+      "updatedAt": "2026-05-10T11:43:35.006Z",
       "version": 1,
       "createdBy": "U05F9P78LTG",
       "reviewedBy": "U05F9P78LTG"
@@ -616,54 +676,5 @@
         "exemptPatterns": []
       },
       "createdAt": "2026-04-22T06:11:59.569Z",
-      "updatedAt": "2026-04-22T11:43:57.133Z",
-      "version": 1,
-      "createdBy": "U_OMAR",
-      "reviewedBy": "df51fb32-47a2-48b2-ac32-3887a582a966"
-    },
-    {
-      "id": "81145171-98f5-43da-b922-9c76d78741b5",
-      "type": "decision",
-      "title": "Standardize on PostgreSQL with pgvector for primary storage and vector search",
-      "problem": "Selecting the primary datastore to handle both standard relational data and vector search requirements efficiently.",
-      "decision": "Use PostgreSQL with pgvector and HNSW indexes as the standard solution for primary datastore and vector search operations.",
-      "rationale": "PostgreSQL with pgvector provides the ability to manage both SQL-based relational data and vector search capabilities within a single system, simplifying the architecture compared to managing separate databases.",
-      "severity": "HIGH",
-      "status": "active",
-      "confidence": 0.5,
-      "affectedFiles": [],
-      "tags": [
-        "postgresql",
-        "pgvector",
-        "database",
-        "infrastructure",
-        "vector-search"
-      ],
-      "alternatives": [
-        {
-          "option": "MongoDB",
-          "reasonRejected": "The team preferred the relational capabilities of PostgreSQL and the unified support for vector search provided by pgvector."
-        },
-        {
-          "option": "CockroachDB",
-          "reasonRejected": "The team decided that PostgreSQL with pgvector was sufficient and preferred over the complexity or features offered by CockroachDB."
-        }
-      ],
-      "sources": [
-        {
-          "type": "slack",
-          "confidence": 0.5,
-          "ref": {
-            "priority": "high",
-            "threadTs": "1776837955.000000",
-            "channelId": "C_ENG_GENERAL",
-            "sourceUrl": null,
-            "channelName": "engineering-general",
-            "slackTeamId": "T05FJS3A8JG",
-            "triggeredBy": null,
-            "detectionMethod": "explicit",
-            "triggeredByName": null
-          },
-          "snippet": "Use PostgreSQL with pgvector and HNSW indexes as the standard solution for primary datastore and vector search operations."
 
 <!-- decispher: output truncated to context budget -->
