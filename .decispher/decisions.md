@@ -39,6 +39,67 @@
 
 ---
 
+<!-- DECISION-DEC-9F213A -->
+## Decision: Migrate payment backend to Azure Functions
+
+**Status**: Active  
+**Date**: 2026-05-10  
+**Severity**: Critical
+
+**Files**:
+- `infrastructure/payment-service`
+- `backend/payments`
+
+**Rules**:
+```json
+{
+  "conditions": [
+    {
+      "type": "file",
+      "pattern": "infrastructure/payment-service/**/*",
+      "content_rules": [
+        {
+          "mode": "string",
+          "patterns": [
+            "aws_lambda",
+            "aws-lambda",
+            "lambda_function"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "pattern": "backend/payments/**/*",
+      "content_rules": [
+        {
+          "mode": "string",
+          "patterns": [
+            "aws_lambda",
+            "aws-lambda",
+            "lambda_function"
+          ]
+        }
+      ]
+    }
+  ],
+  "match_mode": "any"
+}
+```
+
+### Context
+
+**Problem:** Selecting the cloud hosting provider for the payment backend service.
+
+**Decision:** The payment backend cloud service will be hosted on Azure Functions instead of AWS.
+
+**Rationale:** The team decided to move the payment infrastructure to Azure to align with existing cloud vendor preferences and service integration requirements.
+
+**Alternatives Considered:**
+- **AWS Lambda**: The team prefers Azure for the payment backend service infrastructure.
+
+---
+
 <!-- DECISION-DEC-B5692C -->
 ## Decision: Use ITSI RFC for SS7 stack backend development
 
@@ -798,50 +859,5 @@
 
 **Alternatives Considered:**
 - **Continue with current fragmented multi-provider setup (Gemini-Flash for detection, Claude-Sonnet for extraction, GPT-4o-mini for formatting).**: This approach is unmaintainable, costly (Claude-Sonnet accounts for 60% of the LLM bill), and suffers from inconsistent provider availability issues.
-- **Consolidate to a single LLM provider for all pipeline steps.**: This would limit flexibility, potentially sacrificing accuracy for high-tier companies or forcing budget-conscious companies to pay for more expensive models than necessary. It would also lead to vendor lock-in and a single point of failure for LLM stability.
-
----
-
-<!-- DECISION-CONV-47BAF0 -->
-## Decision: Standardize on TypeScript and camelCase JSON for backend services
-
-**Status**: Active  
-**Date**: 2026-05-08  
-**Severity**: Warning
-
-**Files**:
-- `/src/backend/`
-
-**Rules**:
-```json
-{
-  "conditions": [
-    {
-      "type": "file",
-      "pattern": "src/backend/**/*.ts",
-      "content_rules": [
-        {
-          "mode": "regex",
-          "start": 1,
-          "pattern": "(?s).*class.*|.*interface.*"
-        }
-      ],
-      "content_match_mode": "all"
-    }
-  ],
-  "match_mode": "all"
-}
-```
-
-### Context
-
-**Problem:** Need to ensure consistency and type safety across new backend development and prevent API interoperability issues.
-
-**Decision:** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
-
-**Rationale:** TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency.
-
----
-
 
 <!-- decispher: output truncated to context budget -->
