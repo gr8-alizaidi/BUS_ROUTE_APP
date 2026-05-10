@@ -13,6 +13,12 @@ Violating these decisions requires explicit approval.
 - **Rationale:** There is an active and non-negotiable architectural constraint against MongoDB in the stack due to the critical requirement for ACID compliance across all billing and user data. MongoDB does not satisfy this fundamental requirement.
 - **Do NOT:** MongoDB for analytics events (It violates an active architectural constraint due to its lack of native ACID compliance, which is non-negotiable for billing and user data within our stack.)
 
+### Migrate payment backend to Azure Functions (HIGH)
+- **Decision:** The payment backend cloud service will be hosted on Azure Functions instead of AWS.
+- **Rationale:** The team decided to move the payment infrastructure to Azure to align with existing cloud vendor preferences and service integration requirements.
+- **Affected files:** `infrastructure/payment-service`, `backend/payments`
+- **Do NOT:** AWS Lambda (The team prefers Azure for the payment backend service infrastructure.)
+
 ### Use ITSI RFC for SS7 stack backend development (HIGH)
 - **Decision:** The team will adopt the ITSI RFC standard instead of the 3GPP standard for the implementation of the SS7 stack backend.
 - **Rationale:** The team decided to move away from 3GPP in favor of ITSI RFC to better align with specific backend requirements for the SS7 stack.
