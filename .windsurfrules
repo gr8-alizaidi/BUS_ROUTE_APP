@@ -12,6 +12,10 @@ Cascade MUST respect these rules when generating or modifying code.
 
 ## [HIGH]
 
+- The payment backend cloud service will be hosted on Azure Functions instead of AWS.
+  Reason: The team decided to move the payment infrastructure to Azure to align with existing cloud vendor preferences and service integration requirements.
+  Files: infrastructure/payment-service, backend/payments
+
 - The team will adopt the ITSI RFC standard instead of the 3GPP standard for the implementation of the SS7 stack backend.
   Reason: The team decided to move away from 3GPP in favor of ITSI RFC to better align with specific backend requirements for the SS7 stack.
   Files: src/ss7-stack/backend
