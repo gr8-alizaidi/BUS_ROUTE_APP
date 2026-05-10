@@ -12,6 +12,10 @@ Cascade MUST respect these rules when generating or modifying code.
 
 ## [HIGH]
 
+- The team will adopt the ITSI RFC standard instead of the 3GPP standard for the implementation of the SS7 stack backend.
+  Reason: The team decided to move away from 3GPP in favor of ITSI RFC to better align with specific backend requirements for the SS7 stack.
+  Files: src/ss7-stack/backend
+
 - Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
   Reason: The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.
   Files: src/reporting-worker/api-client.ts, src/api/auth/middleware.ts
