@@ -42,6 +42,18 @@ Aider should follow all of these conventions when making changes.
 
 **Relevant files:** `analytics/storage`, `infrastructure/database-policy`
 
+## Ss7
+
+### Use ITSI RFC for SS7 stack backend development
+
+**Convention:** The team will adopt the ITSI RFC standard instead of the 3GPP standard for the implementation of the SS7 stack backend.
+
+**Why:** The team decided to move away from 3GPP in favor of ITSI RFC to better align with specific backend requirements for the SS7 stack.
+
+> ⚠️ This is a **HIGH** priority rule — do not violate it.
+
+**Relevant files:** `src/ss7-stack/backend`
+
 ## Security
 
 ### Use shared secret token authentication for reporting worker communication
