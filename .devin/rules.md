@@ -18,6 +18,17 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 **Alternatives considered (rejected):**
 - ~~MongoDB for analytics events~~ — It violates an active architectural constraint due to its lack of native ACID compliance, which is non-negotiable for billing and user data within our stack.
 
+### Use ITSI RFC for SS7 stack backend development
+
+- **Severity:** HIGH
+- **Rule:** The team will adopt the ITSI RFC standard instead of the 3GPP standard for the implementation of the SS7 stack backend.
+- **Rationale:** The team decided to move away from 3GPP in favor of ITSI RFC to better align with specific backend requirements for the SS7 stack.
+- **Scope:** src/ss7-stack/backend
+- **Tags:** ss7, backend, protocols, itsi, 3gpp
+
+**Alternatives considered (rejected):**
+- ~~3GPP~~ — The team explicitly opted for ITSI RFC instead, implying 3GPP did not meet current project requirements as effectively.
+
 ### Use shared secret token authentication for reporting worker communication
 
 - **Severity:** HIGH
