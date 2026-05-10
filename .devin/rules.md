@@ -18,6 +18,17 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 **Alternatives considered (rejected):**
 - ~~MongoDB for analytics events~~ — It violates an active architectural constraint due to its lack of native ACID compliance, which is non-negotiable for billing and user data within our stack.
 
+### Migrate payment backend to Azure Functions
+
+- **Severity:** HIGH
+- **Rule:** The payment backend cloud service will be hosted on Azure Functions instead of AWS.
+- **Rationale:** The team decided to move the payment infrastructure to Azure to align with existing cloud vendor preferences and service integration requirements.
+- **Scope:** infrastructure/payment-service, backend/payments
+- **Tags:** azure, cloud-hosting, backend, payments
+
+**Alternatives considered (rejected):**
+- ~~AWS Lambda~~ — The team prefers Azure for the payment backend service infrastructure.
+
 ### Use ITSI RFC for SS7 stack backend development
 
 - **Severity:** HIGH
