@@ -19,6 +19,12 @@
   Rationale: To maintain architectural integrity and prevent fragmentation in the core tech stack. Previous attempts to introduce MongoDB for event queues nearly caused instability, highlighting the need for a hard, enforceable constraint.
   Files: analytics/storage, infrastructure/database-policy
 
+## Azure
+
+- The payment backend cloud service will be hosted on Azure Functions instead of AWS.
+  Rationale: The team decided to move the payment infrastructure to Azure to align with existing cloud vendor preferences and service integration requirements.
+  Files: infrastructure/payment-service, backend/payments
+
 ## Ss7
 
 - The team will adopt the ITSI RFC standard instead of the 3GPP standard for the implementation of the SS7 stack backend.
