@@ -4,26 +4,6 @@
 These are the active engineering decisions for this repository.
 Aider should follow all of these conventions when making changes.
 
-## Postgresql
-
-### Prohibit MongoDB and mandate PostgreSQL for core pipelines
-
-**Convention:** The core pipeline must exclusively use PostgreSQL 16 with pgvector and Redis; the use of MongoDB is strictly prohibited.
-
-**Why:** Enforcing a specific database stack ensures architectural consistency, simplifies maintenance, and leverages existing infrastructure and expertise with PostgreSQL and pgvector.
-
-> ⚠️ This is a **CRITICAL** priority rule — do not violate it.
-
-**Relevant files:** `infrastructure/database`, `src/db/config.ts`
-
-### Standardize on PostgreSQL with pgvector for primary storage and vector search
-
-**Convention:** Use PostgreSQL with pgvector and HNSW indexes as the standard solution for primary datastore and vector search operations.
-
-**Why:** PostgreSQL with pgvector provides the ability to manage both SQL-based relational data and vector search capabilities within a single system, simplifying the architecture compared to managing separate databases.
-
-> ⚠️ This is a **HIGH** priority rule — do not violate it.
-
 ## Mongodb
 
 ### Prohibition of MongoDB in the Tech Stack for Analytics Events
@@ -61,6 +41,54 @@ Aider should follow all of these conventions when making changes.
 **Why:** To maintain architectural integrity and prevent fragmentation in the core tech stack. Previous attempts to introduce MongoDB for event queues nearly caused instability, highlighting the need for a hard, enforceable constraint.
 
 **Relevant files:** `analytics/storage`, `infrastructure/database-policy`
+
+## Azure
+
+### Migrate payment backend to Azure Functions
+
+**Convention:** The payment backend cloud service will be hosted on Azure Functions instead of AWS.
+
+**Why:** The team decided to move the payment infrastructure to Azure to align with existing cloud vendor preferences and service integration requirements.
+
+> ⚠️ This is a **HIGH** priority rule — do not violate it.
+
+**Relevant files:** `infrastructure/payment-service`, `backend/payments`
+
+## Ss7
+
+### Use ITSI RFC for SS7 stack backend development
+
+**Convention:** The team will adopt the ITSI RFC standard instead of the 3GPP standard for the implementation of the SS7 stack backend.
+
+**Why:** The team decided to move away from 3GPP in favor of ITSI RFC to better align with specific backend requirements for the SS7 stack.
+
+> ⚠️ This is a **HIGH** priority rule — do not violate it.
+
+**Relevant files:** `src/ss7-stack/backend`
+
+## Security
+
+### Use shared secret token authentication for reporting worker communication
+
+**Convention:** Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
+
+**Why:** The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.
+
+> ⚠️ This is a **HIGH** priority rule — do not violate it.
+
+**Relevant files:** `src/reporting-worker/api-client.ts`, `src/api/auth/middleware.ts`
+
+## Authentication
+
+### Enforce 5-minute token expiry for authentication service
+
+**Convention:** Implement a strict 5-minute token expiry window for the authentication service.
+
+**Why:** This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.
+
+> ⚠️ This is a **HIGH** priority rule — do not violate it.
+
+**Relevant files:** `services/auth-service`
 
 ## Email
 
@@ -100,23 +128,23 @@ Aider should follow all of these conventions when making changes.
 
 ## Billing
 
-### Establish ownership and modification constraints for credits and billing system
+### Use long-running containers for billing service instead of serverless functions
 
-**Convention:** Replace all usage of the double type for money representations with the string type in src/billing.ts.
+**Convention:** The billing service uses long-running containers instead of serverless functions.
 
-**Why:** Using floating-point numbers (doubles) for currency leads to rounding errors and precision issues due to IEEE 754 binary representation. Using strings ensures that exact decimal precision is maintained during financial calculations.
+**Why:** Serverless functions introduced cold starts which resulted in unacceptable latency spikes during traffic peaks, negatively impacting the user experience for the billing service.
 
 > ⚠️ This is a **HIGH** priority rule — do not violate it.
 
-**Relevant files:** `packages/api/src/routes/credits.ts`, `packages/decision-store/src/repositories/credit-repository.ts`, `packages/common/src/types/credits.ts`
+**Relevant files:** `packages/api/src/routes/credits.ts`, `packages/decision-store/src/repositories/credit-repository.ts`, `packages/common/src/types/credits.ts`, `services/billing`
 
-### Ownership of Billing Module
+### Establish Revenue squad ownership of billing and Stripe integration
 
-**Convention:** Replace all usages of double with string to represent money transactions in src/billing.ts.
+**Convention:** The Revenue squad now has exclusive ownership of the billing module and Stripe integration, requiring their explicit approval for all pull requests affecting these areas.
 
-**Why:** Using string types for monetary values prevents floating-point arithmetic errors inherent in the double type, ensuring accuracy for financial calculations.
+**Why:** Centralizing ownership ensures better control, security, and specialized maintenance for critical payment-related infrastructure.
 
-**Relevant files:** `packages/api/src/billing/`
+**Relevant files:** `packages/api/src/billing/`, `src/modules/billing/`, `src/integrations/stripe/`
 
 ## Llm
 
@@ -141,6 +169,16 @@ Aider should follow all of these conventions when making changes.
 > ⚠️ This is a **HIGH** priority rule — do not violate it.
 
 **Relevant files:** `infrastructure/terraform`, `infrastructure/k8s`
+
+## Postgresql
+
+### Standardize on PostgreSQL with pgvector for primary storage and vector search
+
+**Convention:** Use PostgreSQL with pgvector and HNSW indexes as the standard solution for primary datastore and vector search operations.
+
+**Why:** PostgreSQL with pgvector provides the ability to manage both SQL-based relational data and vector search capabilities within a single system, simplifying the architecture compared to managing separate databases.
+
+> ⚠️ This is a **HIGH** priority rule — do not violate it.
 
 ## LLM
 
@@ -210,6 +248,34 @@ Aider should follow all of these conventions when making changes.
 
 **Relevant files:** `packages/api/src/routes/internal/`
 
+## Typescript
+
+### Standardize on TypeScript and camelCase JSON for backend services
+
+**Convention:** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
+
+**Why:** TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency.
+
+**Relevant files:** `/src/backend/`
+
+## Rfc
+
+### Cancellation of RFC 78 implementation
+
+**Convention:** The team has officially cancelled the usage and implementation of RFC 78.
+
+**Why:** The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities.
+
+## Rfc7812
+
+### Adopt RFC7812 for theme data JSON validation
+
+**Convention:** Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
+
+**Why:** RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data.
+
+**Relevant files:** `src/sync/theme-validation.js`
+
 ## Vector-search
 
 ### Standardize on HNSW for new vector indexes
@@ -269,6 +335,16 @@ Aider should follow all of these conventions when making changes.
 **Convention:** Implemented Redis semantic caching for LLM embedding calls. The cache key is a hash of the input text, model, and provider. The cache entries have a Time-To-Live (TTL) of 1 hour.
 
 **Why:** Redis was a natural extension since it is already in use for BullMQ and session caching. This implementation reduced redundant embedding calls by approximately 40% in tests.
+
+## Css
+
+### Use separate SCSS file for navigation component styling
+
+**Convention:** Use standard SCSS in a separate navbar.scss file for the new navigation component.
+
+**Why:** Complex hover state requirements for the navigation component lead to unmanageable code when using Tailwind utility classes.
+
+**Relevant files:** `navbar.scss`, `navbar.tsx`
 
 ## Mobile
 

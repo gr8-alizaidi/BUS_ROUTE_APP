@@ -1,89 +1,28 @@
 {
   "$schema": "https://decispher.dev/schemas/context-rules/v1.json",
   "specVersion": "1.0.0",
-  "generatedAt": "2026-05-06T16:38:28.568Z",
+  "generatedAt": "2026-05-10T11:44:36.876Z",
   "companyId": "1489dcdc-ef7f-4cc5-b0cb-b453efa059f4",
   "meta": {
-    "totalRules": 28,
+    "totalRules": 35,
     "rulesByType": {
-      "decision": 19,
-      "convention": 3,
-      "constraint": 2,
-      "rationale": 0,
+      "decision": 25,
+      "convention": 4,
+      "constraint": 1,
+      "rationale": 1,
       "ownership": 2,
       "history": 1,
       "plan": 1
     },
     "rulesBySeverity": {
-      "CRITICAL": 2,
-      "HIGH": 15,
-      "MEDIUM": 10,
-      "LOW": 1
+      "CRITICAL": 1,
+      "HIGH": 19,
+      "MEDIUM": 13,
+      "LOW": 2
     },
     "generator": "decispher-ai-blocker@1.0.0"
   },
   "rules": [
-    {
-      "id": "8d730075-9042-46a9-b163-9bedcaaee371",
-      "type": "constraint",
-      "title": "Prohibit MongoDB and mandate PostgreSQL for core pipelines",
-      "problem": "Need to define and enforce the database technology stack to ensure system consistency and data integrity.",
-      "decision": "The core pipeline must exclusively use PostgreSQL 16 with pgvector and Redis; the use of MongoDB is strictly prohibited.",
-      "rationale": "Enforcing a specific database stack ensures architectural consistency, simplifies maintenance, and leverages existing infrastructure and expertise with PostgreSQL and pgvector.",
-      "severity": "CRITICAL",
-      "status": "active",
-      "confidence": 0.48,
-      "affectedFiles": [
-        "infrastructure/database",
-        "src/db/config.ts"
-      ],
-      "tags": [
-        "postgresql",
-        "database",
-        "mongodb",
-        "infrastructure",
-        "backend"
-      ],
-      "alternatives": [
-        {
-          "option": "MongoDB",
-          "reasonRejected": "Prohibited to maintain stack consistency and data integrity requirements."
-        }
-      ],
-      "sources": [
-        {
-          "type": "slack",
-          "confidence": 0.48,
-          "ref": {
-            "priority": "high",
-            "threadTs": "1776838145.000000",
-            "channelId": "C_BACKEND_INFRA",
-            "sourceUrl": null,
-            "channelName": "backend-infra",
-            "slackTeamId": "T05FJS3A8JG",
-            "triggeredBy": null,
-            "detectionMethod": "explicit",
-            "triggeredByName": null
-          },
-          "snippet": "The core pipeline must exclusively use PostgreSQL 16 with pgvector and Redis; the use of MongoDB is strictly prohibited."
-        }
-      ],
-      "supersededBy": null,
-      "enforcement": {
-        "blockOnViolation": false,
-        "requiresExplicitOverride": false,
-        "filePatterns": [
-          "infrastructure/database",
-          "src/db/config.ts"
-        ],
-        "exemptPatterns": []
-      },
-      "createdAt": "2026-04-22T06:07:48.054Z",
-      "updatedAt": "2026-04-22T11:43:24.579Z",
-      "version": 1,
-      "createdBy": "U_NADIA",
-      "reviewedBy": "df51fb32-47a2-48b2-ac32-3887a582a966"
-    },
     {
       "id": "393329ba-9640-498c-89f1-46c1324aaeff",
       "type": "constraint",
@@ -132,6 +71,239 @@
       },
       "createdAt": "2026-04-18T13:33:59.601Z",
       "updatedAt": "2026-04-18T13:34:22.478Z",
+      "version": 1,
+      "createdBy": "U05F9P78LTG",
+      "reviewedBy": "U05F9P78LTG"
+    },
+    {
+      "id": "9f213a97-eb01-49b8-aa57-76b0a2358c10",
+      "type": "decision",
+      "title": "Migrate payment backend to Azure Functions",
+      "problem": "Selecting the cloud hosting provider for the payment backend service.",
+      "decision": "The payment backend cloud service will be hosted on Azure Functions instead of AWS.",
+      "rationale": "The team decided to move the payment infrastructure to Azure to align with existing cloud vendor preferences and service integration requirements.",
+      "severity": "HIGH",
+      "status": "active",
+      "confidence": 0.5,
+      "affectedFiles": [
+        "infrastructure/payment-service",
+        "backend/payments"
+      ],
+      "tags": [
+        "azure",
+        "cloud-hosting",
+        "backend",
+        "payments"
+      ],
+      "alternatives": [
+        {
+          "option": "AWS Lambda",
+          "reasonRejected": "The team prefers Azure for the payment backend service infrastructure."
+        }
+      ],
+      "sources": [
+        {
+          "type": "slack",
+          "confidence": 0.5,
+          "ref": {
+            "priority": "high",
+            "threadTs": "1778413335.358529",
+            "channelId": "C05FDF7SWN9",
+            "sourceUrl": "https://newworkspace-zdx9462.slack.com/archives/C05FDF7SWN9/p1778413335358529?thread_ts=1778413335.358529&cid=C05FDF7SWN9",
+            "channelName": "general",
+            "slackTeamId": null,
+            "triggeredBy": "U05F9P78LTG",
+            "detectionMethod": "explicit",
+            "triggeredByName": "Ali Abbas"
+          },
+          "snippet": "The payment backend cloud service will be hosted on Azure Functions instead of AWS."
+        }
+      ],
+      "supersededBy": null,
+      "enforcement": {
+        "blockOnViolation": false,
+        "requiresExplicitOverride": false,
+        "filePatterns": [
+          "infrastructure/payment-service",
+          "backend/payments"
+        ],
+        "exemptPatterns": []
+      },
+      "createdAt": "2026-05-10T11:42:59.605Z",
+      "updatedAt": "2026-05-10T11:43:35.006Z",
+      "version": 1,
+      "createdBy": "U05F9P78LTG",
+      "reviewedBy": "U05F9P78LTG"
+    },
+    {
+      "id": "b5692ce3-058f-4fff-b37c-f3a14d89d277",
+      "type": "decision",
+      "title": "Use ITSI RFC for SS7 stack backend development",
+      "problem": "Selecting the protocol standard for building the SS7 stack backend codebase.",
+      "decision": "The team will adopt the ITSI RFC standard instead of the 3GPP standard for the implementation of the SS7 stack backend.",
+      "rationale": "The team decided to move away from 3GPP in favor of ITSI RFC to better align with specific backend requirements for the SS7 stack.",
+      "severity": "HIGH",
+      "status": "active",
+      "confidence": 0.48,
+      "affectedFiles": [
+        "src/ss7-stack/backend"
+      ],
+      "tags": [
+        "ss7",
+        "backend",
+        "protocols",
+        "itsi",
+        "3gpp"
+      ],
+      "alternatives": [
+        {
+          "option": "3GPP",
+          "reasonRejected": "The team explicitly opted for ITSI RFC instead, implying 3GPP did not meet current project requirements as effectively."
+        }
+      ],
+      "sources": [
+        {
+          "type": "slack",
+          "confidence": 0.48,
+          "ref": {
+            "priority": "high",
+            "threadTs": "1778410964.016279",
+            "channelId": "C0ALKBAGZQS",
+            "sourceUrl": "https://newworkspace-zdx9462.slack.com/archives/C0ALKBAGZQS/p1778410964016279?thread_ts=1778410964.016279&cid=C0ALKBAGZQS",
+            "channelName": "bot-test-1",
+            "slackTeamId": null,
+            "triggeredBy": "U05F9P78LTG",
+            "detectionMethod": "explicit",
+            "triggeredByName": "Ali Abbas"
+          },
+          "snippet": "The team will adopt the ITSI RFC standard instead of the 3GPP standard for the implementation of the SS7 stack backend."
+        }
+      ],
+      "supersededBy": null,
+      "enforcement": {
+        "blockOnViolation": false,
+        "requiresExplicitOverride": false,
+        "filePatterns": [
+          "src/ss7-stack/backend"
+        ],
+        "exemptPatterns": []
+      },
+      "createdAt": "2026-05-10T11:03:36.275Z",
+      "updatedAt": "2026-05-10T11:04:01.077Z",
+      "version": 1,
+      "createdBy": "U05F9P78LTG",
+      "reviewedBy": "U05F9P78LTG"
+    },
+    {
+      "id": "260c4141-6041-4f13-9314-cecfe7698bc1",
+      "type": "decision",
+      "title": "Use shared secret token authentication for reporting worker communication",
+      "problem": "The reporting worker requires authentication to communicate with the main API, but mTLS setup is perceived as too slow or complex for this specific integration.",
+      "decision": "Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.",
+      "rationale": "The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.",
+      "severity": "HIGH",
+      "status": "active",
+      "confidence": 0.43,
+      "affectedFiles": [
+        "src/reporting-worker/api-client.ts",
+        "src/api/auth/middleware.ts"
+      ],
+      "tags": [
+        "security",
+        "authentication",
+        "reporting-service",
+        "mtls",
+        "api"
+      ],
+      "alternatives": [
+        {
+          "option": "mTLS",
+          "reasonRejected": "The team felt it would be too slow and complex to implement for this specific worker."
+        }
+      ],
+      "sources": [
+        {
+          "type": "slack",
+          "confidence": 0.43,
+          "ref": {
+            "priority": "high",
+            "threadTs": "1778277024.087199",
+            "channelId": "C0ALKBAGZQS",
+            "sourceUrl": "https://newworkspace-zdx9462.slack.com/archives/C0ALKBAGZQS/p1778277024087199?thread_ts=1778277024.087199&cid=C0ALKBAGZQS",
+            "channelName": "bot-test-1",
+            "slackTeamId": null,
+            "triggeredBy": "U05F9P78LTG",
+            "detectionMethod": "explicit",
+            "triggeredByName": "Ali Abbas"
+          },
+          "snippet": "Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication."
+        }
+      ],
+      "supersededBy": null,
+      "enforcement": {
+        "blockOnViolation": false,
+        "requiresExplicitOverride": false,
+        "filePatterns": [
+          "src/reporting-worker/api-client.ts",
+          "src/api/auth/middleware.ts"
+        ],
+        "exemptPatterns": []
+      },
+      "createdAt": "2026-05-08T21:50:33.887Z",
+      "updatedAt": "2026-05-08T21:50:52.410Z",
+      "version": 1,
+      "createdBy": "U05F9P78LTG",
+      "reviewedBy": "U05F9P78LTG"
+    },
+    {
+      "id": "02e6acff-0e2b-4caf-969d-be906d20eedc",
+      "type": "rationale",
+      "title": "Enforce 5-minute token expiry for authentication service",
+      "problem": "Determine the optimal token expiration duration for the authentication service to balance security and usability.",
+      "decision": "Implement a strict 5-minute token expiry window for the authentication service.",
+      "rationale": "This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.",
+      "severity": "HIGH",
+      "status": "active",
+      "confidence": 0.45,
+      "affectedFiles": [
+        "services/auth-service"
+      ],
+      "tags": [
+        "authentication",
+        "security",
+        "compliance",
+        "backend"
+      ],
+      "alternatives": [],
+      "sources": [
+        {
+          "type": "slack",
+          "confidence": 0.45,
+          "ref": {
+            "priority": "high",
+            "threadTs": "1778275094.826989",
+            "channelId": "C0ALKBAGZQS",
+            "sourceUrl": "https://newworkspace-zdx9462.slack.com/archives/C0ALKBAGZQS/p1778275094826989?thread_ts=1778275094.826989&cid=C0ALKBAGZQS",
+            "channelName": "bot-test-1",
+            "slackTeamId": null,
+            "triggeredBy": "U05F9P78LTG",
+            "detectionMethod": "explicit",
+            "triggeredByName": "Ali Abbas"
+          },
+          "snippet": "Implement a strict 5-minute token expiry window for the authentication service."
+        }
+      ],
+      "supersededBy": null,
+      "enforcement": {
+        "blockOnViolation": false,
+        "requiresExplicitOverride": false,
+        "filePatterns": [
+          "services/auth-service"
+        ],
+        "exemptPatterns": []
+      },
+      "createdAt": "2026-05-08T21:24:39.440Z",
+      "updatedAt": "2026-05-08T21:26:29.595Z",
       "version": 1,
       "createdBy": "U05F9P78LTG",
       "reviewedBy": "U05F9P78LTG"
@@ -304,17 +476,18 @@
     {
       "id": "08631b5a-a39c-4766-b840-beb3a13fde5e",
       "type": "ownership",
-      "title": "Establish ownership and modification constraints for credits and billing system",
+      "title": "Use long-running containers for billing service instead of serverless functions",
       "problem": "Uncertainty regarding ownership of the billing module and the requirements for implementing new effort modes.",
-      "decision": "Replace all usage of the double type for money representations with the string type in src/billing.ts.",
-      "rationale": "Using floating-point numbers (doubles) for currency leads to rounding errors and precision issues due to IEEE 754 binary representation. Using strings ensures that exact decimal precision is maintained during financial calculations.",
+      "decision": "The billing service uses long-running containers instead of serverless functions.",
+      "rationale": "Serverless functions introduced cold starts which resulted in unacceptable latency spikes during traffic peaks, negatively impacting the user experience for the billing service.",
       "severity": "HIGH",
       "status": "active",
       "confidence": 0.43,
       "affectedFiles": [
         "packages/api/src/routes/credits.ts",
         "packages/decision-store/src/repositories/credit-repository.ts",
-        "packages/common/src/types/credits.ts"
+        "packages/common/src/types/credits.ts",
+        "services/billing"
       ],
       "tags": [
         "billing",
@@ -322,7 +495,12 @@
         "credits",
         "compliance"
       ],
-      "alternatives": [],
+      "alternatives": [
+        {
+          "option": "Serverless functions",
+          "reasonRejected": "Caused unacceptable latency spikes due to cold starts during traffic peaks."
+        }
+      ],
       "sources": [
         {
           "type": "slack",
@@ -367,12 +545,13 @@
         "filePatterns": [
           "packages/api/src/routes/credits.ts",
           "packages/decision-store/src/repositories/credit-repository.ts",
-          "packages/common/src/types/credits.ts"
+          "packages/common/src/types/credits.ts",
+          "services/billing"
         ],
         "exemptPatterns": []
       },
       "createdAt": "2026-04-22T06:14:04.546Z",
-      "updatedAt": "2026-05-05T12:33:12.799Z",
+      "updatedAt": "2026-05-08T21:16:45.660Z",
       "version": 2,
       "createdBy": "U_SARA",
       "reviewedBy": "df51fb32-47a2-48b2-ac32-3887a582a966"
@@ -497,171 +676,5 @@
         "exemptPatterns": []
       },
       "createdAt": "2026-04-22T06:11:59.569Z",
-      "updatedAt": "2026-04-22T11:43:57.133Z",
-      "version": 1,
-      "createdBy": "U_OMAR",
-      "reviewedBy": "df51fb32-47a2-48b2-ac32-3887a582a966"
-    },
-    {
-      "id": "81145171-98f5-43da-b922-9c76d78741b5",
-      "type": "decision",
-      "title": "Standardize on PostgreSQL with pgvector for primary storage and vector search",
-      "problem": "Selecting the primary datastore to handle both standard relational data and vector search requirements efficiently.",
-      "decision": "Use PostgreSQL with pgvector and HNSW indexes as the standard solution for primary datastore and vector search operations.",
-      "rationale": "PostgreSQL with pgvector provides the ability to manage both SQL-based relational data and vector search capabilities within a single system, simplifying the architecture compared to managing separate databases.",
-      "severity": "HIGH",
-      "status": "active",
-      "confidence": 0.5,
-      "affectedFiles": [],
-      "tags": [
-        "postgresql",
-        "pgvector",
-        "database",
-        "infrastructure",
-        "vector-search"
-      ],
-      "alternatives": [
-        {
-          "option": "MongoDB",
-          "reasonRejected": "The team preferred the relational capabilities of PostgreSQL and the unified support for vector search provided by pgvector."
-        },
-        {
-          "option": "CockroachDB",
-          "reasonRejected": "The team decided that PostgreSQL with pgvector was sufficient and preferred over the complexity or features offered by CockroachDB."
-        }
-      ],
-      "sources": [
-        {
-          "type": "slack",
-          "confidence": 0.5,
-          "ref": {
-            "priority": "high",
-            "threadTs": "1776837955.000000",
-            "channelId": "C_ENG_GENERAL",
-            "sourceUrl": null,
-            "channelName": "engineering-general",
-            "slackTeamId": "T05FJS3A8JG",
-            "triggeredBy": null,
-            "detectionMethod": "explicit",
-            "triggeredByName": null
-          },
-          "snippet": "Use PostgreSQL with pgvector and HNSW indexes as the standard solution for primary datastore and vector search operations."
-        }
-      ],
-      "supersededBy": null,
-      "enforcement": {
-        "blockOnViolation": false,
-        "requiresExplicitOverride": false,
-        "filePatterns": [],
-        "exemptPatterns": []
-      },
-      "createdAt": "2026-04-22T06:06:49.679Z",
-      "updatedAt": "2026-04-22T11:44:09.055Z",
-      "version": 1,
-      "createdBy": "U_ALI",
-      "reviewedBy": "df51fb32-47a2-48b2-ac32-3887a582a966"
-    },
-    {
-      "id": "3213c504-c4a3-4364-bc9f-3e3213242b7a",
-      "type": "decision",
-      "title": "Use MongoDB Atlas for schemaless analytics webhook storage",
-      "problem": "",
-      "decision": "Use MongoDB Atlas specifically for the analytics event ingestion pipeline, while keeping all other core application data in PostgreSQL.",
-      "rationale": "MongoDB Atlas provides the necessary horizontal sharding and schemaless structure to handle the required 50k write operations per second, whereas PostgreSQL performance degrades under this load.",
-      "severity": "HIGH",
-      "status": "active",
-      "confidence": 0.5,
-      "affectedFiles": [
-        "services/analytics-webhook-handler",
-        "infrastructure/database-clusters"
-      ],
-      "tags": [
-        "mongodb",
-        "postgresql",
-        "analytics",
-        "database",
-        "infrastructure",
-        "fusion:contradicts"
-      ],
-      "alternatives": [
-        {
-          "option": "PostgreSQL JSONB",
-          "reasonRejected": "Proved too difficult and inefficient to index effectively for schemaless event data."
-        }
-      ],
-      "sources": [
-        {
-          "type": "slack",
-          "confidence": 0.5,
-          "ref": {
-            "priority": "high",
-            "threadTs": "1776590790.779709",
-            "channelId": "C0ALJ121XLZ",
-            "channelName": "decispher-test-1",
-            "triggeredBy": "U05F9P78LTG",
-            "detectionMethod": "explicit"
-          },
-          "snippet": "Use MongoDB Atlas as the primary datastore for all raw analytics event logs, bypassing the existing PostgreSQL setup for this specific data type."
-        },
-        {
-          "type": "slack",
-          "confidence": 0.5,
-          "ref": {
-            "priority": "high",
-            "threadTs": "1777674632.806469",
-            "channelId": "C0ALKBAGZQS",
-            "sourceUrl": "https://newworkspace-zdx9462.slack.com/archives/C0ALKBAGZQS/p1777674632806469?thread_ts=1777674632.806469&cid=C0ALKBAGZQS",
-            "channelName": "bot-test-1",
-            "slackTeamId": null,
-            "triggeredBy": "U05F9P78LTG",
-            "detectionMethod": "explicit",
-            "triggeredByName": "Ali Abbas"
-          },
-          "snippet": "Use MongoDB Atlas specifically for the analytics event ingestion pipeline, while keeping all other core application data in PostgreSQL."
-        }
-      ],
-      "supersededBy": null,
-      "enforcement": {
-        "blockOnViolation": false,
-        "requiresExplicitOverride": false,
-        "filePatterns": [
-          "services/analytics-webhook-handler",
-          "infrastructure/database-clusters"
-        ],
-        "exemptPatterns": []
-      },
-      "createdAt": "2026-04-19T09:26:59.727Z",
-      "updatedAt": "2026-05-01T23:41:07.751Z",
-      "version": 2,
-      "createdBy": "U05F9P78LTG",
-      "reviewedBy": "df51fb32-47a2-48b2-ac32-3887a582a966"
-    },
-    {
-      "id": "465c1e1a-bb9e-4b3f-ade4-dc7674a5870a",
-      "type": "decision",
-      "title": "Use MongoDB for Analytics Events Pipeline",
-      "problem": "PostgreSQL's write throughput is insufficient for high-cardinality analytics event data, failing to meet new scale requirements.",
-      "decision": "We will use MongoDB for the analytics events pipeline, provisioning a MongoDB Atlas cluster to handle the data.",
-      "rationale": "MongoDB offers 10x the write throughput compared to PostgreSQL for high-cardinality event data, which is essential to meet the current scale requirements. The previous constraint was established before these new scale demands emerged.",
-      "severity": "HIGH",
-      "status": "active",
-      "confidence": 0.5,
-      "affectedFiles": [
-        "packages/api/src/analytics/"
-      ],
-      "tags": [
-        "mongodb",
-        "analytics",
-        "database",
-        "pipeline",
-        "backend",
-        "fusion:contradicts"
-      ],
-      "alternatives": [
-        {
-          "option": "PostgreSQL",
-          "reasonRejected": "PostgreSQL's write throughput is 10x lower than MongoDB for high-cardinality event data, making it unsuitable for the new scale requirements of the analytics pipeline."
-        }
-      ],
 
 <!-- decispher: output truncated to context budget -->

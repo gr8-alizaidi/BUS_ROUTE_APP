@@ -8,17 +8,6 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 
 ## Rules
 
-### Prohibit MongoDB and mandate PostgreSQL for core pipelines
-
-- **Severity:** CRITICAL
-- **Rule:** The core pipeline must exclusively use PostgreSQL 16 with pgvector and Redis; the use of MongoDB is strictly prohibited.
-- **Rationale:** Enforcing a specific database stack ensures architectural consistency, simplifies maintenance, and leverages existing infrastructure and expertise with PostgreSQL and pgvector.
-- **Scope:** infrastructure/database, src/db/config.ts
-- **Tags:** postgresql, database, mongodb, infrastructure, backend
-
-**Alternatives considered (rejected):**
-- ~~MongoDB~~ — Prohibited to maintain stack consistency and data integrity requirements.
-
 ### Prohibition of MongoDB in the Tech Stack for Analytics Events
 
 - **Severity:** CRITICAL
@@ -28,6 +17,47 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 
 **Alternatives considered (rejected):**
 - ~~MongoDB for analytics events~~ — It violates an active architectural constraint due to its lack of native ACID compliance, which is non-negotiable for billing and user data within our stack.
+
+### Migrate payment backend to Azure Functions
+
+- **Severity:** HIGH
+- **Rule:** The payment backend cloud service will be hosted on Azure Functions instead of AWS.
+- **Rationale:** The team decided to move the payment infrastructure to Azure to align with existing cloud vendor preferences and service integration requirements.
+- **Scope:** infrastructure/payment-service, backend/payments
+- **Tags:** azure, cloud-hosting, backend, payments
+
+**Alternatives considered (rejected):**
+- ~~AWS Lambda~~ — The team prefers Azure for the payment backend service infrastructure.
+
+### Use ITSI RFC for SS7 stack backend development
+
+- **Severity:** HIGH
+- **Rule:** The team will adopt the ITSI RFC standard instead of the 3GPP standard for the implementation of the SS7 stack backend.
+- **Rationale:** The team decided to move away from 3GPP in favor of ITSI RFC to better align with specific backend requirements for the SS7 stack.
+- **Scope:** src/ss7-stack/backend
+- **Tags:** ss7, backend, protocols, itsi, 3gpp
+
+**Alternatives considered (rejected):**
+- ~~3GPP~~ — The team explicitly opted for ITSI RFC instead, implying 3GPP did not meet current project requirements as effectively.
+
+### Use shared secret token authentication for reporting worker communication
+
+- **Severity:** HIGH
+- **Rule:** Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
+- **Rationale:** The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.
+- **Scope:** src/reporting-worker/api-client.ts, src/api/auth/middleware.ts
+- **Tags:** security, authentication, reporting-service, mtls, api
+
+**Alternatives considered (rejected):**
+- ~~mTLS~~ — The team felt it would be too slow and complex to implement for this specific worker.
+
+### Enforce 5-minute token expiry for authentication service
+
+- **Severity:** HIGH
+- **Rule:** Implement a strict 5-minute token expiry window for the authentication service.
+- **Rationale:** This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.
+- **Scope:** services/auth-service
+- **Tags:** authentication, security, compliance, backend
 
 ### Migrate email service to Zoho and update SMTP infrastructure
 
@@ -56,13 +86,16 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 - **Scope:** api/responses, api/error-handling
 - **Tags:** api, rfc7807, standards, backend
 
-### Establish ownership and modification constraints for credits and billing system
+### Use long-running containers for billing service instead of serverless functions
 
 - **Severity:** HIGH
-- **Rule:** Replace all usage of the double type for money representations with the string type in src/billing.ts.
-- **Rationale:** Using floating-point numbers (doubles) for currency leads to rounding errors and precision issues due to IEEE 754 binary representation. Using strings ensures that exact decimal precision is maintained during financial calculations.
-- **Scope:** packages/api/src/routes/credits.ts, packages/decision-store/src/repositories/credit-repository.ts, packages/common/src/types/credits.ts
+- **Rule:** The billing service uses long-running containers instead of serverless functions.
+- **Rationale:** Serverless functions introduced cold starts which resulted in unacceptable latency spikes during traffic peaks, negatively impacting the user experience for the billing service.
+- **Scope:** packages/api/src/routes/credits.ts, packages/decision-store/src/repositories/credit-repository.ts, packages/common/src/types/credits.ts, services/billing
 - **Tags:** billing, ownership, credits, compliance
+
+**Alternatives considered (rejected):**
+- ~~Serverless functions~~ — Caused unacceptable latency spikes due to cold starts during traffic peaks.
 
 ### Define Model Fallback Ordering Strategy for API Rate Limits
 
@@ -168,6 +201,29 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 - ~~Continue with current fragmented multi-provider setup (Gemini-Flash for detection, Claude-Sonnet for extraction, GPT-4o-mini for formatting).~~ — This approach is unmaintainable, costly (Claude-Sonnet accounts for 60% of the LLM bill), and suffers from inconsistent provider availability issues.
 - ~~Consolidate to a single LLM provider for all pipeline steps.~~ — This would limit flexibility, potentially sacrificing accuracy for high-tier companies or forcing budget-conscious companies to pay for more expensive models than necessary. It would also lead to vendor lock-in and a single point of failure for LLM stability.
 
+### Standardize on TypeScript and camelCase JSON for backend services
+
+- **Severity:** MEDIUM
+- **Rule:** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
+- **Rationale:** TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency.
+- **Scope:** /src/backend/
+- **Tags:** typescript, api, backend, json, coding-standards
+
+### Cancellation of RFC 78 implementation
+
+- **Severity:** MEDIUM
+- **Rule:** The team has officially cancelled the usage and implementation of RFC 78.
+- **Rationale:** The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities.
+- **Tags:** rfc, architecture, process
+
+### Adopt RFC7812 for theme data JSON validation
+
+- **Severity:** MEDIUM
+- **Rule:** Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
+- **Rationale:** RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data.
+- **Scope:** src/sync/theme-validation.js
+- **Tags:** rfc7812, json, validation, theme, sync
+
 ### Standardize on HNSW for new vector indexes
 
 - **Severity:** MEDIUM
@@ -254,13 +310,24 @@ Devin MUST follow all rules below. Do not deviate without explicit instruction.
 - **Rationale:** Redis was a natural extension since it is already in use for BullMQ and session caching. This implementation reduced redundant embedding calls by approximately 40% in tests.
 - **Tags:** redis, caching, llm, embeddings, performance, optimization
 
-### Ownership of Billing Module
+### Establish Revenue squad ownership of billing and Stripe integration
 
 - **Severity:** MEDIUM
-- **Rule:** Replace all usages of double with string to represent money transactions in src/billing.ts.
-- **Rationale:** Using string types for monetary values prevents floating-point arithmetic errors inherent in the double type, ensuring accuracy for financial calculations.
-- **Scope:** packages/api/src/billing/
+- **Rule:** The Revenue squad now has exclusive ownership of the billing module and Stripe integration, requiring their explicit approval for all pull requests affecting these areas.
+- **Rationale:** Centralizing ownership ensures better control, security, and specialized maintenance for critical payment-related infrastructure.
+- **Scope:** packages/api/src/billing/, src/modules/billing/, src/integrations/stripe/
 - **Tags:** billing, ownership, team
+
+### Use separate SCSS file for navigation component styling
+
+- **Severity:** LOW
+- **Rule:** Use standard SCSS in a separate navbar.scss file for the new navigation component.
+- **Rationale:** Complex hover state requirements for the navigation component lead to unmanageable code when using Tailwind utility classes.
+- **Scope:** navbar.scss, navbar.tsx
+- **Tags:** css, scss, tailwind, frontend, ui
+
+**Alternatives considered (rejected):**
+- ~~Tailwind utility classes~~ — The resulting code is too messy and complex for the required hover states.
 
 ### Standardization on iPhones for mobile communication
 

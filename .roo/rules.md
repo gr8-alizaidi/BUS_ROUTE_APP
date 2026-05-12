@@ -3,12 +3,24 @@
 
 ## ⚠️ Critical Rules — Do Not Violate
 
-- **Prohibit MongoDB and mandate PostgreSQL for core pipelines:** The core pipeline must exclusively use PostgreSQL 16 with pgvector and Redis; the use of MongoDB is strictly prohibited.
-  *(Enforcing a specific database stack ensures architectural consistency, simplifies maintenance, and leverages existing infrastructure and expertise with PostgreSQL and pgvector.)*
-  Files: infrastructure/database, src/db/config.ts
-
 - **Prohibition of MongoDB in the Tech Stack for Analytics Events:** MongoDB is strictly prohibited from being integrated into the current technology stack, including for analytics events.
   *(There is an active and non-negotiable architectural constraint against MongoDB in the stack due to the critical requirement for ACID compliance across all billing and user data. MongoDB does not satisfy this fundamental requirement.)*
+
+- **Migrate payment backend to Azure Functions:** The payment backend cloud service will be hosted on Azure Functions instead of AWS.
+  *(The team decided to move the payment infrastructure to Azure to align with existing cloud vendor preferences and service integration requirements.)*
+  Files: infrastructure/payment-service, backend/payments
+
+- **Use ITSI RFC for SS7 stack backend development:** The team will adopt the ITSI RFC standard instead of the 3GPP standard for the implementation of the SS7 stack backend.
+  *(The team decided to move away from 3GPP in favor of ITSI RFC to better align with specific backend requirements for the SS7 stack.)*
+  Files: src/ss7-stack/backend
+
+- **Use shared secret token authentication for reporting worker communication:** Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
+  *(The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.)*
+  Files: src/reporting-worker/api-client.ts, src/api/auth/middleware.ts
+
+- **Enforce 5-minute token expiry for authentication service:** Implement a strict 5-minute token expiry window for the authentication service.
+  *(This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.)*
+  Files: services/auth-service
 
 - **Migrate email service to Zoho and update SMTP infrastructure:** Migrate all email services to Zoho and update the SMTP server infrastructure, including the implementation of new routing rules to block any traffic to the legacy SMTP server.
   *(The team decided to move to Zoho to consolidate mailing services and address the limitations or overhead associated with the existing legacy SMTP infrastructure.)*
@@ -22,9 +34,9 @@
   *(The team determined that the RFC 7807 specification is outdated and no longer aligns with the current requirements and standards of the API architecture.)*
   Files: api/responses, api/error-handling
 
-- **Establish ownership and modification constraints for credits and billing system:** Replace all usage of the double type for money representations with the string type in src/billing.ts.
-  *(Using floating-point numbers (doubles) for currency leads to rounding errors and precision issues due to IEEE 754 binary representation. Using strings ensures that exact decimal precision is maintained during financial calculations.)*
-  Files: packages/api/src/routes/credits.ts, packages/decision-store/src/repositories/credit-repository.ts, packages/common/src/types/credits.ts
+- **Use long-running containers for billing service instead of serverless functions:** The billing service uses long-running containers instead of serverless functions.
+  *(Serverless functions introduced cold starts which resulted in unacceptable latency spikes during traffic peaks, negatively impacting the user experience for the billing service.)*
+  Files: packages/api/src/routes/credits.ts, packages/decision-store/src/repositories/credit-repository.ts, packages/common/src/types/credits.ts, services/billing
 
 - **Define Model Fallback Ordering Strategy for API Rate Limits:** Establish explicit provider fallback orderings: For extraction, use Anthropic → DeepSeek → OpenAI. For detection, use Google → OpenAI → DeepSeek.
   *(To maintain system reliability and avoid task failure when individual LLM providers hit rate limits, a hierarchical fallback mechanism ensures work is diverted to alternative models before resorting to the Dead Letter Queue (DLQ) after retries.)*
@@ -67,6 +79,15 @@
 
 ## General Conventions
 
+- **Standardize on TypeScript and camelCase JSON for backend services:** Adopt TypeScript as the mandatory language for all new backend services and enforce a strict convention where all API endpoints must return camelCase JSON.
+  *(TypeScript provides necessary type safety to reduce runtime errors in backend services, and a consistent camelCase JSON format ensures predictability for frontend consumption and API consistency.)*
+
+- **Cancellation of RFC 78 implementation:** The team has officially cancelled the usage and implementation of RFC 78.
+  *(The conversation indicates a strategic shift away from the previously proposed RFC 78, implying it is no longer aligned with current requirements or priorities.)*
+
+- **Adopt RFC7812 for theme data JSON validation:** Use RFC7812 as the specification for validating all JSON data synced by the server related to theme configurations.
+  *(RFC7812 provides a standardized approach for schema validation, ensuring consistency and reliability across synced theme data.)*
+
 - **Standardize on HNSW for new vector indexes:** All new vector indexes must be created using the HNSW algorithm. Existing IVFFlat indexes (specifically in the llm_cache table) are to be migrated to HNSW in Sprint 16.
   *(HNSW is the current architectural standard for vector indexing. The previous rejection of the migration to HNSW was due to operational risks in production, not a lack of performance or technical suitability of HNSW.)*
 
@@ -94,8 +115,11 @@
 - **Implement Redis Semantic Caching for LLM Embedding Calls:** Implemented Redis semantic caching for LLM embedding calls. The cache key is a hash of the input text, model, and provider. The cache entries have a Time-To-Live (TTL) of 1 hour.
   *(Redis was a natural extension since it is already in use for BullMQ and session caching. This implementation reduced redundant embedding calls by approximately 40% in tests.)*
 
-- **Ownership of Billing Module:** Replace all usages of double with string to represent money transactions in src/billing.ts.
-  *(Using string types for monetary values prevents floating-point arithmetic errors inherent in the double type, ensuring accuracy for financial calculations.)*
+- **Establish Revenue squad ownership of billing and Stripe integration:** The Revenue squad now has exclusive ownership of the billing module and Stripe integration, requiring their explicit approval for all pull requests affecting these areas.
+  *(Centralizing ownership ensures better control, security, and specialized maintenance for critical payment-related infrastructure.)*
+
+- **Use separate SCSS file for navigation component styling:** Use standard SCSS in a separate navbar.scss file for the new navigation component.
+  *(Complex hover state requirements for the navigation component lead to unmanageable code when using Tailwind utility classes.)*
 
 - **Standardization on iPhones for mobile communication:** The team will use iPhones to perform mobile calls.
   *(The team aligned on a single mobile device platform for communication consistency.)*

@@ -1,50 +1,3 @@
-<!-- DECISION-CNST-8D7300 -->
-## Decision: Prohibit MongoDB and mandate PostgreSQL for core pipelines
-
-**Status**: Active  
-**Date**: 2026-04-22  
-**Severity**: Critical
-
-**Files**:
-- `infrastructure/database`
-- `src/db/config.ts`
-
-**Rules**:
-```json
-{
-  "conditions": [
-    {
-      "type": "file",
-      "pattern": "{infrastructure/database/**,src/db/config.ts}",
-      "content_rules": [
-        {
-          "mode": "string",
-          "patterns": [
-            "mongodb",
-            "mongoose",
-            "mongo"
-          ]
-        }
-      ]
-    }
-  ],
-  "match_mode": "all"
-}
-```
-
-### Context
-
-**Problem:** Need to define and enforce the database technology stack to ensure system consistency and data integrity.
-
-**Decision:** The core pipeline must exclusively use PostgreSQL 16 with pgvector and Redis; the use of MongoDB is strictly prohibited.
-
-**Rationale:** Enforcing a specific database stack ensures architectural consistency, simplifies maintenance, and leverages existing infrastructure and expertise with PostgreSQL and pgvector.
-
-**Alternatives Considered:**
-- **MongoDB**: Prohibited to maintain stack consistency and data integrity requirements.
-
----
-
 <!-- DECISION-CNST-393329 -->
 ## Decision: Prohibition of MongoDB in the Tech Stack for Analytics Events
 
@@ -83,6 +36,210 @@
 
 **Alternatives Considered:**
 - **MongoDB for analytics events**: It violates an active architectural constraint due to its lack of native ACID compliance, which is non-negotiable for billing and user data within our stack.
+
+---
+
+<!-- DECISION-DEC-9F213A -->
+## Decision: Migrate payment backend to Azure Functions
+
+**Status**: Active  
+**Date**: 2026-05-10  
+**Severity**: Critical
+
+**Files**:
+- `infrastructure/payment-service`
+- `backend/payments`
+
+**Rules**:
+```json
+{
+  "conditions": [
+    {
+      "type": "file",
+      "pattern": "infrastructure/payment-service/**/*",
+      "content_rules": [
+        {
+          "mode": "string",
+          "patterns": [
+            "aws_lambda",
+            "aws-lambda",
+            "lambda_function"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "pattern": "backend/payments/**/*",
+      "content_rules": [
+        {
+          "mode": "string",
+          "patterns": [
+            "aws_lambda",
+            "aws-lambda",
+            "lambda_function"
+          ]
+        }
+      ]
+    }
+  ],
+  "match_mode": "any"
+}
+```
+
+### Context
+
+**Problem:** Selecting the cloud hosting provider for the payment backend service.
+
+**Decision:** The payment backend cloud service will be hosted on Azure Functions instead of AWS.
+
+**Rationale:** The team decided to move the payment infrastructure to Azure to align with existing cloud vendor preferences and service integration requirements.
+
+**Alternatives Considered:**
+- **AWS Lambda**: The team prefers Azure for the payment backend service infrastructure.
+
+---
+
+<!-- DECISION-DEC-B5692C -->
+## Decision: Use ITSI RFC for SS7 stack backend development
+
+**Status**: Active  
+**Date**: 2026-05-10  
+**Severity**: Critical
+
+**Files**:
+- `src/ss7-stack/backend`
+
+**Rules**:
+```json
+{
+  "conditions": [
+    {
+      "type": "file",
+      "pattern": "src/ss7-stack/backend/**",
+      "content_rules": [
+        {
+          "mode": "string",
+          "patterns": [
+            "3GPP"
+          ]
+        }
+      ],
+      "content_match_mode": "any"
+    }
+  ],
+  "match_mode": "all"
+}
+```
+
+### Context
+
+**Problem:** Selecting the protocol standard for building the SS7 stack backend codebase.
+
+**Decision:** The team will adopt the ITSI RFC standard instead of the 3GPP standard for the implementation of the SS7 stack backend.
+
+**Rationale:** The team decided to move away from 3GPP in favor of ITSI RFC to better align with specific backend requirements for the SS7 stack.
+
+**Alternatives Considered:**
+- **3GPP**: The team explicitly opted for ITSI RFC instead, implying 3GPP did not meet current project requirements as effectively.
+
+---
+
+<!-- DECISION-DEC-260C41 -->
+## Decision: Use shared secret token authentication for reporting worker communication
+
+**Status**: Active  
+**Date**: 2026-05-08  
+**Severity**: Critical
+
+**Files**:
+- `src/reporting-worker/api-client.ts`
+- `src/api/auth/middleware.ts`
+
+**Rules**:
+```json
+{
+  "conditions": [
+    {
+      "type": "file",
+      "pattern": "src/reporting-worker/api-client.ts",
+      "content_rules": [
+        {
+          "mode": "string",
+          "patterns": [
+            "https",
+            "tls",
+            "clientCert"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "pattern": "src/api/auth/middleware.ts",
+      "content_rules": [
+        {
+          "mode": "regex",
+          "start": 1,
+          "pattern": "mtls|certificate"
+        }
+      ]
+    }
+  ],
+  "match_mode": "any"
+}
+```
+
+### Context
+
+**Problem:** The reporting worker requires authentication to communicate with the main API, but mTLS setup is perceived as too slow or complex for this specific integration.
+
+**Decision:** Bypass mTLS authentication for the new reporting worker and implement a hardcoded shared secret token in the HTTP header for inter-service authentication.
+
+**Rationale:** The team chose a shared secret token approach to prioritize communication speed and reduce the implementation overhead compared to the mTLS setup.
+
+**Alternatives Considered:**
+- **mTLS**: The team felt it would be too slow and complex to implement for this specific worker.
+
+---
+
+<!-- DECISION-RAT-02E6AC -->
+## Decision: Enforce 5-minute token expiry for authentication service
+
+**Status**: Active  
+**Date**: 2026-05-08  
+**Severity**: Critical
+
+**Files**:
+- `services/auth-service`
+
+**Rules**:
+```json
+{
+  "conditions": [
+    {
+      "type": "file",
+      "pattern": "services/auth-service/**/*",
+      "content_rules": [
+        {
+          "mode": "regex",
+          "start": 1,
+          "pattern": "(expiresIn|expiry|ttl|lifetime).*?([6-9]\\d{2,}|[1-9]\\d{3,}|[0-9]{4,})"
+        }
+      ]
+    }
+  ],
+  "match_mode": "all"
+}
+```
+
+### Context
+
+**Problem:** Determine the optimal token expiration duration for the authentication service to balance security and usability.
+
+**Decision:** Implement a strict 5-minute token expiry window for the authentication service.
+
+**Rationale:** This decision is driven by compliance requirements mandating rapid session invalidation and the need to mitigate the risk of replay attacks associated with longer-lived tokens.
 
 ---
 
@@ -220,7 +377,7 @@
 ---
 
 <!-- DECISION-OWN-08631B -->
-## Decision: Establish ownership and modification constraints for credits and billing system
+## Decision: Use long-running containers for billing service instead of serverless functions
 
 **Status**: Active  
 **Date**: 2026-04-22  
@@ -230,6 +387,7 @@
 - `packages/api/src/routes/credits.ts`
 - `packages/decision-store/src/repositories/credit-repository.ts`
 - `packages/common/src/types/credits.ts`
+- `services/billing`
 
 **Rules**:
 ```json
@@ -256,9 +414,12 @@
 
 **Problem:** Uncertainty regarding ownership of the billing module and the requirements for implementing new effort modes.
 
-**Decision:** Replace all usage of the double type for money representations with the string type in src/billing.ts.
+**Decision:** The billing service uses long-running containers instead of serverless functions.
 
-**Rationale:** Using floating-point numbers (doubles) for currency leads to rounding errors and precision issues due to IEEE 754 binary representation. Using strings ensures that exact decimal precision is maintained during financial calculations.
+**Rationale:** Serverless functions introduced cold starts which resulted in unacceptable latency spikes during traffic peaks, negatively impacting the user experience for the billing service.
+
+**Alternatives Considered:**
+- **Serverless functions**: Caused unacceptable latency spikes due to cold starts during traffic peaks.
 
 ---
 
@@ -698,138 +859,5 @@
 
 **Alternatives Considered:**
 - **Continue with current fragmented multi-provider setup (Gemini-Flash for detection, Claude-Sonnet for extraction, GPT-4o-mini for formatting).**: This approach is unmaintainable, costly (Claude-Sonnet accounts for 60% of the LLM bill), and suffers from inconsistent provider availability issues.
-- **Consolidate to a single LLM provider for all pipeline steps.**: This would limit flexibility, potentially sacrificing accuracy for high-tier companies or forcing budget-conscious companies to pay for more expensive models than necessary. It would also lead to vendor lock-in and a single point of failure for LLM stability.
-
----
-
-<!-- DECISION-DEC-F3DB51 -->
-## Decision: Standardize on HNSW for new vector indexes
-
-**Status**: Active  
-**Date**: 2026-04-22  
-**Severity**: Warning
-
-**Files**:
-- `db/schema/vector_indexes`
-- `db/migrations/sprint_16/migrate_llm_cache_to_hnsw`
-
-**Rules**:
-```json
-{
-  "conditions": [
-    {
-      "type": "file",
-      "pattern": "db/schema/vector_indexes",
-      "content_rules": [
-        {
-          "mode": "regex",
-          "start": 0,
-          "pattern": "USING\\s+(IVFFLAT|IVFFLAT\\s+)"
-        }
-      ]
-    },
-    {
-      "type": "file",
-      "pattern": "db/migrations/sprint_16/migrate_llm_cache_to_hnsw",
-      "content_rules": [
-        {
-          "mode": "regex",
-          "start": 0,
-          "pattern": "CREATE\\s+INDEX.*USING\\s+IVFFLAT"
-        }
-      ]
-    }
-  ],
-  "match_mode": "any"
-}
-```
-
-### Context
-
-**Problem:** Uncertainty regarding whether the rejection of IVFFlat to HNSW migration applied to the index technology choice or the migration process itself.
-
-**Decision:** All new vector indexes must be created using the HNSW algorithm. Existing IVFFlat indexes (specifically in the llm_cache table) are to be migrated to HNSW in Sprint 16.
-
-**Rationale:** HNSW is the current architectural standard for vector indexing. The previous rejection of the migration to HNSW was due to operational risks in production, not a lack of performance or technical suitability of HNSW.
-
-**Alternatives Considered:**
-- **IVFFlat**: The team has standardized on HNSW for new indexes to maintain architectural consistency, despite potential performance profiles for specific query patterns.
-
----
-
-<!-- DECISION-CONV-17F772 -->
-## Decision: Establish authoritative RFC 7807 error format convention
-
-**Status**: Active  
-**Date**: 2026-04-22  
-**Severity**: Warning
-
-**Files**:
-- `packages/api/src/plugins/error-handler.ts`
-
-**Rules**:
-```json
-{
-  "conditions": [
-    {
-      "type": "file",
-      "pattern": "packages/api/src/plugins/error-handler.ts",
-      "content_rules": [
-        {
-          "mode": "regex",
-          "start": 0,
-          "pattern": "(?s)^(?!.*(type|title|status|detail|instance)).*$"
-        }
-      ]
-    }
-  ],
-  "match_mode": "all"
-}
-```
-
-### Context
-
-**Problem:** Duplicate and conflicting conventions regarding RFC 7807 error format severity were documented in the Decispher system.
-
-**Decision:** Adopt the HIGH severity specification as the authoritative version for the RFC 7807 error format, which includes fields: type, title, status, detail, and instance.
-
-**Rationale:** The team identified that two existing conventions were redundant. Designating the HIGH severity entry as canonical while allowing the fusion engine to merge duplicate references ensures consistency across documentation and API implementations.
-
-**Alternatives Considered:**
-- **MEDIUM severity specification**: The HIGH severity version was explicitly selected as the authoritative and canonical standard.
-
----
-
-<!-- DECISION-DEC-75490C -->
-## Decision: Use cosine distance for pgvector similarity searches
-
-**Status**: Active  
-**Date**: 2026-04-22  
-**Severity**: Warning
-
-**Rules**:
-```json
-{
-  "conditions": [
-    {
-      "type": "file",
-      "pattern": "**/*.sql",
-      "content_rules": [
-        {
-          "mode": "regex",
-          "start": 0,
-          "pattern": "<->"
-        }
-      ]
-    }
-  ],
-  "match_mode": "all"
-}
-```
-
-### Context
-
-**Problem:** Determine the optimal distance metric for embedding similarity search in pgvector to maximize recall.
-
 
 <!-- decispher: output truncated to context budget -->
